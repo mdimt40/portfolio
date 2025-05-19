@@ -1,0 +1,403 @@
+/*
+     Template Name: Fotograaf V2- One Page Photographer Portfolio Template
+    Template URL: #
+    Description: Fotograaf V2- One Page Photographer Portfolio Template is built with a modern design and the latest web technologies.
+    Author: DesignToCodes
+    Author URL: https://www.designtocodes.com
+    Text Domain: fotograaf v2 
+*/
+
+/* small phone responsive css */
+@media only screen and (min-width:0px) and (max-width:574px) {
+    body{
+        overflow-x: hidden;
+    }
+    section{
+        padding: 50px 0px;
+    }
+    p{
+        font-size: 16px;
+    }
+    h3{
+        font-size: 20px;
+    }
+    .navbar{
+        padding: 0px;
+    }
+    [class *="col-"] {
+        padding: 15px;
+    }
+    .d2c_title{
+        font-size: 28px;
+    }
+
+    .d2c_awards .d2c_left_bg,.d2c_about_bg_image{
+        display: none;
+    }
+
+    .d2c_hero{
+        background-image: none;
+        padding: 70px 0px;
+    }
+    .d2c_hero_title{
+        font-size: 36px;
+    }
+    .d2c_hero .d2c_hero_subtitle{
+        font-size: 22px;
+    }
+    .d2c_hero_image img,.d2c_hero_image .d2c_image_bg_gradient{
+        border-radius: 100px 0px 100px 0px;
+    }
+    .d2c_hero_image::before{
+        left: -10px;
+        bottom: -10px;
+    }
+    .d2c_hero_image::after{
+        right: -10px;
+        width: 170px;
+        top: -10px;
+    }
+
+    .d2c_about_wrapper{
+        padding-top: 50px;
+    }
+    .d2c_about_content{
+        padding-bottom: 50px;
+    }
+
+    .d2c_gallery_grid{
+        display: block;
+    }
+    .d2c_gallery_grid img{
+        margin: 10px 0px;
+    }
+
+    .d2c_feedback{
+        padding: 0px;
+        width: 100%;
+    }
+    .d2c_testimonial .d2c_title::after,.d2c_feedback::after{
+        display: none;
+    }
+
+    .d2c_awards{
+        background-position: right -60px;
+    }
+    .d2c_awards h3 span{
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+        border-radius: 10px 0px 10px 0px;
+    }
+
+    .d2c_testimonial .slick-slide {
+        padding: 0px;
+    }
+
+    .d2c_contact_content {
+        padding: 30px 20px;
+    }
+    .d2c_contact_content .d2c_btn{
+        margin-top: 0px;
+        width: 100%;
+        justify-content: center;
+    }
+    .d2c_contact_wrapper {
+        margin-bottom: 50px;
+    }
+
+    .d2c_footer{
+        padding-top: 50px;
+    }
+    .d2c_footer_2 p{
+        margin-bottom: 10px;
+    }
+    .d2c_copyright p{
+        font-size: 14px;
+        text-align: center;
+    }
+    .d2c_footer h3{
+        font-size: 23px;
+    }
+
+    
+
+}
+
+/* big phone responsive css */
+@media only screen and (min-width:575px) and (max-width:767px) {
+    body{
+        overflow-x: hidden;
+    }
+    section{
+        padding: 50px 0px;
+    }
+    p{
+        font-size: 16px;
+    }
+    h3{
+        font-size: 20px;
+    }
+    .navbar{
+        padding: 0px;
+    }
+    [class *="col-"] {
+        padding: 15px;
+    }
+    .d2c_title{
+        font-size: 32px;
+    }
+
+    .d2c_awards .d2c_left_bg,.d2c_about_bg_image{
+        display: none;
+    }
+
+    .d2c_hero{
+        background-image: none;
+        padding: 70px 0px;
+    }
+    .d2c_hero_title{
+        font-size: 45px;
+    }
+    .d2c_hero .d2c_hero_subtitle{
+        font-size: 22px;
+    }
+    .d2c_hero_image img,.d2c_hero_image .d2c_image_bg_gradient{
+        border-radius: 100px 0px 100px 0px;
+    }
+    .d2c_hero_image::before{
+        left: -10px;
+        bottom: -10px;
+    }
+    .d2c_hero_image::after{
+        right: -10px;
+        width: 170px;
+        top: -10px;
+    }
+
+    .d2c_about_wrapper{
+        padding-top: 50px;
+    }
+    .d2c_about_content{
+        padding-bottom: 50px;
+    }
+
+    .d2c_gallery_grid{
+        gap: 10px;
+    }
+    .d2c_gallery_grid img{
+        margin: 10px 0px;
+    }
+
+    .d2c_feedback{
+        padding: 0px;
+        width: 100%;
+    }
+    .d2c_testimonial .slick-slide {
+        padding: 0px;
+    }
+    .d2c_testimonial .d2c_title::after,.d2c_feedback::after{
+        display: none;
+    }
+    
+
+    .d2c_awards{
+        background-position: right top;
+    }
+    .d2c_awards h3 span{
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+        border-radius: 10px 0px 10px 0px;
+    }
+
+    .d2c_contact_content {
+        padding: 40px 30px;
+    }
+    .d2c_contact_content .d2c_btn{
+        margin-top: 0px;
+        width: 100%;
+        justify-content: center;
+    }
+    .d2c_contact_wrapper {
+        margin-bottom: 50px;
+    }
+
+    .d2c_footer{
+        padding-top: 50px;
+    }
+    .d2c_footer_2 p{
+        margin-bottom: 10px;
+    }
+    .d2c_copyright p{
+        text-align: center;
+    }
+    .d2c_footer h3{
+        font-size: 23px;
+    }
+   
+}
+
+/* tab responsive css */
+@media only screen and (min-width:768px) and (max-width:991px) {
+    body{
+        overflow-x: hidden;
+    }
+    section{
+        padding: 70px 0px;
+    }
+    h3{
+        font-size: 20px;
+    }
+    [class *="col-"] {
+        padding: 12px;
+    }
+    .navbar{
+        padding: 0px;
+    }
+    .d2c_title{
+        font-size: 32px;
+    }
+
+    .d2c_hero_title{
+        font-size: 34px;
+    }
+    .d2c_hero .d2c_hero_subtitle{
+        font-size: 24px;
+    }
+    .d2c_hero_image img,.d2c_hero_image .d2c_image_bg_gradient{
+        border-radius: 100px 0px 100px 0px;
+    }
+    .d2c_hero_image::after{
+        width: 150px;
+        top: -15px;
+        right: -15px;
+    }
+    .d2c_hero{
+        background-size: contain;
+        padding: 90px 0px;
+    }
+
+    .d2c_about_wrapper{
+        padding: 70px 0px 0px 0px;
+    }
+    .d2c_about_content {
+        padding-bottom: 70px;
+    }
+    .d2c_about_bg_image {
+        top: 40px;
+        right: -15px;
+        width: 100%;
+    }
+
+    .d2c_feedback{
+        padding: 30px 0px 30px 5px;
+    }
+    .d2c_client_image{
+        height: 230px;
+        border-radius: 50px 0px 50px 0px;
+    }
+    .d2c_feedback::after{
+        display: none;
+    }
+    .d2c_carousel_btn.left{
+        bottom: 20px;
+        left: 0px;
+    }
+    .d2c_carousel_btn.right{
+        bottom: 20px;
+        left: 35px;
+    }
+    .d2c_testimonial{
+        overflow: hidden;
+    }
+
+    .d2c_contact_content .d2c_btn{
+        margin-top: 0px;
+        width: 100%;
+        justify-content: center;
+    }
+    .d2c_contact_wrapper {
+        margin-bottom: 70px;
+    }
+    
+
+  
+    
+}
+
+/* small laptop responsive css */
+@media only screen and (min-width:992px) and (max-width:1199px) {
+    body{
+        overflow-x: hidden;
+    }
+    section{
+        padding: 80px 0px;
+    }
+    h3{
+        font-size: 20px;
+    }
+
+    .d2c_hero_title{
+        font-size: 48px;
+    }
+    .d2c_hero_image img,.d2c_hero_image .d2c_image_bg_gradient{
+        border-radius: 100px 0px 100px 0px;
+    }
+    .d2c_hero{
+        background-size: contain;
+    }
+    .d2c_hero_image::after{
+        width: 150px;
+        top: -15px;
+        right: -15px;
+    }
+
+    .d2c_about_wrapper{
+        padding: 80px 0px 0px 0px;
+    }
+    .d2c_about_bg_image{
+        right: -15px;
+    }
+
+    .d2c_package_card .d2c_btn{
+        margin-top: 40px;
+    }
+    .d2c_package_card table td{
+        font-size: 14px;
+    }
+
+    .d2c_testimonial{
+        overflow: hidden;
+    }
+
+    .d2c_awards .d2c_left_bg img{
+        width: 100%;
+    }
+
+    .d2c_contact_wrapper img{
+        object-fit: cover;
+    }
+
+    
+
+    
+}
+
+@media only screen and (min-width:1200px) and (max-width:1500px) {
+    .d2c_hero_image::after{
+        right: -40px;
+    }
+    .d2c_awards .d2c_left_bg img{
+        width: 100%;
+    }
+    
+}
+/*
+     Template Name: Fotograaf V2- One Page Photographer Portfolio Template
+    Template URL: #
+    Description: Fotograaf V2- One Page Photographer Portfolio Template is built with a modern design and the latest web technologies.
+    Author: DesignToCodes
+    Author URL: https://www.designtocodes.com
+    Text Domain: fotograaf v2 
+*/
