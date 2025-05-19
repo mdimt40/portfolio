@@ -1,0 +1,842 @@
+/*
+    Template Name: Fotograaf V2- One Page Photographer Portfolio Template
+    Template URL: https://www.designtocodes.com/product/fotograaf-v2-one-page-photographer-portfolio-template
+    Description: Fotograaf V2- One Page Photographer Portfolio Template is built with a modern design and the latest web technologies.
+    Author: DesignToCodes
+    Author URL: https://www.designtocodes.com
+    Text Domain: fotograaf v2 
+*/
+
+:root {
+
+  /* Global Color */
+  --primary_color: #6639A6;
+  --primary_shade: rgba(102, 57, 166, 0.04);
+  --secondary_color: #393939;
+  --text_color: #606060; 
+  --default_color_one: #ffffff;
+  --border_radius: 3px;
+
+  /* global google font */
+  --primary_font: 'Poppins', sans-serif;
+  --secondary_font: 'Roboto', sans-serif;
+ 
+}
+
+/*Typography
+-----------------------*/
+p{
+  font-family: var(--secondary_font);
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--text_color);
+  margin-bottom: 16px;
+}
+h1,h2,h3,h4,h5,h6{
+  color: var(--primary_color);
+  font-family: var(--primary_font);
+  margin-bottom: 16px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+h1 {
+  font-size: 58px;
+}
+h2 {
+  font-size: 37px;
+}
+h3 {
+  font-size: 23px;
+  font-weight: 600;
+}
+
+/*Preloader*/
+#preloader {
+  background-color: var(--default_color_one);
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 1100;
+}
+#preloader > img {
+  width: 92px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 50%);
+}
+
+/*Custom Style
+-----------------------*/
+html {
+  scroll-behavior: smooth;
+}
+body {
+  overflow-x: hidden;
+}
+[class *="col-"]{
+  padding: 10px;
+}
+::selection {
+  background: var(--primary_color);
+  color: var(--default_color_one);
+}
+#scrollToTopBtn{
+  display: none;
+}
+a,
+button,
+select,
+input {
+  color: var(--text_color);
+  cursor: pointer;
+  transition: 0.4s all;
+}
+a:focus,
+button:focus,
+select:focus,
+input:focus,
+label:focus {
+  outline: 0;
+}
+a {
+  text-decoration: none;
+  color: var(--secondary_color);
+  font-family: var(--primary_font);
+  font-weight: 400;
+}
+a:hover {
+  text-decoration: none;
+  color: var(--secondary_color);
+}
+section {
+  padding: 100px 0px;
+}
+/* button */
+.d2c_btn {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--default_color_one);
+  background-color: var(--primary_color);
+  border: 1px solid var(--primary_color);
+  border-radius: var(--border_radius);
+  text-align: center;
+  padding: 8px 30px;
+  font-family: var(--primary_font);
+  font-weight: 600;
+  font-size: 17px;
+  text-transform: Capitalize;
+  transition: .4s all ease;
+  position: relative;
+  z-index: 99;
+  overflow: hidden;
+}
+.d2c_btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
+.d2c_btn:hover {
+  border-color: var(--secondary_color);
+  color: var(--default_color_one);
+  transition: .4s all ease;
+}
+.d2c_btn:active {
+  box-shadow: none;
+}
+
+.d2c_btn::after{
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 0px;
+  background: var(--secondary_color);
+  margin: auto;
+  transition: .4s all ease;
+  opacity: 0;
+  z-index: -1;
+}
+.d2c_btn:hover::after{
+  width: 100%;
+  height: 100%;
+  transition: .4s all ease;
+  opacity: 1;
+  
+}
+/* title */
+.d2c_title{
+  font-size: 37px;
+  color: var(--primary_color);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+/* image background gradient */
+.d2c_image_bg_gradient {
+  background: linear-gradient(180deg, #754DAF -17.44%, #F0EBF6 100%);
+  position: absolute;
+  inset: 0;
+  border-radius: var(--border_radius);
+  z-index: -1;
+}
+
+/* navbar */
+.navbar{
+  padding: 8px 0px;
+}
+.navbar-brand{
+  width: 92px;
+}
+.d2c_navbar{
+  background: var(--default_color_one);
+  box-shadow: 0px 0px 21px rgba(102, 57, 166, 0.06);
+  padding: 10px 0px;
+}
+.d2c_navbar .navbar-nav .nav-link{
+  color: var(--secondary_color);
+  font-family: var(--primary_font);
+  font-weight: 500;
+  font-size: 17px;
+  transition: .4s all ease;
+  padding: 10px 15px;
+  text-transform: capitalize;
+}
+.d2c_navbar .navbar-nav .nav-link:hover{
+  color: var(--primary_color);
+  transition: .4s all ease;
+}
+.d2c_nav_right span{
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  background: var(--primary_color);
+  color: var(--default_color_one);
+  border-radius: var(--border_radius);
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+.d2c_nav_right a{
+  font-weight: 500;
+  font-size: 17px;
+}
+/* Nav Item Show from Side */
+body .d2c_mobile_view {
+  position: fixed;
+  height: 100vh;
+  inset: 0;
+  opacity: 1;
+}
+.navbar.d2c_mobile_view_body .navbar-nav {
+  width: 100%;
+}
+
+.navbar.d2c_mobile_view_body .nav-item {
+  margin-right: 0;
+}
+
+.d2c_mobile_view .show_width {
+  max-width: 15.625rem;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  right: -380px;
+  top: 0;
+  transition: 0.5s;
+  padding: 20px 15px;
+  background-color: rgb(241 231 255);
+  overflow: scroll;
+  z-index: 9999;
+}
+
+.d2c_mobile_view.show .show_width {
+  right: 0;
+  transition: 0.5s;
+}
+
+
+.d2c_mobile_view .navbar-toggler {
+  background: #e5d3ff;
+  color: var(--primary_color);
+  padding: 5px 10px;
+  width: 38px;
+}
+
+@media only screen and (min-width:991px) {
+  body .d2c_mobile_view {
+    opacity: 0;
+    transition: .5s;
+  }
+}
+.navbar-nav .nav-link.active, .navbar-nav .show>.nav-link {
+  color: var(--primary_color) !important;
+}
+.navbar-nav .d2c_btn.active{
+  border-color: var(--primary_color);
+  color: var(--default_color_one) !important;
+}
+.navbar-nav .d2c_btn.active::after{
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  color: var(--primary_color);
+  z-index: -1;
+}
+.navbar-toggler{
+  background: var(--primary_shade);
+}
+.navbar-toggler-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary_color);
+}
+/* navbar end */
+
+
+
+/* ========================== hero section start ============================ */
+.d2c_hero{
+  background: url(../images/hero_bg_1.png),url(../images/hero_bg_2.png),var(--primary_shade);
+  background-repeat: no-repeat,no-repeat,no-repeat;
+  background-position: center 20px,center 130px,center;
+  background-size: auto;
+  padding: 130px 0px;
+}
+.d2c_hero_title{
+  color: var(--secondary_color);
+  font-size: 55px;
+  font-weight: 300;
+}
+.d2c_hero_title span{
+  color: var(--primary_color);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.d2c_hero .d2c_hero_subtitle{
+  color: var(--secondary_color);
+  font-weight: 300;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.d2c_hero .d2c_btn{
+  margin-top: 5px;
+}
+.d2c_hero_image img{
+  border-radius: 200px 0px 200px 0px;
+}
+.d2c_hero_image .d2c_image_bg_gradient{
+  border-radius: 200px 0px 200px 0px;
+}
+.d2c_hero_image::before{
+  content: '';
+  width: 80px;
+  height: 80px;
+  background: rgba(102, 57, 166, 0.15);
+  position: absolute;
+  bottom: -15px;
+  left: -15px;
+  z-index: -2;
+}
+.d2c_hero_image::after{
+  content: '';
+  background: rgba(102, 57, 166, 0.15);
+  position: absolute;
+  width: 350px;
+  height: 70px;
+  top: -30px;
+  right: -123px;
+  z-index: -2;
+}
+/* ========================== hero section end ============================ */
+
+/* ========================== about section start ============================ */
+.d2c_about{
+  background: linear-gradient(180deg, #ffffff 0%, rgb(255 255 255 / 0%) 0.04%, #6639a652 439.42%);
+  overflow: hidden;
+}
+.d2c_about_wrapper{
+  padding: 100px 0px 0px 0px;
+  position: relative;
+}
+.d2c_about_content{
+  padding-bottom: 100px;
+}
+.d2c_about h3{
+  color: var(--secondary_color);
+  margin: 20px 0px 10px 0px;
+  display: flex;
+  align-items: center;
+}
+.d2c_about h3::before{
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary_color);
+  display: inline-block;
+  margin-right: 10px;
+}
+.d2c_about_bg_image{
+  position: absolute;
+  top: 65px;
+  right: -123px;
+  z-index: -1;
+}
+/* ========================== about section end ============================ */
+
+
+/* ========================== experience section start ============================ */
+.d2c_experience{
+  background: var(--primary_shade);
+}
+.d2c_experience .d2c_title{
+  margin-bottom: 20px;
+}
+.d2c_experience h3{
+  color: var(--secondary_color);
+  margin: 20px 0px 10px 0px;
+  display: flex;
+  align-items: center;
+}
+.d2c_experience h3::before{
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary_color);
+  display: inline-block;
+  margin-right: 10px;
+}
+.d2c_experience .d2c_btn{
+  margin-top: 15px;
+}
+/* ========================== experience section end ============================ */
+
+/* ========================== services section start ============================ */
+.d2c_services_card{
+  background: url(../images/camera_icon.png),var(--default_color_one);
+  background-repeat: no-repeat,no-repeat;
+  background-position: 90% 25px,center;
+  box-shadow: 0px 0px 25px rgba(102, 57, 166, 0.07);
+  padding: 40px 30px;
+  border-radius: var(--border_radius);
+  transition: .8s all ease;
+}
+.d2c_services_card img{
+  margin-bottom: 22px;
+}
+.d2c_services_card:hover{
+  background: url(../images/camera_icon_1.png),#6639A6;
+  background-repeat: no-repeat,no-repeat;
+  background-position: 90% 25px,center;
+  transition: .8s all ease;
+}
+.d2c_services_card h3,.d2c_services_card p{
+  transition: .7s all ease;
+}
+.d2c_services_card:hover h3,.d2c_services_card:hover p{
+  color: var(--default_color_one);
+  transition: .7s all ease;
+}
+.d2c_services_card:hover img:first-child{
+  display: none;
+}
+.d2c_services_card img:nth-child(2){
+  display: none;
+}
+.d2c_services_card:hover img:nth-child(2){
+  display: block;
+}
+/* ========================== services section end ============================ */
+
+/* ========================== portfolio section start ============================ */
+.d2c_portfolio{
+  
+}
+.d2c_gallery_grid{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  gap: 20px;
+}
+.d2c_gallery_grid img{
+  object-fit: cover;
+  border-radius: var(--border_radius);
+}
+.d2c_gallery_grid a:first-child{
+  grid-row: 1 / 3;
+}
+.d2c_gallery_grid a:nth-child(2){
+  grid-row: 1 / 2;
+}
+.d2c_gallery_grid a:nth-child(3){
+  grid-row: 2 / 3;
+}
+.d2c_gallery_grid a:nth-child(4){
+  grid-row: 1 / 3;
+}
+.d2c_gallery_grid a:nth-child(5){
+  grid-column: 1 / 3;
+}
+/* ========================== portfolio section end ============================ */
+
+/* ========================== package section start ============================ */
+.d2c_package{
+
+}
+.d2c_package_card{
+  background: var(--default_color_one);
+  box-shadow: 0px 0px 25px rgba(102, 57, 166, 0.07);
+  border-radius: var(--border_radius);
+  padding: 60px 30px;
+  border: 1px solid transparent;
+  transition: .4s all ease;
+}
+.d2c_package_card img{
+  margin-bottom: 30px;
+}
+.d2c_package_card table{
+  font-weight: 400;
+  font-size: 18px;
+  font-family: var(--secondary_font);
+  color: var(--text_color);
+}
+.d2c_package_card table td{
+  border-top: 0px;
+  padding: 10px 0px 10px 0px;
+}
+.d2c_package_card table tr{
+  border-bottom: 1px solid #F0EBF6;
+
+}
+.d2c_package_card table tr td:last-child{
+  text-align: right;
+}
+.d2c_package_card h3{
+  color: var(--secondary_color);
+  margin-bottom: 5px;
+}
+.d2c_package_card .d2c_price{
+  font-size: 40px;
+  font-weight: 600;
+  font-family: var(--primary_font);
+  color: var(--primary_color);
+  margin-bottom: 5px;
+}
+.d2c_package_card .d2c_btn{
+  background: #e3dbee;
+  color: var(--primary_color);
+  border-color: #e3dbee;
+  margin-top: 60px;
+}
+.d2c_package_card .d2c_btn:hover{
+  color: var(--default_color_one);
+}
+.d2c_package_card .d2c_btn:hover::after{
+  background: var(--primary_color);
+}
+.d2c_package_card:hover{
+  border: 1px solid var(--primary_color);
+  transition: .4s all ease;
+}
+.d2c_package_card:hover .d2c_btn::after{
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: var(--primary_color);
+}
+.d2c_package_card:hover .d2c_btn{
+  color: var(--default_color_one);
+}
+/* ========================== package section end ============================ */
+
+/* ========================== awards section start ============================ */
+.d2c_awards{
+  background: url(../images/awards_bg.png);
+  background-repeat: no-repeat;
+  background-position: right top;
+}
+.d2c_awards h3 span{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary_color);
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--primary_color);
+  font-size: 24px;
+  margin-right: 10px;
+  border-radius: 15px 0px 15px 0px;
+}
+.d2c_awards .d2c_image_bg_gradient{
+  background: linear-gradient(180deg, #E0D7ED 41%, #E0D7ED 0%, #E0D7ED 50%);
+    border-top-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    height: 255px;
+    inset: unset;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+}
+.d2c_awards .d2c_left_bg{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.d2c_awards .d2c_awards_profile_image{
+  width: 80%;
+  margin: 0 auto;
+}
+/* ========================== awards section end ============================ */
+
+/* ========================== contact section start ============================ */
+
+.d2c_contact_wrapper{
+  box-shadow: 0px 0px 25px rgba(102, 57, 166, 0.07);
+  border-radius: var(--border_radius);
+}
+.d2c_contact_content{
+  padding: 60px;
+}
+.d2c_contact_wrapper{
+  margin-bottom: 100px;
+}
+.d2c_contact_wrapper .d2c_image_bg_gradient{
+  background: #E0D7ED;
+  border-radius: 0px;
+}
+.d2c_contact_wrapper img{
+  border-radius: 0px;
+}
+.d2c_contact_content .d2c_title{
+  margin-bottom: 30px;
+}
+.d2c_contact_content .d2c_btn{
+  margin-top: 30px;
+}
+.form-control{
+  background: var(--default_color_one);
+  box-shadow: 0px 0px 25px rgba(102, 57, 166, 0.07);
+  -webkit-box-shadow: 0px 0px 25px rgba(102, 57, 166, 0.07); 
+  -moz-box-shadow: 0px 0px 25px rgba(102, 57, 166, 0.07);
+  border-radius: 3px;
+  padding: 27px 20px;
+  border: 1px solid rgba(102, 57, 166, 0.3);
+  font-family: var(--secondary_font);
+  color: var(--secondary_color);
+  font-weight: 400;
+}
+.form-control:focus{
+  box-shadow: 0px 0px 25px rgba(102, 57, 166, 0.07);
+  -webkit-box-shadow: 0px 0px 25px rgba(102, 57, 166, 0.07); 
+  -moz-box-shadow: 0px 0px 25px rgba(102, 57, 166, 0.07);
+  border-color: rgba(102, 57, 166, 0.3);
+  outline: none;
+}
+.form-control::placeholder{
+  color: #a2a2a2c9;
+}
+
+/* ========================== contact section end ============================ */
+
+/* ========================== testimonial section start ============================ */
+.d2c_testimonial{
+  background: var(--primary_shade);
+}
+.d2c_testimonial .d2c_title{
+  margin-bottom: 0px;
+  position: relative;
+}
+.d2c_testimonial .d2c_title::after{
+  content: url('../images/testimonial_up_liner.png');
+  position: absolute;
+  top: 50%;
+}
+.d2c_client_name{
+  font-family: var(--primary_font);
+  color: var(--primary_color);
+  font-weight: 600;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+}
+.d2c_client_name::before{
+  content: '';
+  width: 50px;
+  height: 3px;
+  background: var(--primary_color);
+  position: absolute;
+  left: 0px;
+}
+.d2c_feedback{
+  padding: 40px 70px 100px 70px;
+  position: relative;
+}
+.d2c_feedback::after{
+  content: url('../images/testimonial_bottom_liner.png');
+  position: absolute;
+  bottom: -6px;
+  left: 6px;
+}
+.d2c_client_image{
+  border-radius: 70px 0px 70px 0px;
+  height: 300px;
+  object-fit: cover;
+}
+.d2c_carousel_btn {
+  width: 25px;
+    height: 25px;
+    background: var(--primary_color);
+    border-radius: var(--border_radius);
+    border: navajowhite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--default_color_one);
+    font-size: 14px;
+    z-index: 20;
+}
+.d2c_carousel_btn:hover{
+  color: var(--primary_color);
+  background: #E0D7ED;
+}
+.d2c_carousel_btn.left{
+  position: absolute;
+  left: 65px;
+  bottom: 80px;
+}
+.d2c_carousel_btn.right{
+  position: absolute;
+  left: 100px;
+  bottom: 80px;
+}
+.d2c_testimonial .slick-slide{
+  padding: 5px;
+}
+
+
+/* ========================== testimonial section start ============================ */
+
+/* ==========footer section start========== */
+.d2c_footer{
+  background: rgba(102, 57, 166, 0.04);
+  padding: 70px 0px 0px 0px;
+}
+.d2c_footer .d2c_footer_logo{
+  width: 137px;
+  margin-bottom: 25px;
+}
+.d2c_footer h3{
+  color: var(--primary_color);
+}
+.d2c_footer p,.d2c_footer p a{
+  color: rgba(96, 96, 96, 0.9);
+}
+.d2c_footer p a{
+  word-break: break-all;
+}
+.d2c_footer i{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  font-size: 12px;
+  background: rgba(102, 57, 166, 0.12);
+  border-radius: var(--border_radius);
+  margin-right: 10px;
+  color: var(--primary_color);
+  transition: .4s all ease;
+}
+.d2c_footer_2 p{
+  display: flex;
+  align-items: center;
+}
+.d2c_footer hr{
+  margin: 30px 0px 0px 0px;
+}
+.d2c_copyright{
+  padding: 15px 0px;
+}
+.d2c_copyright p{
+  color: var(--primary_color);
+  font-weight: 400;
+}
+.d2c_copyright p a{
+  color: var(--primary_color);
+  font-weight: 600;
+}
+.d2c_social_link i:hover{
+  background: var(--secondary_color);
+  color: var(--default_color_one);
+  transition: .4s all ease;
+}
+.d2c_footer_3 .btn{
+  background: var(--primary_color);
+  border-radius: 2px;
+  width: 60px;
+  font-size: 18px;
+  transition: .4s all ease;
+}
+.d2c_footer_3 .btn:hover{
+  background: var(--secondary_color);
+  transition: .4s all ease;
+}
+
+.d2c_footer_3 .btn i{
+  color: var(--default_color_one);
+  font-size: 18px;
+  background: transparent;
+}
+.d2c_footer_3 .btn i{
+  margin-right: 0px;
+}
+/* ==========footer section end========== */
+
+/* ========================== bottom to top scroll start ============================ */
+#scrollToTopBtn a{
+  text-decoration: none;
+}
+#scrollToTopBtn a i{
+  background: var(--primary_color);
+  box-shadow: 0rem 0rem 1.25rem rgb(0 0 0 / 15%);
+  font-size: 1.25rem;
+  color: var(--default_color_one);
+  border-radius: 0.25rem;
+  width: 2.188rem;
+  height: 2.188rem;
+  position: fixed;
+  z-index: 9999;
+  bottom: 3%;
+  right: 5%;
+  transition: 0.4s all ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--primary_color);
+}
+#scrollToTopBtn a i:hover{
+  background: var(--secondary_color);
+  border-color: var(--secondary_color);
+  color: var(--default_color_one);
+  transition: 0.4s all ease;
+}
+
+/* ========================== bottom to top scroll end ============================ */
+
+/*
+     Template Name: Fotograaf V2- One Page Photographer Portfolio Template
+    Template URL: https://www.designtocodes.com/product/fotograaf-v2-one-page-photographer-portfolio-template
+    Description: Fotograaf V2- One Page Photographer Portfolio Template is built with a modern design and the latest web technologies.
+    Author: DesignToCodes
+    Author URL: https://www.designtocodes.com
+    Text Domain: fotograaf v2 
+*/
+
+
+
