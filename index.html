@@ -46,6 +46,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      padding-top: var(--header-height); /* ADD THIS LINE */
     }
 
     a {
@@ -221,16 +222,15 @@
       z-index: 1001;
     }
 
-    /* ===== HERO SECTION ===== */
-    #home {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--secondary) 0%, #1a1a1a 100%);
-    }
-
+#home {
+  min-height: calc(100vh - var(--header-height)); /* MODIFY THIS LINE */
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--secondary) 0%, #1a1a1a 100%);
+  /* Remove any padding-top from here if it was already present and moved to body */
+}
     .hero-content {
       display: flex;
       align-items: center;
@@ -1382,9 +1382,9 @@
           <h3 class="project-title">Automatic Profile Photo Framer Tool</h3>
           <p class="project-description">Developed a tool to automatically add custom frames to photos, designed for a protest to help users easily create themed profile pictures for a fire service station.</p>
           <div class="project-tech">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Pillow (PIL)</span>
-            <span class="tech-tag">Image Processing</span>
+            <span class="tech-tag">Html</span>
+            <span class="tech-tag">Css</span>
+            <span class="tech-tag">JavaScript</span>
           </div>
           <div class="project-links">
             <a href="#" class="project-link"><i class='bx bx-link-external'></i> View Project</a>
@@ -1421,8 +1421,6 @@
             <span class="tech-tag">HTML</span>
             <span class="tech-tag">CSS</span>
             <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">PHP (or other backend)</span>
-            <span class="tech-tag">MySQL (or other database)</span>
           </div>
           <div class="project-links">
             <a href="#" class="project-link"><i class='bx bx-link-external'></i> View Project</a>
