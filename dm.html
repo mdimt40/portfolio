@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Discrete Math Bangla Guide</title>
+<style>
+:root{
+  --primary:#4f46e5;
+  --accent:#10b981;
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --text:#1e293b;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --font-sans:'Segoe UI',Tahoma,sans-serif;
+  --font-mono:'Consolas','Courier New',monospace;
+  --color-text-primary:#1e293b;
+  --color-text-secondary:#475569;
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f8fafc;
+  --color-border-tertiary:#e2e8f0;
+  --color-border-secondary:#cbd5e1;
+  --color-border-info:#4f46e5;
+  --color-background-info:#e0e7ff;
+  --color-text-info:#3730a3;
+  --color-background-success:#dcfce7;
+  --color-text-success:#166534;
+  --color-background-warning:#fff7ed;
+  --color-text-warning:#9a3412;
+  --color-border-warning:#fdba74;
+  --color-background-danger:#fee2e2;
+  --color-text-danger:#991b1b;
+  --border-radius-lg:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;transition:all .2s ease}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);padding:20px}
+.app-shell{max-width:1000px;margin:0 auto}
+.hero{padding:26px;background:#fff;border:1px solid var(--border);border-radius:20px;box-shadow:0 4px 15px rgba(0,0,0,.05);margin-bottom:16px;text-align:center}
+.hero h1{font-size:32px;font-weight:700;background:linear-gradient(90deg,#4f46e5,#9333ea);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.hero p{font-size:14px;color:var(--muted);line-height:1.6}
+.hero-meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tool{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.search{flex:1;min-width:260px;padding:12px;border-radius:10px;border:1px solid #cbd5e1;outline:none;background:#fff;font-size:14px}
+.search:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,70,229,.12)}
+.ctrl-btn{padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-weight:500;color:#334155}
+.ctrl-btn:hover{background:#f1f5f9}
+.progress-wrap{display:flex;align-items:center;gap:10px;margin-left:auto;min-width:240px}
+.progress{flex:1;height:10px;background:#e2e8f0;border-radius:8px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#22d3ee)}
+.progress-label{font-size:12px;color:#334155;white-space:nowrap}
+.nav{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:5px}
+.nav-btn{padding:10px 18px;background:#fff;border:1px solid var(--border);border-radius:10px;cursor:pointer;white-space:nowrap;font-size:14px;font-weight:600;color:#334155}
+.nav-btn.active,.nav-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.section{display:none}
+.section.active{display:block;animation:slideIn .3s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.section-title{font-size:20px;font-weight:700;margin-bottom:14px;color:#0f172a}
+.card{background:var(--card);border-radius:15px;padding:18px;margin-bottom:15px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(15,23,42,.03)}
+.card h3{font-size:17px;font-weight:700;color:#0f172a;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer}
+.h3-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.h3-tools{display:flex;align-items:center;gap:8px}
+.card-body{margin-top:12px;border-top:1px solid #f1f5f9;padding-top:12px}
+.card.collapsed .card-body{display:none}
+.card p,.card li{font-size:14px;line-height:1.7;color:#334155}
+.card ul{padding-left:20px}
+.topic-check{appearance:none;width:20px;height:20px;border:2px solid #cbd5e1;border-radius:50%;cursor:pointer;display:inline-block;position:relative;background:#fff}
+.topic-check:checked{background:var(--accent);border-color:var(--accent)}
+.topic-check:checked::after{content:'✓';position:absolute;left:4px;top:-1px;color:#fff;font-size:13px;font-weight:700}
+.collapse-icon{font-size:14px;color:#64748b;transition:transform .2s}
+.card.collapsed .collapse-icon{transform:rotate(-90deg)}
+.badge{display:inline-block;padding:3px 9px;border-radius:7px;font-size:11px;font-weight:600}
+.b-blue{background:#e0e7ff;color:#4338ca}
+.b-green{background:#dcfce7;color:#166534}
+.b-amber{background:#fef3c7;color:#92400e}
+.b-red{background:#fee2e2;color:#991b1b}
+.b-purple{background:#ede9fe;color:#5b21b6}
+.highlight{background:#fff7ed;border-left:4px solid #fb923c;padding:10px 12px;border-radius:8px;margin:10px 0;font-size:14px;color:#1e293b}
+.matrix{display:inline-block;border-left:2px solid #64748b;border-right:2px solid #64748b;padding:6px 12px;font-family:var(--font-mono);font-size:13px;line-height:1.8}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.col{flex:1;min-width:220px}
+svg{width:100%;max-width:400px;display:block;margin:8px auto}
+.formula{font-family:var(--font-mono);background:#f1f5f9;padding:8px 10px;border-radius:8px;font-size:13px;display:inline-block;margin:6px 2px;border-left:4px solid var(--primary)}
+.step{display:flex;gap:10px;align-items:flex-start;margin:8px 0}
+.step-num{background:#e0e7ff;color:#3730a3;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+th,td{padding:10px;border:1px solid #e2e8f0;text-align:left}
+th{background:#f8fafc;font-weight:700}
+.tag{font-size:11px;padding:2px 8px;border-radius:10px;background:#eef2ff;color:#4338ca;border:1px solid #e2e8f0;margin-left:4px}
+.hidden-by-search{display:none!important}
+.empty-state{display:none;text-align:center;padding:14px;border:1px dashed #cbd5e1;border-radius:10px;font-size:13px;color:#64748b;background:#f8fafc;margin-bottom:14px}
+@media (max-width:760px){
+  body{padding:12px}
+  .hero h1{font-size:24px}
+  .progress-wrap{min-width:100%;margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<div style="padding:16px 0" class="app-shell">
+<div class="hero">
+  <h1>Discrete Math Bangla Interactive Guide</h1>
+  <p>প্রতিটি topic এখন interactive: search, fold/unfold, আর progress tracking দিয়ে দ্রুত revision করতে পারবেন।</p>
+  <div class="hero-meta">
+    <span class="badge b-blue">Smart Search</span>
+    <span class="badge b-green">Track Progress</span>
+    <span class="badge b-purple">Focus Mode</span>
+  </div>
+</div>
+
+<div class="tool">
+  <input id="topicSearch" class="search" type="text" placeholder="🔎 Search topic, keyword, formula..." />
+  <button id="expandAllBtn" class="ctrl-btn" type="button">Expand All</button>
+  <button id="collapseAllBtn" class="ctrl-btn" type="button">Collapse All</button>
+  <button id="resetProgressBtn" class="ctrl-btn" type="button">Reset Progress</button>
+  <div class="progress-wrap">
+    <div class="progress"><div id="progressFill" class="progress-fill"></div></div>
+    <div id="progressLabel" class="progress-label">0% done</div>
+  </div>
+</div>
+
+<div id="emptySearch" class="empty-state">এই keyword-এর সাথে কোনো content মেলেনি। অন্য keyword চেষ্টা করুন।</div>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="show('graph', this)">📊 Graph</button>
+  <button class="nav-btn" onclick="show('tree', this)">🌳 Tree</button>
+  <button class="nav-btn" onclick="show('function', this)">🎤 Function</button>
+  <button class="nav-btn" onclick="show('relation', this)">🫂 Relation</button>
+</div>
+
+<!-- ==================== GRAPH ==================== -->
+<div id="graph" class="section active">
+<div class="section-title">📊 Graph Theory — বাংলায়</div>
+
+<div class="card">
+<h3>Graph কী? <span class="tag">Basic</span></h3>
+<p>Graph হলো একটি mathematical structure যেখানে <strong>Vertices (nodes)</strong> এবং <strong>Edges (lines)</strong> থাকে।</p>
+<div class="highlight">G = (V, E) যেখানে V = vertices এর set, E = edges এর set</div>
+<div class="row" style="margin-top:10px">
+<div class="col">
+<svg viewBox="0 0 220 160">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+<circle cx="50" cy="80" r="18" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="50" y="85" text-anchor="middle" font-size="12" fill="#0C447C">A</text>
+<circle cx="110" cy="30" r="18" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+<text x="110" y="35" text-anchor="middle" font-size="12" fill="#27500A">B</text>
+<circle cx="170" cy="80" r="18" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+<text x="170" y="85" text-anchor="middle" font-size="12" fill="#633806">C</text>
+<circle cx="110" cy="130" r="18" fill="#FBEAF0" stroke="#993556" stroke-width="1"/>
+<text x="110" y="135" text-anchor="middle" font-size="12" fill="#72243E">D</text>
+<line x1="67" y1="70" x2="93" y2="43" stroke="#888" stroke-width="1"/>
+<line x1="128" y1="43" x2="153" y2="67" stroke="#888" stroke-width="1"/>
+<line x1="67" y1="90" x2="93" y2="117" stroke="#888" stroke-width="1"/>
+<line x1="128" y1="117" x2="153" y2="93" stroke="#888" stroke-width="1"/>
+<line x1="128" y1="43" x2="93" y2="117" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="110" y="155" text-anchor="middle" font-size="11" fill="#888">Undirected Graph</text>
+</svg>
+</div>
+<div class="col">
+<p style="margin-top:8px"><strong>Weighted Graph:</strong> প্রতিটি edge-এ weight/cost থাকে (যেমন দুই শহরের দূরত্ব)</p>
+<p style="margin-top:8px"><strong>Unweighted Graph:</strong> Edge-এ কোনো weight নেই, শুধু connection আছে</p>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Bipartite Graph <span class="tag">গুরুত্বপূর্ণ</span></h3>
+<p>Bipartite Graph-এ vertices দুটি আলাদা set-এ ভাগ করা যায় (U এবং V), যেখানে একই set-এর দুটি vertex-এর মধ্যে কোনো edge থাকে না।</p>
+<div class="highlight">💡 উদাহরণ: Students ↔ Courses — প্রতিটি student শুধু course-এর সাথে connected, কোনো student অন্য student-এর সাথে নয়।</div>
+<svg viewBox="0 0 300 160">
+<rect x="20" y="20" width="100" height="120" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="70" y="14" text-anchor="middle" font-size="11" fill="#0C447C">Set U (Students)</text>
+<circle cx="70" cy="50" r="14" fill="#378ADD" stroke="#185FA5" stroke-width="1"/>
+<text x="70" y="54" text-anchor="middle" font-size="11" fill="#fff">Rina</text>
+<circle cx="70" cy="90" r="14" fill="#378ADD" stroke="#185FA5" stroke-width="1"/>
+<text x="70" y="94" text-anchor="middle" font-size="11" fill="#fff">Karim</text>
+<circle cx="70" cy="130" r="14" fill="#378ADD" stroke="#185FA5" stroke-width="1"/>
+<text x="70" y="134" text-anchor="middle" font-size="11" fill="#fff">Mim</text>
+<rect x="180" y="20" width="100" height="120" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+<text x="230" y="14" text-anchor="middle" font-size="11" fill="#27500A">Set V (Courses)</text>
+<circle cx="230" cy="60" r="14" fill="#639922" stroke="#3B6D11" stroke-width="1"/>
+<text x="230" y="64" text-anchor="middle" font-size="11" fill="#fff">Math</text>
+<circle cx="230" cy="110" r="14" fill="#639922" stroke="#3B6D11" stroke-width="1"/>
+<text x="230" y="114" text-anchor="middle" font-size="11" fill="#fff">CSE</text>
+<line x1="84" y1="50" x2="216" y2="60" stroke="#888" stroke-width="1"/>
+<line x1="84" y1="50" x2="216" y2="110" stroke="#888" stroke-width="1"/>
+<line x1="84" y1="90" x2="216" y2="60" stroke="#888" stroke-width="1"/>
+<line x1="84" y1="130" x2="216" y2="110" stroke="#888" stroke-width="1"/>
+</svg>
+</div>
+
+<div class="card">
+<h3>Graph Isomorphism <span class="tag">সংজ্ঞা</span></h3>
+<p>দুটি graph G₁ এবং G₂ isomorphic যদি একটি bijective function f: V(G₁) → V(G₂) থাকে যেন edges preserve হয়।</p>
+<p style="margin-top:8px">সহজ কথায়: দুটি graph দেখতে আলাদা কিন্তু structure একই — vertex পরিবর্তন করলে একটি আরেকটিতে পরিণত হয়।</p>
+<div class="highlight">🔍 Check করার উপায়: ① একই সংখ্যক vertices ② একই সংখ্যক edges ③ একই degree sequence ④ একই cycle structure</div>
+</div>
+
+<div class="card">
+<h3>Graph Homomorphism</h3>
+<p>Homomorphism হলো function f: V(G) → V(H) যেখানে যদি (u,v) ∈ G-এর edge হয়, তাহলে (f(u), f(v)) ∈ H-এর edge হবে। Isomorphism-এর চেয়ে কম কড়া শর্ত — f-কে bijective হতে হবে না।</p>
+</div>
+
+<div class="card">
+<h3>Eulerian Graph <span class="tag">গুরুত্বপূর্ণ</span></h3>
+<div class="row">
+<div class="col">
+<p><strong>Euler Path:</strong> প্রতিটি edge ঠিক একবার করে visit করা যায়</p>
+<p style="margin-top:6px"><strong>Euler Circuit:</strong> Start ও End একই vertex-এ, প্রতিটি edge একবার</p>
+</div>
+<div class="col">
+<div class="highlight">
+<strong>শর্ত:</strong><br>
+Euler Circuit: সব vertex-এর degree even<br>
+Euler Path: ঠিক ২টি vertex-এর degree odd
+</div>
+</div>
+</div>
+<p style="margin-top:10px">📌 <strong>উদাহরণ — Königsberg Bridge Problem:</strong> ৭টি bridge পার হওয়া, প্রতিটি ঠিক একবার — এটি impossible কারণ ৪টি vertex-এরই odd degree ছিল।</p>
+</div>
+
+<div class="card">
+<h3>Hamiltonian Graph <span class="tag">গুরুত্বপূর্ণ</span></h3>
+<div class="row">
+<div class="col">
+<p><strong>Hamiltonian Path:</strong> প্রতিটি vertex ঠিক একবার visit করা যায়</p>
+<p style="margin-top:6px"><strong>Hamiltonian Circuit:</strong> Start ও End একই vertex, সব vertex একবার</p>
+</div>
+<div class="col">
+<div class="highlight">
+Euler = প্রতিটি EDGE একবার<br>
+Hamilton = প্রতিটি VERTEX একবার
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Dijkstra Algorithm — Shortest Path <span class="tag">Algorithm</span></h3>
+<p>Weighted graph-এ একটি source vertex থেকে সব vertex-এর সবচেয়ে কম cost-এর path বের করে।</p>
+<div style="margin:10px 0">
+<div class="step"><div class="step-num">১</div><div>Source vertex-এর distance = 0, বাকি সব = ∞ সেট করো</div></div>
+<div class="step"><div class="step-num">২</div><div>Unvisited vertex থেকে সবচেয়ে কম distance-এর vertex select করো</div></div>
+<div class="step"><div class="step-num">৩</div><div>সেই vertex-এর সব neighbors-এর distance update করো (Relaxation)</div></div>
+<div class="step"><div class="step-num">৪</div><div>Visited চিহ্নিত করো, সব visit না হওয়া পর্যন্ত ২-৩ repeat করো</div></div>
+</div>
+<div class="highlight">
+উদাহরণ: A→B=4, A→C=2, C→B=1, B→D=3<br>
+A থেকে D: A→C→B→D = 2+1+3 = <strong>6</strong> (shortest!)
+</div>
+</div>
+</div>
+
+<!-- ==================== TREE ==================== -->
+<div id="tree" class="section">
+<div class="section-title">🌳 Tree — বাংলায়</div>
+
+<div class="card">
+<h3>Tree কী?</h3>
+<p>Tree হলো একটি connected, acyclic graph। n টি vertex থাকলে ঠিক n-1 টি edge থাকে।</p>
+<div class="highlight">🌳 Properties: ① কোনো cycle নেই ② সব vertex connected ③ n vertices → n-1 edges</div>
+</div>
+
+<div class="card">
+<h3>Binary Tree — Traversal <span class="tag">গুরুত্বপূর্ণ</span></h3>
+<p>Binary tree-এ প্রতিটি node-এ সর্বোচ্চ ২টি child (left ও right)</p>
+<svg viewBox="0 0 300 180">
+<circle cx="150" cy="25" r="18" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="150" y="30" text-anchor="middle" font-size="13" font-weight="500" fill="#3C3489">1</text>
+<circle cx="80" cy="80" r="18" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="80" y="85" text-anchor="middle" font-size="13" font-weight="500" fill="#3C3489">2</text>
+<circle cx="220" cy="80" r="18" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="220" y="85" text-anchor="middle" font-size="13" font-weight="500" fill="#3C3489">3</text>
+<circle cx="45" cy="135" r="18" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="45" y="140" text-anchor="middle" font-size="13" font-weight="500" fill="#0C447C">4</text>
+<circle cx="115" cy="135" r="18" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="115" y="140" text-anchor="middle" font-size="13" font-weight="500" fill="#0C447C">5</text>
+<circle cx="185" cy="135" r="18" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="185" y="140" text-anchor="middle" font-size="13" font-weight="500" fill="#0C447C">6</text>
+<circle cx="255" cy="135" r="18" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="255" y="140" text-anchor="middle" font-size="13" font-weight="500" fill="#0C447C">7</text>
+<line x1="135" y1="37" x2="95" y2="66" stroke="#534AB7" stroke-width="1"/>
+<line x1="165" y1="37" x2="205" y2="66" stroke="#534AB7" stroke-width="1"/>
+<line x1="66" y1="92" x2="56" y2="122" stroke="#185FA5" stroke-width="1"/>
+<line x1="94" y1="92" x2="104" y2="122" stroke="#185FA5" stroke-width="1"/>
+<line x1="206" y1="92" x2="196" y2="122" stroke="#185FA5" stroke-width="1"/>
+<line x1="234" y1="92" x2="244" y2="122" stroke="#185FA5" stroke-width="1"/>
+</svg>
+<div class="row">
+<div class="col">
+<div class="badge b-blue">Pre-order (Root→Left→Right)</div>
+<p style="margin-top:6px">১ → ২ → ৪ → ৫ → ৩ → ৬ → ৭</p>
+<p style="font-size:12px;color:var(--color-text-secondary)">আগে Root, তারপর Left subtree, তারপর Right</p>
+</div>
+<div class="col">
+<div class="badge b-green">In-order (Left→Root→Right)</div>
+<p style="margin-top:6px">৪ → ২ → ৫ → ১ → ৬ → ৩ → ৭</p>
+<p style="font-size:12px;color:var(--color-text-secondary)">BST-এ sorted order পাওয়া যায়</p>
+</div>
+<div class="col">
+<div class="badge b-amber">Post-order (Left→Right→Root)</div>
+<p style="margin-top:6px">৪ → ৫ → ২ → ৬ → ৭ → ৩ → ১</p>
+<p style="font-size:12px;color:var(--color-text-secondary)">আগে সব child, পরে root</p>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Prim's Algorithm — MST <span class="tag">গুরুত্বপূর্ণ</span></h3>
+<p><strong>MST (Minimum Spanning Tree):</strong> Graph-এর এমন subset যেখানে সব vertex connected এবং total edge weight minimum।</p>
+<div style="margin:10px 0">
+<div class="step"><div class="step-num">১</div><div>যেকোনো একটি vertex থেকে শুরু করো, visited set-এ রাখো</div></div>
+<div class="step"><div class="step-num">২</div><div>Visited vertices থেকে সবচেয়ে কম weight-এর edge বেছে নাও যা নতুন vertex-এ যায়</div></div>
+<div class="step"><div class="step-num">৩</div><div>সেই নতুন vertex-টি visited set-এ যোগ করো</div></div>
+<div class="step"><div class="step-num">৪</div><div>সব vertex visited না হওয়া পর্যন্ত ২-৩ repeat করো</div></div>
+</div>
+<div class="highlight">
+📌 উদাহরণ (A থেকে শুরু):<br>
+Edges: A-B(4), A-C(2), B-D(3), C-D(1), C-B(5)<br>
+<strong>MST: A-C(2) → C-D(1) → D-B(3) = Total: 6</strong>
+</div>
+</div>
+
+<div class="card">
+<h3>Hierarchy Tree</h3>
+<p>Hierarchy tree-এ একটি root থেকে parent-child relationship দিয়ে সংগঠন দেখানো হয়।</p>
+<p style="margin-top:6px">উদাহরণ: University → Department → Faculty → Student</p>
+</div>
+</div>
+
+<!-- ==================== FUNCTION ==================== -->
+<div id="function" class="section">
+<div class="section-title">🎤 Function — বাংলায়</div>
+
+<div class="card">
+<h3>Function কী?</h3>
+<p>Function f: A → B হলো এমন একটি relation যেখানে A-এর প্রতিটি element B-এর ঠিক একটি element-এর সাথে map করে।</p>
+<div class="highlight">Domain (A) → Codomain (B), Range = actual output values</div>
+</div>
+
+<div class="card">
+<h3>Function-এর প্রকারভেদ <span class="tag">গুরুত্বপূর্ণ</span></h3>
+<div class="row">
+<div class="col">
+<div class="badge b-blue">Injective (One-to-One)</div>
+<p style="margin-top:8px">f(a₁) = f(a₂) হলে a₁ = a₂<br>অর্থাৎ দুটি ভিন্ন input কখনো একই output দেবে না।</p>
+<svg viewBox="0 0 180 130">
+<rect x="10" y="10" width="60" height="110" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="40" y="8" text-anchor="middle" font-size="10" fill="#0C447C">A</text>
+<circle cx="40" cy="35" r="10" fill="#378ADD"/><text x="40" y="39" text-anchor="middle" font-size="10" fill="#fff">a</text>
+<circle cx="40" cy="65" r="10" fill="#378ADD"/><text x="40" y="69" text-anchor="middle" font-size="10" fill="#fff">b</text>
+<circle cx="40" cy="95" r="10" fill="#378ADD"/><text x="40" y="99" text-anchor="middle" font-size="10" fill="#fff">c</text>
+<rect x="110" y="10" width="60" height="110" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+<text x="140" y="8" text-anchor="middle" font-size="10" fill="#27500A">B</text>
+<circle cx="140" cy="30" r="10" fill="#639922"/><text x="140" y="34" text-anchor="middle" font-size="10" fill="#fff">1</text>
+<circle cx="140" cy="60" r="10" fill="#639922"/><text x="140" y="64" text-anchor="middle" font-size="10" fill="#fff">2</text>
+<circle cx="140" cy="90" r="10" fill="#639922"/><text x="140" y="94" text-anchor="middle" font-size="10" fill="#fff">3</text>
+<circle cx="140" cy="115" r="8" fill="#C0DD97" stroke="#639922" stroke-width="1"/><text x="140" y="119" text-anchor="middle" font-size="9" fill="#3B6D11">4</text>
+<line x1="50" y1="35" x2="130" y2="30" stroke="#666" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="50" y1="65" x2="130" y2="60" stroke="#666" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="50" y1="95" x2="130" y2="90" stroke="#666" stroke-width="1" marker-end="url(#arr)"/>
+</svg>
+</div>
+<div class="col">
+<div class="badge b-green">Surjective (Onto)</div>
+<p style="margin-top:8px">Codomain-এর প্রতিটি element অন্তত একবার map হয়।<br>Range = Codomain</p>
+<svg viewBox="0 0 180 130">
+<rect x="10" y="10" width="60" height="110" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="40" y="8" text-anchor="middle" font-size="10" fill="#0C447C">A</text>
+<circle cx="40" cy="30" r="10" fill="#378ADD"/><text x="40" y="34" text-anchor="middle" font-size="10" fill="#fff">a</text>
+<circle cx="40" cy="60" r="10" fill="#378ADD"/><text x="40" y="64" text-anchor="middle" font-size="10" fill="#fff">b</text>
+<circle cx="40" cy="90" r="10" fill="#378ADD"/><text x="40" y="94" text-anchor="middle" font-size="10" fill="#fff">c</text>
+<circle cx="40" cy="115" r="10" fill="#378ADD"/><text x="40" y="119" text-anchor="middle" font-size="10" fill="#fff">d</text>
+<rect x="110" y="20" width="60" height="85" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+<text x="140" y="18" text-anchor="middle" font-size="10" fill="#27500A">B</text>
+<circle cx="140" cy="40" r="10" fill="#639922"/><text x="140" y="44" text-anchor="middle" font-size="10" fill="#fff">1</text>
+<circle cx="140" cy="70" r="10" fill="#639922"/><text x="140" y="74" text-anchor="middle" font-size="10" fill="#fff">2</text>
+<circle cx="140" cy="100" r="10" fill="#639922"/><text x="140" y="104" text-anchor="middle" font-size="10" fill="#fff">3</text>
+<line x1="50" y1="30" x2="130" y2="40" stroke="#666" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="50" y1="60" x2="130" y2="40" stroke="#666" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="50" y1="90" x2="130" y2="70" stroke="#666" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="50" y1="115" x2="130" y2="100" stroke="#666" stroke-width="1" marker-end="url(#arr)"/>
+</svg>
+</div>
+<div class="col">
+<div class="badge b-purple">Bijective (One-to-One Onto)</div>
+<p style="margin-top:8px">Injective + Surjective উভয়ই। প্রতিটি input → unique output, সব output covered।<br>Inverse function সবসময় থাকে।</p>
+<svg viewBox="0 0 180 120">
+<rect x="10" y="10" width="60" height="100" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="40" y="8" text-anchor="middle" font-size="10" fill="#0C447C">A</text>
+<circle cx="40" cy="35" r="10" fill="#378ADD"/><text x="40" y="39" text-anchor="middle" font-size="10" fill="#fff">a</text>
+<circle cx="40" cy="65" r="10" fill="#378ADD"/><text x="40" y="69" text-anchor="middle" font-size="10" fill="#fff">b</text>
+<circle cx="40" cy="95" r="10" fill="#378ADD"/><text x="40" y="99" text-anchor="middle" font-size="10" fill="#fff">c</text>
+<rect x="110" y="10" width="60" height="100" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+<text x="140" y="8" text-anchor="middle" font-size="10" fill="#27500A">B</text>
+<circle cx="140" cy="35" r="10" fill="#639922"/><text x="140" y="39" text-anchor="middle" font-size="10" fill="#fff">1</text>
+<circle cx="140" cy="65" r="10" fill="#639922"/><text x="140" y="69" text-anchor="middle" font-size="10" fill="#fff">2</text>
+<circle cx="140" cy="95" r="10" fill="#639922"/><text x="140" y="99" text-anchor="middle" font-size="10" fill="#fff">3</text>
+<line x1="50" y1="35" x2="130" y2="35" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="50" y1="65" x2="130" y2="65" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="50" y1="95" x2="130" y2="95" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arr)"/>
+</svg>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Composition of Functions</h3>
+<p>(g ∘ f)(x) = g(f(x)) — আগে f apply করো, তারপর g</p>
+<div class="highlight">
+উদাহরণ: f(x) = x+2, g(x) = x²<br>
+(g ∘ f)(3) = g(f(3)) = g(5) = 25<br>
+(f ∘ g)(3) = f(g(3)) = f(9) = 11 [ক্রম ভিন্ন!]
+</div>
+</div>
+
+<div class="card">
+<h3>Inverse Function</h3>
+<p>f: A → B bijective হলে f⁻¹: B → A বিদ্যমান, যেখানে f⁻¹(f(x)) = x</p>
+<div class="highlight">উদাহরণ: f(x) = 3x+1 হলে f⁻¹(y) = (y-1)/3</div>
+</div>
+
+<div class="card">
+<h3>Series / Sequence <span class="tag">গুরুত্বপূর্ণ</span></h3>
+<div class="row">
+<div class="col">
+<div class="badge b-blue">Arithmetic Progression (AP)</div>
+<p style="margin-top:8px">প্রতিটি term আগের term থেকে সমান পার্থক্য (d) বেশি</p>
+<p class="formula">aₙ = a + (n-1)d</p>
+<p class="formula">Sₙ = n/2 × (2a + (n-1)d)</p>
+<p style="margin-top:6px">উদাহরণ: 2, 5, 8, 11, ... (d=3)<br>10ম পদ = 2+(9×3) = 29</p>
+</div>
+<div class="col">
+<div class="badge b-green">Geometric Progression (GP)</div>
+<p style="margin-top:8px">প্রতিটি term আগের term-এর সমান অনুপাত (r) গুণ</p>
+<p class="formula">aₙ = a × r^(n-1)</p>
+<p class="formula">Sₙ = a(rⁿ-1)/(r-1) if r≠1</p>
+<p style="margin-top:6px">উদাহরণ: 3, 6, 12, 24, ... (r=2)<br>5ম পদ = 3×2⁴ = 48</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== RELATION ==================== -->
+<div id="relation" class="section">
+<div class="section-title">🫂 Relation — বাংলায়</div>
+
+<div class="card">
+<h3>Relation কী?</h3>
+<p>Set A থেকে B-এর উপর Relation R হলো A×B-এর একটি subset। অর্থাৎ কিছু ordered pairs (a, b) যেখানে a ∈ A এবং b ∈ B।</p>
+<div class="highlight">উদাহরণ: A = {1, 2, 3}, R = {(1,1), (2,2), (3,3), (1,2)} — এটি A-এর উপর একটি relation</div>
+</div>
+
+<div class="card">
+<h3>Relation-এর প্রকারভেদ <span class="tag">সবচেয়ে গুরুত্বপূর্ণ</span></h3>
+
+<!-- Reflexive -->
+<div style="border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px;margin-bottom:10px">
+<div class="badge b-blue">১. Reflexive (প্রতিফলনশীল)</div>
+<p style="margin-top:8px">প্রতিটি element নিজের সাথে related: ∀a ∈ A, (a,a) ∈ R</p>
+<div class="row" style="margin-top:8px">
+<div class="col">
+<strong style="font-size:13px">Matrix:</strong> Diagonal-এ সব 1
+<div class="matrix">
+<div>1 0 0</div>
+<div>0 1 0</div>
+<div>0 0 1</div>
+</div>
+<p style="font-size:12px;margin-top:4px">✅ Diagonal সব 1 = Reflexive</p>
+</div>
+<div class="col">
+<strong style="font-size:13px">Digraph:</strong> প্রতিটি node থেকে নিজেই loop
+<svg viewBox="0 0 160 120">
+<circle cx="50" cy="40" r="16" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="50" y="45" text-anchor="middle" font-size="12" fill="#0C447C">1</text>
+<circle cx="110" cy="40" r="16" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="110" y="45" text-anchor="middle" font-size="12" fill="#0C447C">2</text>
+<circle cx="80" cy="95" r="16" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text x="80" y="100" text-anchor="middle" font-size="12" fill="#0C447C">3</text>
+<path d="M42,24 A14,14 0 1,1 36,38" fill="none" stroke="#378ADD" stroke-width="1.5" marker-end="url(#arr)"/>
+<path d="M118,24 A14,14 0 1,1 112,38" fill="none" stroke="#378ADD" stroke-width="1.5" marker-end="url(#arr)"/>
+<path d="M88,79 A14,14 0 1,1 94,93" fill="none" stroke="#378ADD" stroke-width="1.5" marker-end="url(#arr)"/>
+</svg>
+</div>
+</div>
+</div>
+
+<!-- Anti-reflexive -->
+<div style="border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px;margin-bottom:10px">
+<div class="badge b-red">২. Anti-reflexive (Irreflexive)</div>
+<p style="margin-top:8px">কোনো element নিজের সাথে related নয়: ∀a ∈ A, (a,a) ∉ R</p>
+<div class="highlight">Matrix: Diagonal-এ সব 0। উদাহরণ: "ছোট" relation — 2 < 2 হয় না।</div>
+</div>
+
+<!-- Symmetric -->
+<div style="border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px;margin-bottom:10px">
+<div class="badge b-green">৩. Symmetric (সমমিত)</div>
+<p style="margin-top:8px">যদি (a,b) ∈ R হয় তাহলে (b,a) ∈ R: ∀a,b: (a,b)∈R → (b,a)∈R</p>
+<div class="row" style="margin-top:8px">
+<div class="col">
+<strong style="font-size:13px">Matrix:</strong> M = Mᵀ (Symmetric matrix)
+<div class="matrix">
+<div>1 1 0</div>
+<div>1 1 1</div>
+<div>0 1 0</div>
+</div>
+</div>
+<div class="col">
+<strong style="font-size:13px">Digraph:</strong> প্রতিটি edge দুই দিকে arrow
+<svg viewBox="0 0 160 100">
+<circle cx="40" cy="50" r="16" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+<text x="40" y="55" text-anchor="middle" font-size="12" fill="#27500A">A</text>
+<circle cx="120" cy="50" r="16" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+<text x="120" y="55" text-anchor="middle" font-size="12" fill="#27500A">B</text>
+<line x1="56" y1="44" x2="104" y2="44" stroke="#639922" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="104" y1="57" x2="56" y2="57" stroke="#639922" stroke-width="1.5" marker-end="url(#arr)"/>
+</svg>
+</div>
+</div>
+</div>
+
+<!-- Anti-symmetric -->
+<div style="border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px;margin-bottom:10px">
+<div class="badge b-amber">৪. Anti-symmetric</div>
+<p style="margin-top:8px">যদি (a,b) ∈ R এবং (b,a) ∈ R হয়, তাহলে a = b।</p>
+<div class="highlight">উদাহরণ: "≤" relation — যদি a≤b এবং b≤a, তাহলে a=b।<br>Matrix: mᵢⱼ=1 এবং mⱼᵢ=1 হতে পারে শুধু i=j হলে।</div>
+</div>
+
+<!-- Transitive -->
+<div style="border:0.5px solid var(--color-border-tertiary);border-radius:10px;padding:12px">
+<div class="badge b-purple">৫. Transitive (সঞ্চরণীয়)</div>
+<p style="margin-top:8px">যদি (a,b) ∈ R এবং (b,c) ∈ R হয়, তাহলে (a,c) ∈ R।</p>
+<div class="highlight">উদাহরণ: "বন্ধু" — A বন্ধু B, B বন্ধু C → A বন্ধু C (transitive হলে)<br>Matrix পরীক্ষা: R² ⊆ R হলে Transitive</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Equivalence Relation</h3>
+<p>একটি relation Equivalence হবে যদি তিনটি শর্ত পূরণ হয়:</p>
+<div style="margin:8px 0">
+<div class="step"><div class="step-num">১</div><div><strong>Reflexive:</strong> প্রতিটি element নিজের সাথে related</div></div>
+<div class="step"><div class="step-num">২</div><div><strong>Symmetric:</strong> উভয় দিকে relation</div></div>
+<div class="step"><div class="step-num">৩</div><div><strong>Transitive:</strong> chain-এর মাধ্যমে related</div></div>
+</div>
+<div class="highlight">📌 উদাহরণ: "সমান" (=) relation — ১=১ (Ref), ১=১ → ১=১ (Sym), a=b, b=c → a=c (Trans)<br>Equivalence classes: set-কে disjoint groups-এ ভাগ করে</div>
+</div>
+
+<div class="card">
+<h3>Partial Order Relation</h3>
+<p>একটি relation Partial Order হবে যদি:</p>
+<div class="step"><div class="step-num">১</div><div><strong>Reflexive:</strong> a ≤ a</div></div>
+<div class="step"><div class="step-num">২</div><div><strong>Anti-symmetric:</strong> a≤b এবং b≤a হলে a=b</div></div>
+<div class="step"><div class="step-num">৩</div><div><strong>Transitive:</strong> a≤b এবং b≤c হলে a≤c</div></div>
+<div class="highlight">উদাহরণ: ≤ (less than or equal), ⊆ (subset relation), | (divisibility — a|b মানে a, b-কে ভাগ করে)</div>
+</div>
+
+<div class="card">
+<h3>Composite Relation</h3>
+<p>R ⊆ A×B এবং S ⊆ B×C হলে S∘R ⊆ A×C এমন যে (a,c) ∈ S∘R যদি কোনো b আছে যেন (a,b)∈R এবং (b,c)∈S</p>
+<div class="highlight">Matrix দিয়ে: M(S∘R) = M(R) × M(S) (Boolean multiplication)</div>
+<div style="margin-top:10px">
+<strong style="font-size:13px">উদাহরণ:</strong>
+<p>R = {(1,2),(2,3)}, S = {(2,a),(3,b)}</p>
+<p>S∘R = {(1,a),(2,b)} — কারণ 1→2→a এবং 2→3→b</p>
+</div>
+</div>
+
+<div class="card">
+<h3>Closure of Relation <span class="tag">গুরুত্বপূর্ণ</span></h3>
+<div class="row">
+<div class="col">
+<div class="badge b-blue">Reflexive Closure</div>
+<p style="margin-top:8px">R-এ diagonal যোগ করো: R ∪ {(a,a) | a ∈ A}</p>
+<div class="highlight" style="margin-top:8px">R = {(1,2),(2,3)}<br>R(ref) = {(1,1),(2,2),(3,3),(1,2),(2,3)}</div>
+</div>
+<div class="col">
+<div class="badge b-green">Symmetric Closure</div>
+<p style="margin-top:8px">প্রতিটি pair-এর reverse যোগ করো: R ∪ R⁻¹</p>
+<div class="highlight" style="margin-top:8px">R = {(1,2),(2,3)}<br>R(sym) = {(1,2),(2,1),(2,3),(3,2)}</div>
+</div>
+<div class="col">
+<div class="badge b-purple">Transitive Closure</div>
+<p style="margin-top:8px">R∪R²∪R³∪... নিতে হবে (Warshall's algorithm)</p>
+<div class="highlight" style="margin-top:8px">R = {(1,2),(2,3)}<br>R(trans) = {(1,2),(2,3),(1,3)}</div>
+</div>
+</div>
+</div>
+
+<!-- Summary table -->
+<div class="card">
+<h3>Quick Summary Table</h3>
+<table>
+<tr><th>Property</th><th>শর্ত</th><th>উদাহরণ</th></tr>
+<tr><td>Reflexive</td><td>(a,a) ∈ R সবার জন্য</td><td>=, ≤, ⊆</td></tr>
+<tr><td>Anti-reflexive</td><td>(a,a) ∉ R কখনো না</td><td>&lt;, &gt;, ≠</td></tr>
+<tr><td>Symmetric</td><td>(a,b)∈R → (b,a)∈R</td><td>=, "বন্ধু"</td></tr>
+<tr><td>Anti-symmetric</td><td>(a,b)∈R ∧ (b,a)∈R → a=b</td><td>≤, ⊆, |</td></tr>
+<tr><td>Transitive</td><td>(a,b)∈R ∧ (b,c)∈R → (a,c)∈R</td><td>=, ≤, &lt;</td></tr>
+<tr><td>Equivalence</td><td>Reflexive+Symmetric+Transitive</td><td>=, mod</td></tr>
+<tr><td>Partial Order</td><td>Reflexive+Anti-sym+Transitive</td><td>≤, ⊆</td></tr>
+</table>
+</div>
+</div>
+
+</div>
+
+<script>
+const STORAGE_KEY = 'dm_done_cards_v1';
+
+function show(id, btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn){
+    btn.classList.add('active');
+  }else{
+    const fallbackBtn = document.querySelector(`.nav-btn[onclick*=\"${id}\"]`);
+    if(fallbackBtn) fallbackBtn.classList.add('active');
+  }
+  applySearch();
+}
+
+function loadDoneMap(){
+  try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}
+  catch{return {}}
+}
+
+function saveDoneMap(map){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+}
+
+function updateProgress(){
+  const checks = [...document.querySelectorAll('.topic-check')];
+  const total = checks.length;
+  const done = checks.filter(c=>c.checked).length;
+  const pct = total ? Math.round(done*100/total) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${pct}% done (${done}/${total})`;
+}
+
+function applySearch(){
+  const q = (document.getElementById('topicSearch').value || '').trim().toLowerCase();
+  const activeSection = document.querySelector('.section.active');
+  if(!activeSection) return;
+
+  let visibleCount = 0;
+  activeSection.querySelectorAll('.card').forEach(card=>{
+    const text = card.textContent.toLowerCase();
+    const match = !q || text.includes(q);
+    card.classList.toggle('hidden-by-search', !match);
+    if(match) visibleCount++;
+  });
+
+  document.getElementById('emptySearch').style.display = visibleCount ? 'none' : 'block';
+}
+
+function setCollapsedState(collapsed){
+  const activeSection = document.querySelector('.section.active');
+  if(!activeSection) return;
+  activeSection.querySelectorAll('.card:not(.hidden-by-search)').forEach(card=>{
+    card.classList.toggle('collapsed', collapsed);
+  });
+}
+
+function initCards(){
+  const doneMap = loadDoneMap();
+  let idx = 0;
+  document.querySelectorAll('.card').forEach(card=>{
+    const h3 = card.querySelector('h3');
+    if(!h3) return;
+
+    const cardId = `card-${++idx}`;
+    card.dataset.cardId = cardId;
+
+    if(!card.querySelector('.card-body')){
+      const body = document.createElement('div');
+      body.className = 'card-body';
+      while(h3.nextSibling){
+        body.appendChild(h3.nextSibling);
+      }
+      card.appendChild(body);
+    }
+
+    const oldTitle = h3.innerHTML;
+    h3.innerHTML = '';
+    const left = document.createElement('span');
+    left.className = 'h3-left';
+    left.innerHTML = oldTitle;
+
+    const tools = document.createElement('span');
+    tools.className = 'h3-tools';
+
+    const check = document.createElement('input');
+    check.type = 'checkbox';
+    check.className = 'topic-check';
+    check.checked = !!doneMap[cardId];
+    check.title = 'Mark as done';
+    check.addEventListener('change', (e)=>{
+      doneMap[cardId] = e.target.checked;
+      saveDoneMap(doneMap);
+      updateProgress();
+      e.stopPropagation();
+    });
+
+    const icon = document.createElement('span');
+    icon.className = 'collapse-icon';
+    icon.textContent = '▾';
+
+    tools.appendChild(check);
+    tools.appendChild(icon);
+    h3.appendChild(left);
+    h3.appendChild(tools);
+
+    h3.tabIndex = 0;
+    h3.setAttribute('role','button');
+    h3.addEventListener('click', (e)=>{
+      if(e.target.classList.contains('topic-check')) return;
+      card.classList.toggle('collapsed');
+    });
+    h3.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        card.classList.toggle('collapsed');
+      }
+    });
+  });
+
+  updateProgress();
+}
+
+function initUI(){
+  initCards();
+  document.getElementById('topicSearch').addEventListener('input', applySearch);
+  document.getElementById('expandAllBtn').addEventListener('click', ()=>setCollapsedState(false));
+  document.getElementById('collapseAllBtn').addEventListener('click', ()=>setCollapsedState(true));
+  document.getElementById('resetProgressBtn').addEventListener('click', ()=>{
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll('.topic-check').forEach(c=>c.checked=false);
+    updateProgress();
+  });
+  applySearch();
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initUI);
+}else{
+  initUI();
+}
+</script>
+
+</body>
+</html>
