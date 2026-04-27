@@ -167,6 +167,27 @@ th{background:#f8fafc;font-weight:700}
 </div>
 
 <div class="card">
+<h3>Incidence Matrix (Directed Graph) <span class="tag">গুরুত্বপূর্ণ</span></h3>
+<p>Incidence matrix-এ <strong>row = vertex</strong> এবং <strong>column = edge</strong> ধরা হয়। এটি দেখায় কোন edge কোন vertex থেকে বের হচ্ছে এবং কোন vertex-এ ঢুকছে।</p>
+<div class="highlight">
+Inc[i, j] = +1 ⟶ edge <strong>vertex i</strong> থেকে <strong>outgoing</strong><br>
+Inc[i, j] = -1 ⟶ edge <strong>vertex i</strong>-তে <strong>incoming</strong><br>
+Inc[i, j] = 0 ⟶ কোনো connection নেই
+</div>
+<div style="margin-top:10px">
+<strong style="font-size:13px">উদাহরণ (Vertices: A, B, C, D; Edges: e1..e5):</strong>
+<p style="margin-top:6px">e1: A→C, e2: C→D, e3: B→A, e4: D→A, e5: B→D</p>
+<table>
+  <tr><th>V \ E</th><th>e1</th><th>e2</th><th>e3</th><th>e4</th><th>e5</th></tr>
+  <tr><td>A</td><td>1</td><td>0</td><td>-1</td><td>-1</td><td>0</td></tr>
+  <tr><td>B</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+  <tr><td>C</td><td>-1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+  <tr><td>D</td><td>0</td><td>-1</td><td>0</td><td>1</td><td>-1</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
 <h3>Bipartite Graph <span class="tag">গুরুত্বপূর্ণ</span></h3>
 <p>Bipartite Graph-এ vertices দুটি আলাদা set-এ ভাগ করা যায় (U এবং V), যেখানে একই set-এর দুটি vertex-এর মধ্যে কোনো edge থাকে না।</p>
 <div class="highlight">💡 উদাহরণ: Students ↔ Courses — প্রতিটি student শুধু course-এর সাথে connected, কোনো student অন্য student-এর সাথে নয়।</div>
