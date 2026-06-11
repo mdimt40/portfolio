@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GE 235 — Accounting Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green:   #1a6b3c;
+    --green-lt:#e8f5ee;
+    --green-md:#2d9b5a;
+    --gold:    #c9922a;
+    --gold-lt: #fdf3e3;
+    --red:     #b91c1c;
+    --red-lt:  #fef2f2;
+    --ink:     #1a1a2e;
+    --muted:   #5a6172;
+    --line:    #dde2ea;
+    --bg:      #f7f8fc;
+    --white:   #ffffff;
+    --card:    #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--ink); color: #fff;
+    display: flex; align-items: center; gap: 0;
+    padding: 0 2rem; overflow-x: auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,.3);
+  }
+  nav .brand { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; white-space:nowrap; padding:1rem 1.5rem 1rem 0; border-right:1px solid #ffffff22; margin-right:1rem; }
+  nav a { color:#ffffffcc; text-decoration:none; font-size:.78rem; font-weight:500; padding:.9rem .85rem; white-space:nowrap; letter-spacing:.03em; transition:color .2s; }
+  nav a:hover { color:#fff; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #fff; padding: 5rem 2rem 4rem; text-align: center;
+  }
+  .hero .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:.8rem; letter-spacing:.15em; color:#7ec8a0; text-transform:uppercase; margin-bottom:1rem; }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.15; margin-bottom:1rem; }
+  .hero h1 span { color:#7ec8a0; }
+  .hero p { color:#ffffffaa; font-size:1rem; max-width:540px; margin:0 auto 2rem; }
+  .hero .chips { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; }
+  .hero .chip { background:#ffffff14; border:1px solid #ffffff22; padding:.35rem .9rem; border-radius:999px; font-size:.75rem; color:#ffffffcc; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 4rem 0; }
+  section:nth-child(even) { background: var(--white); }
+
+  /* ── SECTION HEADER ── */
+  .sec-head { margin-bottom: 2.5rem; }
+  .sec-head .week-tag { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--green); background:var(--green-lt); padding:.25rem .75rem; border-radius:4px; margin-bottom:.6rem; }
+  .sec-head h2 { font-family:'Playfair Display',serif; font-size:clamp(1.5rem,3vw,2.2rem); font-weight:700; color:var(--ink); }
+  .sec-head p { color:var(--muted); margin-top:.4rem; font-size:.95rem; }
+
+  /* ── CARDS ── */
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.25rem; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.5rem; transition:box-shadow .2s,transform .2s; }
+  .card:hover { box-shadow:0 6px 24px rgba(0,0,0,.09); transform:translateY(-2px); }
+  .card .icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:1rem; }
+  .icon-green { background:var(--green-lt); }
+  .icon-gold  { background:var(--gold-lt); }
+  .icon-red   { background:var(--red-lt); }
+  .card h3 { font-size:.95rem; font-weight:600; margin-bottom:.4rem; }
+  .card p  { font-size:.85rem; color:var(--muted); }
+
+  /* ── EQUATION BOX ── */
+  .eq-box { background:linear-gradient(135deg,#1a6b3c,#2d9b5a); color:#fff; border-radius:16px; padding:2.5rem; text-align:center; margin:2rem 0; }
+  .eq-box .eq-label { font-family:'IBM Plex Mono',monospace; font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; color:#7ec8a0; margin-bottom:.75rem; }
+  .eq-box .eq-main  { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,3vw,2rem); font-weight:700; }
+  .eq-box .eq-ext   { font-size:.9rem; color:#ffffffcc; margin-top:.5rem; }
+
+  /* ── DEF TABLE ── */
+  .def-table { width:100%; border-collapse:collapse; }
+  .def-table th { background:var(--ink); color:#fff; padding:.7rem 1rem; font-size:.82rem; font-weight:600; text-align:left; }
+  .def-table td { padding:.7rem 1rem; font-size:.87rem; border-bottom:1px solid var(--line); }
+  .def-table tr:last-child td { border-bottom:none; }
+  .def-table tr:hover td { background:var(--green-lt); }
+  .tag { display:inline-block; padding:.18rem .6rem; border-radius:4px; font-size:.72rem; font-weight:600; }
+  .tag-a { background:var(--green-lt); color:var(--green); }
+  .tag-l { background:var(--red-lt);   color:var(--red); }
+  .tag-e { background:var(--gold-lt);  color:var(--gold); }
+
+  /* ── GAAP GRID ── */
+  .gaap-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .gaap-item { border-left:4px solid var(--green); padding:.9rem 1.1rem; background:var(--green-lt); border-radius:0 8px 8px 0; }
+  .gaap-item h4 { font-size:.88rem; font-weight:600; color:var(--green); margin-bottom:.25rem; }
+  .gaap-item p  { font-size:.82rem; color:var(--muted); }
+
+  /* ── ETHICS STEPS ── */
+  .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.25rem; }
+  .step  { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.4rem; position:relative; }
+  .step .num { font-family:'IBM Plex Mono',monospace; font-size:2rem; font-weight:600; color:var(--line); position:absolute; top:.8rem; right:1rem; }
+  .step h4 { font-weight:600; font-size:.9rem; margin-bottom:.35rem; }
+  .step p  { font-size:.82rem; color:var(--muted); }
+
+  /* ── PRINCIPLES ── */
+  .principle-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+  @media(max-width:600px){ .principle-grid { grid-template-columns:1fr; } }
+  .principle { border-radius:12px; padding:1.5rem; }
+  .principle.hist { background:var(--gold-lt); border:1px solid #f0d090; }
+  .principle.fair { background:var(--green-lt); border:1px solid #a8d9bc; }
+  .principle h4 { font-weight:700; font-size:.95rem; margin-bottom:.5rem; }
+  .principle p  { font-size:.85rem; color:var(--muted); }
+  .principle .eg { margin-top:.75rem; background:#ffffff88; border-radius:8px; padding:.6rem .9rem; font-size:.82rem; font-style:italic; }
+
+  /* ── TRANSACTION EXAMPLES ── */
+  .tx-list { display:flex; flex-direction:column; gap:.75rem; }
+  .tx { display:grid; grid-template-columns:1.8rem 1fr auto; gap:.75rem; align-items:start; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1rem 1.2rem; }
+  .tx .num { width:1.8rem; height:1.8rem; background:var(--ink); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.75rem; font-weight:700; flex-shrink:0; margin-top:.1rem; }
+  .tx .desc h4 { font-size:.88rem; font-weight:600; margin-bottom:.2rem; }
+  .tx .desc p  { font-size:.8rem; color:var(--muted); }
+  .tx .effect  { font-family:'IBM Plex Mono',monospace; font-size:.75rem; text-align:right; white-space:nowrap; }
+  .up   { color:var(--green); }
+  .down { color:var(--red); }
+
+  /* ── TABULAR TABLE ── */
+  .tbl-wrap { overflow-x:auto; margin-top:1.5rem; }
+  .tbl-summary { border-collapse:collapse; width:100%; font-size:.78rem; min-width:700px; }
+  .tbl-summary th, .tbl-summary td { border:1.5px solid var(--ink); padding:.55rem .75rem; text-align:center; }
+  .tbl-summary .th-main { background:var(--ink); color:#fff; font-weight:600; font-size:.8rem; }
+  .tbl-summary .th-sub  { background:#2d3748; color:#fff; font-weight:500; }
+  .tbl-summary .label   { text-align:left; font-weight:500; background:var(--bg); }
+  .tbl-summary .balance { font-weight:700; border-top:2.5px double var(--ink); border-bottom:2.5px double var(--ink); background:var(--green-lt); }
+  .tbl-summary .pos { color:var(--green); font-weight:600; }
+  .tbl-summary .neg { color:var(--red);   font-weight:600; }
+  .tbl-summary .eq  { font-weight:800; font-size:1rem; background:var(--bg); }
+  .tbl-summary .check { background:var(--gold-lt); font-weight:700; }
+
+  /* ── MCQ ── */
+  .mcq-list { display:flex; flex-direction:column; gap:1rem; }
+  .mcq { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.1rem 1.3rem; }
+  .mcq .q  { font-weight:600; font-size:.9rem; margin-bottom:.5rem; }
+  .mcq .options { display:flex; flex-wrap:wrap; gap:.4rem; }
+  .mcq .opt     { padding:.25rem .75rem; border-radius:6px; font-size:.8rem; border:1px solid var(--line); }
+  .mcq .correct { background:var(--green); color:#fff; border-color:var(--green); font-weight:600; }
+  .mcq .wrong   { color:var(--muted); }
+  .mcq .reason  { margin-top:.5rem; font-size:.78rem; color:var(--green); font-style:italic; }
+
+  /* ── THEORY ANSWERS ── */
+  .theory-block { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.5rem; margin-bottom:1.25rem; }
+  .theory-block h4 { font-weight:700; font-size:.95rem; margin-bottom:.75rem; color:var(--ink); border-bottom:2px solid var(--green-lt); padding-bottom:.4rem; }
+  .theory-block p  { font-size:.87rem; color:var(--muted); margin-bottom:.5rem; }
+  .theory-block ul { padding-left:1.2rem; }
+  .theory-block li { font-size:.85rem; color:var(--muted); margin-bottom:.3rem; }
+
+  /* ── FOOTER ── */
+  footer { background:var(--ink); color:#ffffff66; text-align:center; padding:2rem; font-size:.78rem; }
+  footer strong { color:#fff; }
+
+  @media(max-width:640px){
+    nav .brand { font-size:.9rem; }
+    .tx { grid-template-columns:1.4rem 1fr; }
+    .tx .effect { grid-column:2; text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">GE 235</div>
+  <a href="#week1">Week 1</a>
+  <a href="#equation">Equation</a>
+  <a href="#week2">Week 2</a>
+  <a href="#gaap">GAAP</a>
+  <a href="#ethics">Ethics</a>
+  <a href="#transactions">Transactions</a>
+  <a href="#quiz">Quiz</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="eyebrow">Daffodil International University · GE 235</p>
+  <h1>Principles of <span>Accounting</span>,<br/>Business & Economics</h1>
+  <p>Complete notes from Week 1 & Week 2 — explained from scratch, in plain English.</p>
+  <div class="chips">
+    <span class="chip">Week 1 Basics</span>
+    <span class="chip">Accounting Equation</span>
+    <span class="chip">GAAP & Ethics</span>
+    <span class="chip">Transaction Analysis</span>
+    <span class="chip">Quiz 01 Solutions</span>
+  </div>
+</div>
+
+<!-- ═══════════════ WEEK 1 ═══════════════ -->
+<section id="week1">
+<div class="container">
+  <div class="sec-head">
+    <span class="week-tag">Week 1 — Lesson 1</span>
+    <h2>What is Accounting?</h2>
+    <p>Accounting is the process of <strong>identifying, recording, summarizing,</strong> and <strong>reporting</strong> financial information. It is called <em>"The Language of Business."</em></p>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="icon icon-green">🔍</div><h3>Identifying</h3><p>Spotting which events involve money — e.g., selling a product, paying rent.</p></div>
+    <div class="card"><div class="icon icon-green">✏️</div><h3>Recording</h3><p>Writing down every money-related event in the books systematically.</p></div>
+    <div class="card"><div class="icon icon-gold">📊</div><h3>Summarizing</h3><p>Adding everything up into totals — daily, monthly, yearly.</p></div>
+    <div class="card"><div class="icon icon-gold">📄</div><h3>Reporting</h3><p>Presenting the results to owners, banks, investors, and government.</p></div>
+  </div>
+
+  <div style="margin-top:2.5rem;">
+    <div class="sec-head"><h2>Types of Accounting</h2></div>
+    <div class="cards">
+      <div class="card"><div class="icon icon-green">🏦</div><h3>Financial Accounting</h3><p>Prepares reports for <strong>outsiders</strong> — investors, banks, regulators. Example: annual company report.</p></div>
+      <div class="card"><div class="icon icon-green">📋</div><h3>Managerial Accounting</h3><p>Prepares reports for <strong>insiders</strong> — managers — to plan and make decisions. Example: monthly budget.</p></div>
+      <div class="card"><div class="icon icon-gold">⚙️</div><h3>Cost Accounting</h3><p>Tracks the <strong>cost of making</strong> products or services. Example: cost to produce one software module.</p></div>
+      <div class="card"><div class="icon icon-gold">🧾</div><h3>Tax Accounting</h3><p>Handles <strong>tax calculations</strong> and government compliance. Example: filing income tax returns.</p></div>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem;">
+    <div class="sec-head"><h2>Users of Accounting Information</h2></div>
+    <div class="cards">
+      <div class="card"><div class="icon icon-green">🏢</div><h3>Internal Users</h3><p>Managers, employees, directors, owners, department heads — people <strong>inside</strong> the company who make day-to-day decisions.</p></div>
+      <div class="card"><div class="icon icon-gold">🌍</div><h3>External Users</h3><p>Investors, banks, suppliers, government, tax authorities — people <strong>outside</strong> the company who rely on honest reports.</p></div>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem;">
+    <div class="sec-head"><h2>Basic Accounting Terms</h2></div>
+    <table class="def-table">
+      <thead><tr><th>Term</th><th>Simple Meaning</th><th>Type</th><th>Real Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Asset</strong></td><td>Something the business <strong>owns</strong></td><td><span class="tag tag-a">Asset</span></td><td>Cash, computer, furniture, accounts receivable</td></tr>
+        <tr><td><strong>Liability</strong></td><td>Something the business <strong>owes</strong></td><td><span class="tag tag-l">Liability</span></td><td>Bank loan, accounts payable, salaries payable</td></tr>
+        <tr><td><strong>Owner's Equity</strong></td><td>What truly <strong>belongs to the owner</strong> after paying all debts</td><td><span class="tag tag-e">Equity</span></td><td>Capital invested + profits kept</td></tr>
+        <tr><td><strong>Revenue</strong></td><td>Money the business <strong>earns</strong></td><td><span class="tag tag-e">Equity ↑</span></td><td>Service fees, sales income</td></tr>
+        <tr><td><strong>Expense</strong></td><td>Money the business <strong>spends</strong> to operate</td><td><span class="tag tag-e">Equity ↓</span></td><td>Rent, salaries, electricity bill</td></tr>
+        <tr><td><strong>Drawings</strong></td><td>Owner takes money <strong>out</strong> for personal use</td><td><span class="tag tag-e">Equity ↓</span></td><td>Owner withdraws Tk. 25,000 cash</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════ EQUATION ═══════════════ -->
+<section id="equation">
+<div class="container">
+  <div class="sec-head">
+    <span class="week-tag">Week 1 — Core Concept</span>
+    <h2>The Accounting Equation</h2>
+    <p>The single most important rule in all of accounting. Every transaction must keep this balanced.</p>
+  </div>
+  <div class="eq-box">
+    <p class="eq-label">The Foundation of Bookkeeping</p>
+    <p class="eq-main">Assets = Liabilities + Owner's Equity</p>
+    <p class="eq-ext">Extended: Assets = Liabilities + (Capital + Revenue − Expenses − Drawings)</p>
+  </div>
+  <div class="cards" style="margin-top:1.5rem;">
+    <div class="card"><div class="icon icon-green">💰</div><h3>Assets (What you HAVE)</h3><p>Cash, equipment, supplies, furniture, accounts receivable. These are resources owned by the business.</p></div>
+    <div class="card"><div class="icon icon-red">📤</div><h3>Liabilities (What you OWE)</h3><p>Bank loans, accounts payable, notes payable. These are debts the business must repay.</p></div>
+    <div class="card"><div class="icon icon-gold">👤</div><h3>Equity (What is YOURS)</h3><p>Owner's Equity = Assets − Liabilities. What remains for the owner after all debts are paid.</p></div>
+  </div>
+
+  <div style="margin-top:2.5rem;">
+    <div class="sec-head"><h2>Transaction Examples (Week 1)</h2><p>Each transaction must keep the equation balanced.</p></div>
+    <div class="tx-list">
+      <div class="tx">
+        <div class="num">1</div>
+        <div class="desc"><h4>Owner invests Tk. 1,00,000 cash</h4><p>Owner puts own money into business → business gets cash, owner's equity increases.</p></div>
+        <div class="effect"><span class="up">Cash ↑ 1,00,000</span><br/><span class="up">Equity ↑ 1,00,000</span></div>
+      </div>
+      <div class="tx">
+        <div class="num">2</div>
+        <div class="desc"><h4>Bought furniture for Tk. 20,000 cash</h4><p>One asset (cash) converts to another asset (furniture). Total assets unchanged.</p></div>
+        <div class="effect"><span class="down">Cash ↓ 20,000</span><br/><span class="up">Furniture ↑ 20,000</span></div>
+      </div>
+      <div class="tx">
+        <div class="num">3</div>
+        <div class="desc"><h4>Bought computer on credit for Tk. 30,000</h4><p>Got an asset (computer) but didn't pay yet → now owe the supplier (liability increases).</p></div>
+        <div class="effect"><span class="up">Computer ↑ 30,000</span><br/><span class="up">A/P ↑ 30,000</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════ WEEK 2 ═══════════════ -->
+<section id="week2">
+<div class="container">
+  <div class="sec-head">
+    <span class="week-tag">Week 2 — Lesson 1</span>
+    <h2 id="ethics">Ethics in Financial Reporting</h2>
+    <p>Ethics means doing what is <strong>right and honest</strong>. In accounting, it means recording money truthfully.</p>
+  </div>
+  <div class="steps">
+    <div class="step"><span class="num">01</span><h4>Recognize the Situation</h4><p>Use your personal ethics to identify when something feels wrong. Many organizations provide written codes of ethics for guidance.</p></div>
+    <div class="step"><span class="num">02</span><h4>Identify the Elements</h4><p>Who are the <strong>stakeholders</strong> — people who may be harmed or helped? What are the responsibilities of everyone involved?</p></div>
+    <div class="step"><span class="num">03</span><h4>Choose the Best Alternative</h4><p>Weigh the impact of each option on all stakeholders. Select the most ethical choice considering all consequences.</p></div>
+  </div>
+  <div style="margin-top:1.5rem; background:var(--red-lt); border:1px solid #fca5a5; border-radius:12px; padding:1.3rem 1.5rem;">
+    <h4 style="color:var(--red); font-weight:700; margin-bottom:.5rem;">⚠️ Famous Unethical Accounting Scandals</h4>
+    <p style="font-size:.87rem; color:var(--muted);">Enron (USA), Parmalat (Italy), Satyam Computer Services (India), AIG (USA) — all collapsed due to dishonest financial reporting. This is why ethics in accounting is so critical.</p>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════ GAAP ═══════════════ -->
+<section id="gaap">
+<div class="container">
+  <div class="sec-head">
+    <span class="week-tag">Week 2 — GAAP</span>
+    <h2>Accounting Standards (GAAP)</h2>
+    <p><strong>GAAP = Generally Accepted Accounting Principles.</strong> Think of it as the rulebook for accounting — everyone must follow the same rules.</p>
+  </div>
+  <div class="gaap-grid">
+    <div class="gaap-item"><h4>Definition</h4><p>A common set of standards and procedures for financial reporting used by all businesses.</p></div>
+    <div class="gaap-item"><h4>Purpose</h4><p>Ensures financial data stays relevant, reliable, and comparable across all companies.</p></div>
+    <div class="gaap-item"><h4>Importance</h4><p>Lets investors and creditors fairly compare different companies' financial health.</p></div>
+    <div class="gaap-item"><h4>Convergence</h4><p>FASB (USA) and IASB (International) are working to reduce differences between GAAP and IFRS globally.</p></div>
+  </div>
+  <table class="def-table" style="margin-top:1.5rem;">
+    <thead><tr><th>Organization</th><th>Full Name</th><th>Scope</th><th>Standards Issued</th></tr></thead>
+    <tbody>
+      <tr><td><strong>FASB</strong></td><td>Financial Accounting Standards Board</td><td>USA</td><td>GAAP</td></tr>
+      <tr><td><strong>IASB</strong></td><td>International Accounting Standards Board</td><td>International</td><td>IFRS</td></tr>
+      <tr><td><strong>SEC</strong></td><td>Securities & Exchange Commission</td><td>USA</td><td>Oversees FASB</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:2.5rem;">
+    <div class="sec-head"><h2>Measurement Principles</h2></div>
+    <div class="principle-grid">
+      <div class="principle hist">
+        <h4>📌 Historical Cost (Cost Principle)</h4>
+        <p>Record assets at the <strong>original price paid</strong> when purchased, not today's market value. This keeps records objective and verifiable.</p>
+        <div class="eg">Example: Bought laptop for Tk. 80,000 in 2024. Now worth Tk. 45,000. Still recorded as <strong>Tk. 80,000</strong>.</div>
+      </div>
+      <div class="principle fair">
+        <h4>📌 Fair Value Principle</h4>
+        <p>Record assets and liabilities at their <strong>current market value</strong> — what you would get if you sold them today.</p>
+        <div class="eg">Example: Shares bought for Tk. 50,000. Current market value Tk. 75,000. Reported as <strong>Tk. 75,000</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem;">
+    <div class="sec-head"><h2>Fundamental Accounting Assumptions</h2></div>
+    <div class="cards">
+      <div class="card"><div class="icon icon-green">💱</div><h3>Monetary Unit Assumption</h3><p>Only record things that can be expressed in <strong>money</strong>. You cannot record "we have a great team" — there's no number for that.</p></div>
+      <div class="card"><div class="icon icon-gold">🏗️</div><h3>Economic Entity Assumption</h3><p>The business and the owner are <strong>completely separate</strong>. Owner's personal expenses must never enter the business books. Zero owner costs in business books.</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════ TRANSACTIONS WEEK 2 ═══════════════ -->
+<section id="transactions">
+<div class="container">
+  <div class="sec-head">
+    <span class="week-tag">Week 2 — Lesson 2</span>
+    <h2>Analyzing Business Transactions</h2>
+    <p>A transaction is any economic event that affects money. Every transaction must affect <strong>at least two accounts</strong> and keep the equation balanced.</p>
+  </div>
+
+  <div style="margin-top:1rem;">
+    <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem;">Softbyte SA — All 10 Transactions</h3>
+    <div class="tx-list">
+      <div class="tx"><div class="num">1</div><div class="desc"><h4>Shareholders invest $15,000 cash</h4><p>Owners put money in → business gets cash, share capital increases.</p></div><div class="effect"><span class="up">Cash ↑15,000</span><br/><span class="up">Share Capital ↑15,000</span></div></div>
+      <div class="tx"><div class="num">2</div><div class="desc"><h4>Buy equipment for $7,000 cash</h4><p>Cash converts to equipment — both are assets, total unchanged.</p></div><div class="effect"><span class="down">Cash ↓7,000</span><br/><span class="up">Equipment ↑7,000</span></div></div>
+      <div class="tx"><div class="num">3</div><div class="desc"><h4>Buy supplies worth $1,600 on credit</h4><p>Got supplies now, will pay later → liability (A/P) increases.</p></div><div class="effect"><span class="up">Supplies ↑1,600</span><br/><span class="up">A/P ↑1,600</span></div></div>
+      <div class="tx"><div class="num">4</div><div class="desc"><h4>Earned $1,200 cash for services</h4><p>Did work and got paid → cash up, revenue up (increases equity).</p></div><div class="effect"><span class="up">Cash ↑1,200</span><br/><span class="up">Revenue ↑1,200</span></div></div>
+      <div class="tx"><div class="num">5</div><div class="desc"><h4>Advertising bill of $250 (unpaid)</h4><p>Used advertising service, haven't paid yet → payable and expense both increase.</p></div><div class="effect"><span class="up">A/P ↑250</span><br/><span class="down">Expense ↑250</span></div></div>
+      <div class="tx"><div class="num">6</div><div class="desc"><h4>Earned $3,500 ($1,500 cash + $2,000 credit)</h4><p>Did more work — part paid now (cash), part to be collected later (A/R).</p></div><div class="effect"><span class="up">Cash ↑1,500 · A/R ↑2,000</span><br/><span class="up">Revenue ↑3,500</span></div></div>
+      <div class="tx"><div class="num">7</div><div class="desc"><h4>Paid rent & salary $1,500 cash</h4><p>Operating costs paid → cash down, expenses up (equity decreases).</p></div><div class="effect"><span class="down">Cash ↓1,500</span><br/><span class="down">Expense ↑1,500</span></div></div>
+      <div class="tx"><div class="num">8</div><div class="desc"><h4>Paid the $250 advertising bill</h4><p>Settling a previous liability → cash down, A/P down.</p></div><div class="effect"><span class="down">Cash ↓250</span><br/><span class="down">A/P ↓250</span></div></div>
+      <div class="tx"><div class="num">9</div><div class="desc"><h4>Collected $600 from credit customer</h4><p>Customer pays what they owed → cash up, A/R down (no new revenue).</p></div><div class="effect"><span class="up">Cash ↑600</span><br/><span class="down">A/R ↓600</span></div></div>
+      <div class="tx"><div class="num">10</div><div class="desc"><h4>Paid $1,300 dividends to shareholders</h4><p>Owners take profit out → cash down, equity decreases via dividends.</p></div><div class="effect"><span class="down">Cash ↓1,300</span><br/><span class="down">Dividends ↑1,300</span></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════ QUIZ ═══════════════ -->
+<section id="quiz">
+<div class="container">
+  <div class="sec-head">
+    <span class="week-tag">Quiz 01 — 10th June 2026</span>
+    <h2>Complete Quiz Solutions</h2>
+    <p>Section 44-D · Full Marks: 15 · Time: 40 Minutes</p>
+  </div>
+
+  <!-- Q1 MCQ -->
+  <div class="theory-block">
+    <h4>Question 01 — Multiple Choice (5 Marks)</h4>
+    <div class="mcq-list">
+      <div class="mcq">
+        <p class="q">1. GAAP stands for:</p>
+        <div class="options">
+          <span class="opt wrong">A. General Auditing and Accounting Practices</span>
+          <span class="opt wrong">B. Global Accounting Application Procedures</span>
+          <span class="opt correct">C. Generally Accepted Accounting Principles ✓</span>
+          <span class="opt wrong">D. General Accounting Approval Process</span>
+        </div>
+      </div>
+      <div class="mcq">
+        <p class="q">2. Which of the following is an asset?</p>
+        <div class="options">
+          <span class="opt wrong">A. Accounts Payable (liability)</span>
+          <span class="opt wrong">B. Notes Payable (liability)</span>
+          <span class="opt correct">C. Prepaid Expense ✓</span>
+          <span class="opt wrong">D. Unearned Revenue (liability)</span>
+        </div>
+        <p class="reason">Prepaid expense = you paid in advance, so you OWN a future benefit → it's an asset.</p>
+      </div>
+      <div class="mcq">
+        <p class="q">3. Which represents a correct form of the accounting equation?</p>
+        <div class="options">
+          <span class="opt wrong">A. Assets = Liabilities + Owner's Equity</span>
+          <span class="opt wrong">B. Liabilities = Assets − Owner's Equity</span>
+          <span class="opt wrong">C. Assets = Liabilities + (Capital + Revenue − Expense − Drawings)</span>
+          <span class="opt correct">D. All of the above ✓</span>
+        </div>
+        <p class="reason">All three are mathematically correct rearrangements of the same equation.</p>
+      </div>
+      <div class="mcq">
+        <p class="q">4. Accounting is known as the —</p>
+        <div class="options">
+          <span class="opt wrong">A. Language of Economics</span>
+          <span class="opt wrong">B. Language of Business & Economics</span>
+          <span class="opt correct">C. Language of Business ✓</span>
+          <span class="opt wrong">D. Language of Commerce</span>
+        </div>
+      </div>
+      <div class="mcq">
+        <p class="q">5. Which of the following is an external user?</p>
+        <div class="options">
+          <span class="opt wrong">A. Production Supervisor (internal)</span>
+          <span class="opt wrong">B. Finance Director (internal)</span>
+          <span class="opt wrong">C. Company President (internal)</span>
+          <span class="opt correct">D. Investor ✓</span>
+        </div>
+        <p class="reason">Investors are outside the company — they use financial reports to decide whether to invest.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 Theory -->
+  <div class="theory-block">
+    <h4>Question 02 — Theory (5 Marks)</h4>
+    <p><strong>Q1: Define accounting. What are the main branches? Briefly explain each.</strong></p>
+    <p style="margin-top:.5rem;">Accounting is the process of <strong>identifying, recording, summarizing, and reporting</strong> financial transactions of a business. It is called "The Language of Business."</p>
+    <table class="def-table" style="margin-top:.75rem;">
+      <thead><tr><th>Branch</th><th>Who uses it?</th><th>Purpose</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Financial Accounting</strong></td><td>Outsiders</td><td>Prepare financial statements for investors, banks</td><td>Annual report</td></tr>
+        <tr><td><strong>Managerial Accounting</strong></td><td>Insiders</td><td>Help managers plan and make decisions</td><td>Monthly budget report</td></tr>
+        <tr><td><strong>Cost Accounting</strong></td><td>Management</td><td>Track production/service costs for efficiency</td><td>Cost per unit of product</td></tr>
+        <tr><td><strong>Tax Accounting</strong></td><td>Business + Government</td><td>Handle tax returns and compliance</td><td>Filing income tax</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1rem;"><strong>Q2: Historical Cost vs Fair Value — with examples.</strong></p>
+    <div class="principle-grid" style="margin-top:.75rem;">
+      <div class="principle hist">
+        <h4>Historical Cost Principle</h4>
+        <p>Assets recorded at the <strong>original purchase price</strong>, regardless of current market value. Ensures objectivity and verifiability.</p>
+        <div class="eg">Laptop bought for Tk. 80,000 in 2024. Worth Tk. 45,000 today. Still recorded as <strong>Tk. 80,000</strong>.</div>
+      </div>
+      <div class="principle fair">
+        <h4>Fair Value Principle</h4>
+        <p>Assets recorded at <strong>current market value</strong> — what you'd get if you sold today. More relevant for investors.</p>
+        <div class="eg">Shares bought for Tk. 50,000. Market value today Tk. 75,000. Reported as <strong>Tk. 75,000</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 Math -->
+  <div class="theory-block">
+    <h4>Question 03 — Transaction Analysis / Tabular Summary (5 Marks)</h4>
+    <p style="margin-bottom:.5rem;"><strong>Mr. X's Design Studio — June 2026</strong></p>
+    <div class="tbl-wrap">
+      <table class="tbl-summary">
+        <thead>
+          <tr>
+            <th class="th-main" rowspan="2" style="text-align:left; min-width:200px;">Transaction</th>
+            <th class="th-main" colspan="4">Assets</th>
+            <th class="th-main" rowspan="2" style="font-size:1rem;">=</th>
+            <th class="th-main">Liabilities</th>
+            <th class="th-main" rowspan="2">SE<br/>(SC + Rev − Exp − Draw)</th>
+          </tr>
+          <tr>
+            <th class="th-sub">Cash</th>
+            <th class="th-sub">A/R</th>
+            <th class="th-sub">Equipment</th>
+            <th class="th-sub">Supplies</th>
+            <th class="th-sub">A/P</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">1. Owner invested cash</td>
+            <td class="pos">+6,00,000</td><td></td><td></td><td></td>
+            <td class="eq">=</td><td></td>
+            <td class="pos">+6,00,000 (Capital)</td>
+          </tr>
+          <tr>
+            <td class="label">2. Bought equipment (cash)</td>
+            <td class="neg">−2,50,000</td><td></td>
+            <td class="pos">+2,50,000</td><td></td>
+            <td class="eq">=</td><td></td><td></td>
+          </tr>
+          <tr>
+            <td class="label">3. Office supplies on account</td>
+            <td></td><td></td><td></td>
+            <td class="pos">+30,000</td>
+            <td class="eq">=</td>
+            <td class="pos">+30,000</td><td></td>
+          </tr>
+          <tr>
+            <td class="label">4. Service revenue (cash)</td>
+            <td class="pos">+1,20,000</td><td></td><td></td><td></td>
+            <td class="eq">=</td><td></td>
+            <td class="pos">+1,20,000 (Revenue)</td>
+          </tr>
+          <tr>
+            <td class="label">5. Bank loan (N/P)</td>
+            <td class="pos">+80,000</td><td></td><td></td><td></td>
+            <td class="eq">=</td>
+            <td class="pos">+80,000</td><td></td>
+          </tr>
+          <tr>
+            <td class="label">6. Salary (35k) + Utility (12k)</td>
+            <td class="neg">−47,000</td><td></td><td></td><td></td>
+            <td class="eq">=</td><td></td>
+            <td class="neg">−47,000 (Expense)</td>
+          </tr>
+          <tr>
+            <td class="label">7. Furniture on credit</td>
+            <td></td><td></td><td></td>
+            <td class="pos">+20,000</td>
+            <td class="eq">=</td>
+            <td class="pos">+20,000</td><td></td>
+          </tr>
+          <tr>
+            <td class="label">8. Owner withdrew cash</td>
+            <td class="neg">−25,000</td><td></td><td></td><td></td>
+            <td class="eq">=</td><td></td>
+            <td class="neg">−25,000 (Drawings)</td>
+          </tr>
+          <tr class="balance">
+            <td class="label">✅ Balance</td>
+            <td>4,78,000</td>
+            <td>—</td>
+            <td>2,50,000</td>
+            <td>50,000</td>
+            <td class="eq">=</td>
+            <td>1,30,000</td>
+            <td>6,48,000</td>
+          </tr>
+          <tr class="check">
+            <td class="label" colspan="5" style="text-align:right;">Total Assets = 4,78,000 + 2,50,000 + 50,000 = <strong>7,78,000</strong></td>
+            <td class="eq">=</td>
+            <td colspan="2" style="text-align:center;">1,30,000 + 6,48,000 = <strong>7,78,000 ✓</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:1rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.75rem;">
+      <div style="background:var(--green-lt); border-radius:8px; padding:.9rem; font-size:.82rem;"><strong>Note on Furniture:</strong> Recorded under Supplies column as per format.</div>
+      <div style="background:var(--green-lt); border-radius:8px; padding:.9rem; font-size:.82rem;"><strong>Note on Bank Loan (N/P):</strong> Recorded under A/P column as per format.</div>
+      <div style="background:var(--gold-lt); border-radius:8px; padding:.9rem; font-size:.82rem;"><strong>Equation Check:</strong> Assets 7,78,000 = Liabilities 1,30,000 + SE 6,48,000 ✅</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p><strong>GE 235 — Principles of Accounting, Business & Economics</strong></p>
+  <p style="margin-top:.4rem;">Daffodil International University · Prepared for Section 44-D · Week 1 & Week 2</p>
+</footer>
+
+</body>
+</html>
