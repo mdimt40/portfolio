@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Management Blueprint — Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-deep:#0a1622;
+  --bg-panel:#0e2238;
+  --bg-panel-2:#10273f;
+  --line:#1d3a57;
+  --line-soft:#173049;
+  --grid-line:rgba(94,231,208,0.055);
+  --ink:#e3edf7;
+  --ink-soft:#94aec6;
+  --ink-faint:#5d7793;
+  --cyan:#5ee7d0;
+  --cyan-dim:rgba(94,231,208,0.14);
+  --amber:#f5a94d;
+  --amber-dim:rgba(245,169,77,0.15);
+  --white:#ffffff;
+  --radius:10px;
+  --font-display:'Sora',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --font-bn:'Noto Sans Bengali',sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background-color:var(--bg-deep);
+  background-image:
+    repeating-linear-gradient(0deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 32px),
+    repeating-linear-gradient(90deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 32px);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.5;
+  min-height:100vh;
+}
+.bn{font-family:var(--font-bn);}
+::selection{background:var(--cyan-dim); color:var(--white);}
+a{color:inherit;text-decoration:none;}
+:focus-visible{outline:2px solid var(--cyan); outline-offset:2px; border-radius:4px;}
+
+/* ===== Topbar ===== */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:linear-gradient(180deg, rgba(10,22,34,0.97), rgba(10,22,34,0.88));
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(8px);
+  padding:14px 22px;
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+}
+.brand{display:flex; align-items:baseline; gap:10px; flex:1; min-width:220px;}
+.brand .mark{
+  font-family:var(--font-mono); font-size:11px; color:var(--bg-deep);
+  background:var(--cyan); padding:3px 7px; border-radius:4px; letter-spacing:0.08em; font-weight:700;
+}
+.brand h1{
+  font-family:var(--font-display); font-size:18px; font-weight:700; margin:0; letter-spacing:0.01em;
+}
+.brand .sub{font-size:11px; color:var(--ink-faint); font-family:var(--font-mono); letter-spacing:0.04em;}
+.search-wrap{position:relative; min-width:220px; flex:0 0 280px;}
+.search-wrap input{
+  width:100%; background:var(--bg-panel); border:1px solid var(--line); color:var(--ink);
+  font-family:var(--font-body); font-size:13.5px; padding:9px 12px 9px 32px; border-radius:7px;
+}
+.search-wrap input::placeholder{color:var(--ink-faint);}
+.search-wrap svg{position:absolute; left:10px; top:50%; transform:translateY(-50%); width:14px; height:14px; stroke:var(--ink-faint);}
+.search-hint{font-size:10.5px; color:var(--ink-faint); font-family:var(--font-mono); white-space:nowrap;}
+
+/* ===== Layout ===== */
+.layout{display:flex; max-width:1320px; margin:0 auto;}
+.sidenav{
+  position:sticky; top:64px; align-self:flex-start;
+  width:236px; flex:0 0 236px; padding:22px 10px 40px 22px;
+  max-height:calc(100vh - 64px); overflow-y:auto;
+}
+.sidenav a{
+  display:flex; gap:10px; align-items:baseline; padding:8px 10px; border-radius:7px;
+  font-size:12.8px; color:var(--ink-soft); margin-bottom:2px; border-left:2px solid transparent;
+}
+.sidenav a .n{font-family:var(--font-mono); color:var(--ink-faint); font-size:11px;}
+.sidenav a:hover{background:var(--bg-panel-2); color:var(--ink);}
+.sidenav a.active{background:var(--cyan-dim); color:var(--cyan); border-left:2px solid var(--cyan); font-weight:600;}
+.sidenav a.active .n{color:var(--cyan);}
+
+main{flex:1; min-width:0; padding:26px 22px 80px;}
+
+/* ===== Sheet panel ===== */
+.sheet{
+  position:relative;
+  background:var(--bg-panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  margin-bottom:30px;
+  padding:26px 26px 22px;
+  overflow:hidden;
+}
+.sheet::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:repeating-linear-gradient(0deg, transparent 0 7px, rgba(255,255,255,0.012) 7px 8px);
+}
+.sheet-head{display:flex; justify-content:space-between; align-items:flex-start; gap:18px; margin-bottom:18px; flex-wrap:wrap;}
+.sheet-head h2{
+  font-family:var(--font-display); font-size:21px; font-weight:700; margin:0 0 4px; color:var(--white);
+  display:flex; align-items:center; gap:10px;
+}
+.sheet-head h2 .num{color:var(--cyan); font-family:var(--font-mono); font-size:14px; font-weight:600;}
+.sheet-head .bn-title{color:var(--ink-soft); font-size:13.5px;}
+.titleblock{
+  font-family:var(--font-mono); font-size:9.5px; color:var(--ink-faint);
+  border:1px solid var(--line); border-radius:6px; padding:6px 10px; text-align:right; line-height:1.6;
+  white-space:nowrap;
+}
+.titleblock b{color:var(--ink-soft); font-weight:500;}
+
+.lead{color:var(--ink-soft); font-size:13.5px; margin:0 0 18px; max-width:680px;}
+
+/* margin note */
+.note{
+  border-left:2px dashed var(--amber); background:var(--amber-dim);
+  border-radius:0 7px 7px 0; padding:9px 13px; font-size:12.5px; color:#ffd9a8;
+  margin:14px 0 20px; max-width:680px;
+}
+.note b{color:var(--amber); font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.04em; display:block; margin-bottom:3px;}
+
+h3.block-title{
+  font-family:var(--font-display); font-size:13.5px; color:var(--cyan); text-transform:uppercase;
+  letter-spacing:0.06em; margin:24px 0 12px; display:flex; align-items:center; gap:8px;
+}
+h3.block-title::after{content:""; flex:1; height:1px; background:var(--line);}
+
+/* ===== Flip cards ===== */
+.grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fill, minmax(190px,1fr));}
+.flip-card{height:118px; perspective:900px; cursor:pointer;}
+.flip-inner{
+  position:relative; width:100%; height:100%; transition:transform 0.5s cubic-bezier(.4,.2,.2,1);
+  transform-style:preserve-3d;
+}
+.flip-card.is-flipped .flip-inner{transform:rotateY(180deg);}
+.flip-front,.flip-back{
+  position:absolute; inset:0; backface-visibility:hidden; border-radius:8px;
+  border:1px solid var(--line); padding:13px; display:flex; flex-direction:column; justify-content:center;
+}
+.flip-front{background:var(--bg-panel-2);}
+.flip-front .fc-en{font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--white); display:block; margin-bottom:5px;}
+.flip-front .fc-bn{font-family:var(--font-bn); font-size:12px; color:var(--cyan);}
+.flip-front .fc-tap{position:absolute; bottom:8px; right:10px; font-family:var(--font-mono); font-size:8.5px; color:var(--ink-faint); letter-spacing:0.05em;}
+.flip-back{
+  background:linear-gradient(150deg, var(--cyan-dim), var(--bg-panel-2));
+  transform:rotateY(180deg); font-size:12.3px; color:var(--ink); line-height:1.45;
+}
+.flip-card:hover .flip-front{border-color:var(--cyan);}
+
+/* plain info card */
+.card{
+  background:var(--bg-panel-2); border:1px solid var(--line); border-radius:8px; padding:14px 15px;
+}
+.card .en{font-family:var(--font-display); font-weight:600; font-size:13.8px; color:var(--white); display:block; margin-bottom:3px;}
+.card .bn{font-family:var(--font-bn); font-size:11.8px; color:var(--cyan); display:block; margin-bottom:7px;}
+.card .ex{font-size:12.3px; color:var(--ink-soft);}
+
+/* role grid icons */
+.role-grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
+.role-card{display:flex; gap:12px; align-items:flex-start;}
+.role-icon{
+  flex:0 0 34px; height:34px; width:34px; border-radius:8px; background:var(--cyan-dim); color:var(--cyan);
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:700; font-size:13px;
+}
+
+/* ===== Timeline (sequential processes) ===== */
+.timeline{display:flex; gap:0; overflow-x:auto; padding:6px 2px 14px;}
+.tl-step{flex:0 0 168px; position:relative; padding:0 10px 0 0;}
+.tl-step:not(:last-child)::after{
+  content:""; position:absolute; top:15px; right:-2px; width:24px; height:2px; background:var(--line);
+}
+.tl-dot{
+  width:30px; height:30px; border-radius:50%; background:var(--bg-deep); border:2px solid var(--cyan);
+  color:var(--cyan); font-family:var(--font-mono); font-size:12px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; margin-bottom:10px;
+}
+.tl-step .ttl{font-family:var(--font-display); font-weight:600; font-size:12.8px; color:var(--white); display:block; margin-bottom:3px;}
+.tl-step .bn{font-family:var(--font-bn); font-size:11px; color:var(--ink-soft);}
+
+/* ===== WBS tree ===== */
+.wbs{font-family:var(--font-mono); font-size:12.5px;}
+.wbs ul{list-style:none; margin:0; padding-left:26px; border-left:1px dashed var(--line);}
+.wbs > ul{padding-left:0; border-left:none;}
+.wbs li{position:relative; padding:7px 0 7px 18px;}
+.wbs li::before{content:"└"; position:absolute; left:0; top:6px; color:var(--ink-faint);}
+.wbs .code{color:var(--cyan); margin-right:6px;}
+.wbs .lbl{color:var(--ink); font-family:var(--font-body); font-weight:500;}
+.wbs .bn{color:var(--ink-soft); font-family:var(--font-bn); font-size:11.5px; margin-left:6px;}
+.wbs-root{color:var(--white); font-weight:700;}
+
+/* ===== Network diagram ===== */
+.netflow{display:flex; align-items:center; gap:0; overflow-x:auto; padding:14px 2px 18px;}
+.nf-node{
+  flex:0 0 auto; min-width:118px; text-align:center; background:var(--bg-panel-2); border:1px solid var(--cyan);
+  border-radius:8px; padding:12px 10px; position:relative;
+}
+.nf-node.endpoint{border-color:var(--ink-faint); border-style:dashed;}
+.nf-node .lbl{font-family:var(--font-display); font-weight:600; font-size:13px; color:var(--white); display:block;}
+.nf-node .days{font-family:var(--font-mono); font-size:11px; color:var(--cyan); display:block; margin-top:3px;}
+.nf-arrow{flex:0 0 36px; height:2px; background:var(--line); position:relative;}
+.nf-arrow::after{content:"▸"; position:absolute; right:-4px; top:-9px; color:var(--ink-faint); font-size:13px;}
+
+/* ===== tables ===== */
+.table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:8px;}
+table{width:100%; border-collapse:collapse; font-size:12.6px; min-width:620px;}
+thead th{
+  background:var(--bg-panel-2); color:var(--cyan); font-family:var(--font-mono); font-size:10.6px;
+  text-transform:uppercase; letter-spacing:0.04em; text-align:left; padding:10px 12px; border-bottom:1px solid var(--line);
+}
+tbody td{padding:10px 12px; border-bottom:1px solid var(--line-soft); color:var(--ink-soft); vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr.total td{color:var(--white); font-weight:700; background:var(--bg-panel-2);}
+.status{font-family:var(--font-mono); font-size:10.5px; padding:3px 8px; border-radius:20px; display:inline-block;}
+.status.done{background:var(--cyan-dim); color:var(--cyan);}
+.status.progress{background:var(--amber-dim); color:var(--amber);}
+
+/* ===== fishbone ===== */
+.fishbone{padding:18px 2px 8px; overflow-x:auto;}
+.fb-svg-wrap{min-width:560px;}
+.fb-legend{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px; font-size:11.5px; color:var(--ink-soft);}
+.fb-legend span{display:inline-flex; align-items:center; gap:6px;}
+.fb-legend i{width:9px;height:9px;border-radius:50%; background:var(--cyan); display:inline-block;}
+
+/* dmaic */
+.dmaic{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px;}
+.dmaic .step{background:var(--bg-panel-2); border:1px solid var(--line); border-radius:8px; padding:14px; text-align:center;}
+.dmaic .step .letter{font-family:var(--font-display); font-size:24px; font-weight:800; color:var(--cyan); display:block;}
+.dmaic .step .word{font-size:12px; color:var(--white); font-weight:600; margin-top:2px; display:block;}
+.dmaic .step .bn{font-family:var(--font-bn); font-size:10.8px; color:var(--ink-soft); display:block; margin-top:3px;}
+
+/* dependency mini-diagram */
+.dep-diagram{font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); margin-top:8px; text-align:center;}
+.dep-diagram .a{color:var(--cyan);} .dep-diagram .b{color:var(--amber);}
+
+/* mobile nav */
+.mobilenav{display:none;}
+@media (max-width:880px){
+  .sidenav{display:none;}
+  .mobilenav{
+    display:flex; gap:6px; overflow-x:auto; padding:10px 14px; border-bottom:1px solid var(--line);
+    background:var(--bg-deep); position:sticky; top:62px; z-index:40;
+  }
+  .mobilenav a{
+    flex:0 0 auto; font-family:var(--font-mono); font-size:10.5px; color:var(--ink-soft);
+    border:1px solid var(--line); border-radius:20px; padding:6px 11px; white-space:nowrap;
+  }
+  .mobilenav a.active{background:var(--cyan-dim); color:var(--cyan); border-color:var(--cyan);}
+  .topbar{padding:12px 14px;}
+  .search-wrap{flex:1 1 100%;}
+  main{padding:18px 14px 60px;}
+  .sheet{padding:18px 16px;}
+}
+.dimmed{opacity:0.18; filter:saturate(0.4); transition:opacity .25s;}
+.hidden-by-search{display:none !important;}
+
+footer{text-align:center; padding:30px 20px 50px; color:var(--ink-faint); font-family:var(--font-mono); font-size:11px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <span class="mark">PM·101</span>
+    <div>
+      <h1>Project Management Blueprint</h1>
+      <div class="sub">10 SHEETS · BILINGUAL EN/BN · CLICK CARDS TO FLIP</div>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input id="searchInput" type="text" placeholder="Search a term… e.g. sunk cost, WBS, slack">
+  </div>
+  <div class="search-hint">⌘/CTRL+F free</div>
+</div>
+
+<div class="mobilenav" id="mobilenav"></div>
+
+<div class="layout">
+  <nav class="sidenav" id="sidenav">
+    <a href="#s1" data-n="01"><span class="n">01</span> Attributes & Constraints</a>
+    <a href="#s2" data-n="02"><span class="n">02</span> Stakeholders</a>
+    <a href="#s3" data-n="03"><span class="n">03</span> Success & Skills</a>
+    <a href="#s4" data-n="04"><span class="n">04</span> Scope & WBS</a>
+    <a href="#s5" data-n="05"><span class="n">05</span> Traceability (RTM)</a>
+    <a href="#s6" data-n="06"><span class="n">06</span> Time & Dependencies</a>
+    <a href="#s7" data-n="07"><span class="n">07</span> Network Diagram</a>
+    <a href="#s8" data-n="08"><span class="n">08</span> Cost Types</a>
+    <a href="#s9" data-n="09"><span class="n">09</span> Cash Flow & Budget</a>
+    <a href="#s10" data-n="10"><span class="n">10</span> Quality & Six Sigma</a>
+  </nav>
+
+  <main>
+
+  <!-- SHEET 01 -->
+  <section class="sheet" id="s1">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 01</span> Project Attributes & Constraints</h2>
+        <div class="bn-title bn">প্রজেক্টের বৈশিষ্ট্য ও সীমাবদ্ধতা</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead">Every project shares six core traits — and is always boxed in by three hard limits. Click a card to flip it.</p>
+
+    <h3 class="block-title">Six attributes</h3>
+    <div class="grid">
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Unique Purpose</span><span class="fc-bn bn">নির্দিষ্ট উদ্দেশ্য</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">No two projects are alike — each one chases its own one-time goal that hasn't been done in exactly that way before.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Temporary</span><span class="fc-bn bn">সাময়িক</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">It has a clear start date and a clear end date — once the goal is delivered, the project closes.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Progressive Elaboration</span><span class="fc-bn bn">পর্যায়ক্রমিক উন্নয়ন</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">You don't know every detail on day one — the plan gets more specific step by step as work moves forward.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Resources</span><span class="fc-bn bn">রিসোর্স</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Nothing runs on its own — people, money, and tools all have to be supplied to get the work done.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Sponsor</span><span class="fc-bn bn">স্পন্সর</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Someone pays the bills and sets the direction — that's the sponsor, the project's main backer.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Uncertainty</span><span class="fc-bn bn">অনিশ্চয়তা</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Risks and surprises are part of the deal — plans change because not everything can be predicted up front.</div>
+      </div></div>
+    </div>
+
+    <h3 class="block-title">The Triple Constraint</h3>
+    <div class="grid">
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Scope</span><span class="fc-bn bn">স্কোপ</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">The exact list of work that will (and won't) be done. Add work without adjusting this and you get "scope creep."</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Time</span><span class="fc-bn bn">সময়</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">The schedule and deadlines the work must fit inside.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Cost</span><span class="fc-bn bn">বাজেট</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">The approved money you're allowed to spend. Push one side of the triangle (scope/time/cost) and the others usually move too.</div>
+      </div></div>
+    </div>
+    <div class="note"><b>FIELD NOTE</b>Think of scope, time, and cost as a triangle — squeeze one corner and the other two shift to compensate.</div>
+  </section>
+
+  <!-- SHEET 02 -->
+  <section class="sheet" id="s2">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 02</span> Project Management & Stakeholders</h2>
+        <div class="bn-title bn">প্রজেক্ট ম্যানেজমেন্ট ও স্টেকহোল্ডার</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead"><b style="color:var(--white)">Project Management</b> simply means applying the right knowledge, skills, and tools to get a project's goals met — without blowing the triple constraint above. <span class="bn">উদ্দেশ্য পূরণের জন্য জ্ঞান, দক্ষতা ও টুলের সঠিক প্রয়োগ।</span></p>
+
+    <h3 class="block-title">Who's on the field, and what they actually do</h3>
+    <div class="role-grid">
+      <div class="card role-card">
+        <div class="role-icon">$</div>
+        <div><span class="en">Sponsor / Client</span><span class="bn">স্পন্সর</span><span class="ex">Funds the project and gives final sign-off on deliverables.</span></div>
+      </div>
+      <div class="card role-card">
+        <div class="role-icon">PM</div>
+        <div><span class="en">Project Manager</span><span class="bn">প্রজেক্ট ম্যানেজার</span><span class="ex">Steers the team day-to-day and keeps scope/time/cost in balance.</span></div>
+      </div>
+      <div class="card role-card">
+        <div class="role-icon">&lt;/&gt;</div>
+        <div><span class="en">Developers / Team</span><span class="bn">টিম মেম্বার</span><span class="ex">Do the actual building — code, design, and technical milestones.</span></div>
+      </div>
+      <div class="card role-card">
+        <div class="role-icon">📦</div>
+        <div><span class="en">Suppliers</span><span class="bn">সরবরাহকারী</span><span class="ex">Provide outside tools, software licenses, or services the project needs.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHEET 03 -->
+  <section class="sheet" id="s3">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 03</span> Success Criteria & Skills</h2>
+        <div class="bn-title bn">সাফল্যের মানদণ্ড ও দক্ষতা</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead">A project doesn't just need to "finish" — it needs to win on three fronts at once.</p>
+    <div class="role-grid">
+      <div class="card"><span class="en">On Time & On Budget</span><span class="bn">সময় ও বাজেটে শেষ</span><span class="ex">Delivered the agreed scope, on the original schedule, within the original cost plan.</span></div>
+      <div class="card"><span class="en">Happy Customers</span><span class="bn">গ্রাহকের সন্তুষ্টি</span><span class="ex">The end result is genuinely easy to use and satisfies the client.</span></div>
+      <div class="card"><span class="en">Business Value</span><span class="bn">ব্যবসায়িক লাভ</span><span class="ex">It actually saves money, boosts profit, or speeds work up — value beyond just "it shipped."</span></div>
+    </div>
+
+    <h3 class="block-title">Hard skills <span class="bn" style="text-transform:none; letter-spacing:0; color:var(--ink-soft); font-size:11.5px;">— হার্ড স্কিল</span></h3>
+    <div class="grid">
+      <div class="card"><span class="en">Budgeting</span><span class="ex">Estimate people/software/tool costs and track spending so the money doesn't run dry.</span></div>
+      <div class="card"><span class="en">Scheduling</span><span class="ex">List every task, order them sensibly, and map timelines — typically with a Gantt chart.</span></div>
+      <div class="card"><span class="en">SDLC Knowledge</span><span class="ex">Know your build approaches — step-by-step Waterfall vs. fast, flexible Agile.</span></div>
+      <div class="card"><span class="en">Procurement</span><span class="ex">Plan how you'll buy licenses or bring in outside contractors.</span></div>
+      <div class="card"><span class="en">Risk Management</span><span class="ex">Spot what could go wrong ahead of time and have a backup plan ready.</span></div>
+    </div>
+
+    <h3 class="block-title">Soft skills <span class="bn" style="text-transform:none; letter-spacing:0; color:var(--ink-soft); font-size:11.5px;">— সফট স্কিল</span></h3>
+    <div class="grid">
+      <div class="card"><span class="en">Leadership</span><span class="ex">Keep the team motivated and flex your style to fit the situation.</span></div>
+      <div class="card"><span class="en">Communication</span><span class="ex">Give clear, simple progress updates so everyone stays aligned.</span></div>
+      <div class="card"><span class="en">Conflict Resolution</span><span class="ex">Settle disagreements between people calmly, before they fester.</span></div>
+      <div class="card"><span class="en">Team Building</span><span class="ex">Turn a group of different people into one team that actually works together.</span></div>
+      <div class="card"><span class="en">Problem-Solving</span><span class="ex">Find quick, practical fixes the moment something technical breaks.</span></div>
+    </div>
+  </section>
+
+  <!-- SHEET 04 -->
+  <section class="sheet" id="s4">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 04</span> Scope Management & WBS</h2>
+        <div class="bn-title bn">স্কোপ ম্যানেজমেন্ট ও WBS</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead">Scope is controlled through six processes — in order — ending in a breakdown of the work itself.</p>
+
+    <h3 class="block-title">Six processes, in sequence</h3>
+    <div class="timeline">
+      <div class="tl-step"><div class="tl-dot">1</div><span class="ttl">Plan Scope</span><span class="bn">কীভাবে স্কোপ ট্র্যাক হবে তার পরিকল্পনা</span></div>
+      <div class="tl-step"><div class="tl-dot">2</div><span class="ttl">Collect Requirements</span><span class="bn">স্টেকহোল্ডারদের প্রয়োজন সংগ্রহ</span></div>
+      <div class="tl-step"><div class="tl-dot">3</div><span class="ttl">Define Scope</span><span class="bn">বিস্তারিত বিবরণ তৈরি</span></div>
+      <div class="tl-step"><div class="tl-dot">4</div><span class="ttl">Create WBS</span><span class="bn">ছোট ছোট প্যাকেজে ভাগ</span></div>
+      <div class="tl-step"><div class="tl-dot">5</div><span class="ttl">Validate Scope</span><span class="bn">ক্লায়েন্টের আনুষ্ঠানিক স্বীকৃতি</span></div>
+      <div class="tl-step"><div class="tl-dot">6</div><span class="ttl">Control Scope</span><span class="bn">অনাকাঙ্ক্ষিত পরিবর্তন রোধ</span></div>
+    </div>
+    <div class="note"><b>FIELD NOTE</b>Skip "Control Scope" and you get scope creep — new work quietly added without anyone re-checking time or budget.</div>
+
+    <h3 class="block-title">WBS — breaking the project into pieces <span class="bn" style="text-transform:none;letter-spacing:0;color:var(--ink-soft);font-size:11.5px;">(মোট কাজকে ছোট অংশে ভাগ)</span></h3>
+    <div class="wbs">
+      <ul>
+        <li class="wbs-root"><span class="code">1.0</span><span class="lbl">IT Upgrade Project</span><span class="bn">আইটি আপগ্রেড প্রজেক্ট</span>
+          <ul>
+            <li><span class="code">1.1</span><span class="lbl">Hardware Inventory</span><span class="bn">হার্ডওয়্যার ইনভেন্টরি</span>
+              <ul>
+                <li><span class="code">1.1.1</span><span class="lbl">Desktop Audit</span></li>
+                <li><span class="code">1.1.2</span><span class="lbl">Laptop Audit</span></li>
+              </ul>
+            </li>
+            <li><span class="code">1.2</span><span class="lbl">System Testing</span><span class="bn">সিস্টেম টেস্টিং</span>
+              <ul>
+                <li><span class="code">1.2.1</span><span class="lbl">Security Testing</span></li>
+                <li><span class="code">1.2.2</span><span class="lbl">Software Verification</span></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SHEET 05 -->
+  <section class="sheet" id="s5">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 05</span> Requirement Traceability Matrix</h2>
+        <div class="bn-title bn">রিকোয়ারমেন্ট ট্রেসেবিলিটি ম্যাট্রিক্স (RTM)</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead">An RTM is just a table that follows one requirement all the way from "idea" to "tested code," so nothing falls through the cracks.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Req ID</th><th>Description</th><th>Design Module</th><th>Code Module</th><th>Test Case ID</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>REQ-01</td><td>Standard OS Install</td><td>Sys_Image_v1</td><td>OS_deploy.sh</td><td>TC-OS-101</td><td><span class="status done">Done</span></td></tr>
+          <tr><td>REQ-02</td><td>Security Hashing</td><td>Auth_Protocol</td><td>crypto.js</td><td>TC-SEC-402</td><td><span class="status progress">In Progress</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><b>FIELD NOTE</b>If a requirement has no row here, ask: was it ever actually built — and was it ever actually tested?</div>
+  </section>
+
+  <!-- SHEET 06 -->
+  <section class="sheet" id="s6">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 06</span> Time Management & Dependencies</h2>
+        <div class="bn-title bn">সময় ব্যবস্থাপনা ও পারস্পরিক নির্ভরতা</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead">Building the schedule runs through six steps — and every pair of tasks relates to each other in one of four ways.</p>
+
+    <h3 class="block-title">Six scheduling processes</h3>
+    <div class="timeline">
+      <div class="tl-step"><div class="tl-dot">1</div><span class="ttl">Plan Schedule</span></div>
+      <div class="tl-step"><div class="tl-dot">2</div><span class="ttl">Define Activities</span><span class="bn">কাজ চিহ্নিত করা</span></div>
+      <div class="tl-step"><div class="tl-dot">3</div><span class="ttl">Sequence Activities</span></div>
+      <div class="tl-step"><div class="tl-dot">4</div><span class="ttl">Estimate Durations</span></div>
+      <div class="tl-step"><div class="tl-dot">5</div><span class="ttl">Develop Schedule</span></div>
+      <div class="tl-step"><div class="tl-dot">6</div><span class="ttl">Control Schedule</span></div>
+    </div>
+
+    <h3 class="block-title">Four task dependencies — flip for the rule</h3>
+    <div class="grid">
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Finish-to-Start (FS)</span><span class="fc-bn bn">A শেষ → B শুরু</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">B can't start until A is fully done.<div class="dep-diagram"><span class="a">[Hardware Inventory]</span> ──► <span class="b">[OS Installation]</span></div></div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Start-to-Start (SS)</span><span class="fc-bn bn">A শুরু → B শুরু</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">B starts the moment A starts — they kick off together.<div class="dep-diagram"><span class="a">[UI Design]</span> ⟺ <span class="b">[DB Architecture]</span></div></div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Finish-to-Finish (FF)</span><span class="fc-bn bn">A শেষ → B শেষ</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">B can't wrap up until A wraps up too.<div class="dep-diagram"><span class="a">[Software Coding]</span> ⟺ <span class="b">[Tech Documentation]</span></div></div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Start-to-Finish (SF)</span><span class="fc-bn bn">A শুরু → B শেষ</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">B can only finish once A has started — the rarest dependency type, often used in just-in-time handovers.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- SHEET 07 -->
+  <section class="sheet" id="s7">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 07</span> Activity Network Diagram</h2>
+        <div class="bn-title bn">অ্যাক্টিভিটি নেটওয়ার্ক ডায়াগ্রাম</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead">A picture of how tasks chain together — used to spot the longest unavoidable path through the project.</p>
+
+    <div class="netflow">
+      <div class="nf-node endpoint"><span class="lbl">Start</span></div>
+      <div class="nf-arrow"></div>
+      <div class="nf-node"><span class="lbl">A · Audit</span><span class="days">2 days</span></div>
+      <div class="nf-arrow"></div>
+      <div class="nf-node"><span class="lbl">B · Deploy</span><span class="days">5 days</span></div>
+      <div class="nf-arrow"></div>
+      <div class="nf-node"><span class="lbl">C · Verify</span><span class="days">2 days</span></div>
+      <div class="nf-arrow"></div>
+      <div class="nf-node endpoint"><span class="lbl">End</span><span class="days">9 days total</span></div>
+    </div>
+
+    <h3 class="block-title">Key terms — flip for the plain-English version</h3>
+    <div class="grid">
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Forward Pass</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Walk left-to-right through the chain to calculate each task's Earliest Start (ES) and Earliest Finish (EF).</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Backward Pass</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Walk right-to-left from the end date to calculate each task's Latest Start (LS) and Latest Finish (LF).</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Slack / Float</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">LS − ES. How many days a task can slip before it delays the whole project.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Critical Path</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">The longest chain of tasks with zero slack — delay any task on it, and the whole project slips.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- SHEET 08 -->
+  <section class="sheet" id="s8">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 08</span> Cost Management & Cost Types</h2>
+        <div class="bn-title bn">কস্ট ম্যানেজমেন্ট ও খরচের প্রকারভেদ</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead">Planning, estimating, budgeting, and controlling what the project spends — and learning to label every dollar correctly.</p>
+
+    <div class="grid">
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Cash Flow Analysis</span><span class="fc-bn bn">ক্যাশ ফ্লো অ্যানালাইসিস</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Projects yearly costs and gains (and NPV) so leadership doesn't fund too many cash-hungry projects in the same year — also adjusts for inflation.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Tangible Cost/Benefit</span><span class="fc-bn bn">দৃশ্যমান খরচ ও লাভ</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Easy to put a dollar figure on. e.g. a feasibility study that cost a flat $100,000.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Intangible Cost/Benefit</span><span class="fc-bn bn">অদৃশ্য খরচ ও লাভ</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Hard to price in dollars — goodwill, prestige, or someone's personal unpaid time spent on the project.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Direct Cost</span><span class="fc-bn bn">সরাসরি খরচ</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Tied straight to building the product, and the PM controls it — e.g. full-time staff salaries, hardware bought specifically for this project.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Indirect Cost</span><span class="fc-bn bn">পরোক্ষ খরচ</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Not tied to one project, and outside the PM's control — e.g. the electricity bill for a 1,000-person office.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Sunk Cost</span><span class="fc-bn bn">সান্ক কস্ট</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">Money already spent and gone for good. Rule: don't keep funding a failing project just because you've already spent a lot — ignore sunk costs when deciding.</div>
+      </div></div>
+    </div>
+    <div class="note"><b>FIELD NOTE</b>"We've already spent $50k, we can't stop now" is the sunk-cost trap — past spending is never a reason on its own to keep going.</div>
+  </section>
+
+  <!-- SHEET 09 -->
+  <section class="sheet" id="s9">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 09</span> Cash Flow & Budget Table</h2>
+        <div class="bn-title bn">ক্যাশ ফ্লো ও বাজেট টেবিল</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead"><b style="color:var(--white)">Cash Flow</b> is just tracking money in vs. money out over time. Below: a sample budget tying activities to resources, hours, and tools.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>WBS Code</th><th>Activity</th><th>Resource</th><th>Rate</th><th>Hours</th><th>Tools / Materials</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>1.1</td><td>Hardware Inventory Audit</td><td>1 IT Auditor</td><td>$40/hr</td><td>50</td><td>Barcode Scanner ($150)</td><td>$2,150</td></tr>
+          <tr><td>1.2</td><td>Core OS Compatibility Research</td><td>1 R&D Specialist</td><td>$80/hr</td><td>30</td><td>License Benchmark Tool ($300)</td><td>$2,700</td></tr>
+          <tr><td>1.3</td><td>Automated Script Deployment</td><td>2 Engineers</td><td>$75/hr</td><td>80</td><td>Cloud Deployment Server ($200)</td><td>$12,200</td></tr>
+          <tr class="total"><td colspan="6">TOTAL BUDGET</td><td>$17,050</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SHEET 10 -->
+  <section class="sheet" id="s10">
+    <div class="sheet-head">
+      <div>
+        <h2><span class="num">SHEET 10</span> Quality Management & Six Sigma</h2>
+        <div class="bn-title bn">কোয়ালিটি ম্যানেজমেন্ট ও সিক্স সিগমা</div>
+      </div>
+      <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
+    </div>
+    <p class="lead"><b style="color:var(--white)">Quality</b> means meeting the requirements and actually being fit for use — not just "technically working."</p>
+
+    <h3 class="block-title">Fishbone diagram — tracing a defect to its root cause</h3>
+    <div class="fishbone">
+      <div class="fb-svg-wrap">
+        <svg viewBox="0 0 560 220" width="100%" height="220" style="max-width:560px">
+          <line x1="20" y1="110" x2="430" y2="110" stroke="#5ee7d0" stroke-width="2"/>
+          <polygon points="430,100 460,110 430,120" fill="#5ee7d0"/>
+          <rect x="455" y="86" width="95" height="48" rx="8" fill="#10273f" stroke="#5ee7d0"/>
+          <text x="502" y="106" fill="#ffffff" font-size="11" font-family="Sora, sans-serif" font-weight="700" text-anchor="middle">DEFECT</text>
+          <text x="502" y="120" fill="#94aec6" font-size="9" text-anchor="middle">(effect)</text>
+
+          <line x1="120" y1="110" x2="70" y2="50" stroke="#1d3a57" stroke-width="2"/>
+          <text x="68" y="42" fill="#94aec6" font-size="11" font-family="JetBrains Mono">Man</text>
+          <line x1="220" y1="110" x2="180" y2="40" stroke="#1d3a57" stroke-width="2"/>
+          <text x="178" y="32" fill="#94aec6" font-size="11" font-family="JetBrains Mono">Method</text>
+          <line x1="120" y1="110" x2="70" y2="170" stroke="#1d3a57" stroke-width="2"/>
+          <text x="55" y="190" fill="#94aec6" font-size="11" font-family="JetBrains Mono">Machine</text>
+          <line x1="220" y1="110" x2="180" y2="180" stroke="#1d3a57" stroke-width="2"/>
+          <text x="160" y="200" fill="#94aec6" font-size="11" font-family="JetBrains Mono">Material</text>
+        </svg>
+      </div>
+      <div class="fb-legend"><span><i></i>Spine = the chain toward the defect</span><span><i style="background:var(--ink-faint)"></i>Bones = the 4 common cause categories</span></div>
+    </div>
+
+    <h3 class="block-title">Six Sigma — DMAIC</h3>
+    <p class="lead" style="margin-bottom:14px;">A data-driven method aiming for <b style="color:var(--cyan)">≤ 3.4 defects per million opportunities</b>, run through five stages:</p>
+    <div class="dmaic">
+      <div class="step"><span class="letter">D</span><span class="word">Define</span><span class="bn">ডিফাইন</span></div>
+      <div class="step"><span class="letter">M</span><span class="word">Measure</span><span class="bn">মেজার</span></div>
+      <div class="step"><span class="letter">A</span><span class="word">Analyze</span><span class="bn">অ্যানালাইজ</span></div>
+      <div class="step"><span class="letter">I</span><span class="word">Improve</span><span class="bn">ইমপ্রুভ</span></div>
+      <div class="step"><span class="letter">C</span><span class="word">Control</span><span class="bn">কন্ট্রোল</span></div>
+    </div>
+  </section>
+
+  </main>
+</div>
+
+<footer>PROJECT MANAGEMENT BLUEPRINT — INTERACTIVE STUDY SHEET · 10/10 SHEETS</footer>
+
+<script>
+// Build mobile nav from sidenav
+const sidenavLinks = Array.from(document.querySelectorAll('#sidenav a'));
+const mobilenav = document.getElementById('mobilenav');
+sidenavLinks.forEach(link=>{
+  const clone = link.cloneNode(true);
+  mobilenav.appendChild(clone);
+});
+const allNavLinks = [...sidenavLinks, ...Array.from(mobilenav.querySelectorAll('a'))];
+
+// Scrollspy
+const sections = Array.from(document.querySelectorAll('main .sheet'));
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      allNavLinks.forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href') === '#'+id);
+      });
+    }
+  });
+}, {rootMargin:'-15% 0px -70% 0px', threshold:0});
+sections.forEach(s=>observer.observe(s));
+
+// Flip cards
+document.querySelectorAll('.flip-card').forEach(card=>{
+  function toggle(){ card.classList.toggle('is-flipped'); }
+  card.addEventListener('click', toggle);
+  card.addEventListener('keypress', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); } });
+});
+
+// Search filter
+const searchInput = document.getElementById('searchInput');
+const searchableItems = Array.from(document.querySelectorAll('.flip-card, .card, .role-card'));
+searchInput.addEventListener('input', (e)=>{
+  const q = e.target.value.trim().toLowerCase();
+  searchableItems.forEach(item=>{
+    if(!q){ item.classList.remove('dimmed'); return; }
+    const text = item.textContent.toLowerCase();
+    item.classList.toggle('dimmed', !text.includes(q));
+  });
+});
+</script>
+</body>
+</html>
