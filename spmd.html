@@ -198,6 +198,46 @@ h3.block-title::after{content:""; flex:1; height:1px; background:var(--line);}
 .wbs .bn{color:var(--ink-soft); font-family:var(--font-bn); font-size:11.5px; margin-left:6px;}
 .wbs-root{color:var(--white); font-weight:700;}
 
+/* ===== AON diagram exhibit (pinned paper look) ===== */
+.aon-paper{
+  position:relative; background:#f4f1ea; border-radius:6px; padding:26px 20px 16px;
+  box-shadow:0 14px 30px rgba(0,0,0,0.35); margin:10px 0 8px; overflow-x:auto;
+}
+.aon-tape{
+  position:absolute; width:70px; height:24px; background:rgba(255,255,255,0.55);
+  border:1px solid rgba(0,0,0,0.06); top:-10px; box-shadow:0 2px 4px rgba(0,0,0,0.15);
+}
+.aon-tape-l{left:36px; transform:rotate(-5deg);}
+.aon-tape-r{right:36px; transform:rotate(4deg);}
+.aon-legend{
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap; font-family:var(--font-mono);
+  font-size:11px; color:#3a3a38; margin-bottom:14px; padding-bottom:12px; border-bottom:1px dashed #c9c3b4;
+}
+.aon-legend-title{font-family:var(--font-display); font-weight:700; font-size:12.5px; color:#1d2a36;}
+.aon-mini{font-size:9.5px; line-height:1;}
+.aon-mini-row{display:flex; border:1px solid #2255a4;}
+.aon-mini-row span{padding:3px 6px; border-right:1px solid #2255a4; background:#fff; color:#1d2a36;}
+.aon-mini-row span:last-child{border-right:none;}
+.aon-mini-row span.g{background:#d9d9d9; font-weight:700;}
+.aon-mini-mid{border:1px solid #2255a4; border-top:none; background:#eaf4fb; text-align:center; padding:5px; color:#1d2a36; font-family:var(--font-body); font-weight:600;}
+.aon-swatch{display:inline-block; width:16px; height:2px; background:#2a2a2a; margin-right:4px; vertical-align:middle;}
+.aon-swatch.crit{background:#d2231f;}
+.aon-legend-note{font-family:var(--font-body); color:#5b5b58; font-size:11.5px;}
+.aon-legend-note b{color:#1d2a36;}
+
+.paper-doc{font-family:Georgia,'Times New Roman',serif; color:#2a2a26; padding:6px 8px 2px;}
+.paper-doc h4{font-size:18px; margin:0 0 14px; color:#1d2a36; text-align:center; font-weight:700;}
+.paper-doc p{font-size:13px; line-height:1.6; margin:0 0 10px; font-family:'Inter',sans-serif;}
+.paper-table-wrap{margin:14px 0 16px; border:1px solid #2a2a26;}
+table.paper-table{width:100%; border-collapse:collapse; font-family:'Inter',sans-serif; font-size:12.8px;}
+table.paper-table thead th{background:#fff; border-bottom:2px solid #2a2a26; padding:8px 12px; text-align:center; font-weight:700; color:#1d2a36;}
+table.paper-table td{padding:7px 12px; border-bottom:1px solid #c9c3b4; color:#2a2a26;}
+table.paper-table td:first-child{text-align:left;}
+table.paper-table td:nth-child(2), table.paper-table td:nth-child(3){text-align:center;}
+table.paper-table tr.ptotal td{font-weight:700; border-top:2px solid #2a2a26; border-bottom:none;}
+.paper-just{font-style:normal;}
+.paper-credit{text-align:right; font-size:11px; color:#6b6b66; font-family:'Inter',sans-serif; margin-top:10px;}
+
 /* ===== Network diagram ===== */
 .netflow{display:flex; align-items:center; gap:0; overflow-x:auto; padding:14px 2px 18px;}
 .nf-node{
@@ -312,7 +352,7 @@ footer{text-align:center; padding:30px 20px 50px; color:var(--ink-faint); font-f
     </div>
     <p class="lead">Every project shares six core traits — and is always boxed in by three hard limits. Click a card to flip it.</p>
 
-    <h3 class="block-title">Six attributes</h3>
+    <h3 class="block-title">Seven attributes</h3>
     <div class="grid">
       <div class="flip-card" tabindex="0"><div class="flip-inner">
         <div class="flip-front"><span class="fc-en">Unique Purpose</span><span class="fc-bn bn">নির্দিষ্ট উদ্দেশ্য</span><span class="fc-tap">TAP ⤵</span></div>
@@ -323,15 +363,19 @@ footer{text-align:center; padding:30px 20px 50px; color:var(--ink-faint); font-f
         <div class="flip-back">It has a clear start date and a clear end date — once the goal is delivered, the project closes.</div>
       </div></div>
       <div class="flip-card" tabindex="0"><div class="flip-inner">
+        <div class="flip-front"><span class="fc-en">Drives Change & Value</span><span class="fc-bn bn">পরিবর্তন আনে ও মূল্য তৈরি করে</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-back">A project exists to move something forward — a new product, system, or capability that creates real value once delivered.</div>
+      </div></div>
+      <div class="flip-card" tabindex="0"><div class="flip-inner">
         <div class="flip-front"><span class="fc-en">Progressive Elaboration</span><span class="fc-bn bn">পর্যায়ক্রমিক উন্নয়ন</span><span class="fc-tap">TAP ⤵</span></div>
         <div class="flip-back">You don't know every detail on day one — the plan gets more specific step by step as work moves forward.</div>
       </div></div>
       <div class="flip-card" tabindex="0"><div class="flip-inner">
-        <div class="flip-front"><span class="fc-en">Resources</span><span class="fc-bn bn">রিসোর্স</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-front"><span class="fc-en">Requires Resources</span><span class="fc-bn bn">রিসোর্স প্রয়োজন</span><span class="fc-tap">TAP ⤵</span></div>
         <div class="flip-back">Nothing runs on its own — people, money, and tools all have to be supplied to get the work done.</div>
       </div></div>
       <div class="flip-card" tabindex="0"><div class="flip-inner">
-        <div class="flip-front"><span class="fc-en">Sponsor</span><span class="fc-bn bn">স্পন্সর</span><span class="fc-tap">TAP ⤵</span></div>
+        <div class="flip-front"><span class="fc-en">Primary Sponsor</span><span class="fc-bn bn">মূল স্পন্সর</span><span class="fc-tap">TAP ⤵</span></div>
         <div class="flip-back">Someone pays the bills and sets the direction — that's the sponsor, the project's main backer.</div>
       </div></div>
       <div class="flip-card" tabindex="0"><div class="flip-inner">
@@ -373,19 +417,35 @@ footer{text-align:center; padding:30px 20px 50px; color:var(--ink-faint); font-f
     <div class="role-grid">
       <div class="card role-card">
         <div class="role-icon">$</div>
-        <div><span class="en">Sponsor / Client</span><span class="bn">স্পন্সর</span><span class="ex">Funds the project and gives final sign-off on deliverables.</span></div>
+        <div><span class="en">Sponsor</span><span class="bn">স্পন্সর</span><span class="ex">Funds the project and gives final sign-off on deliverables.</span></div>
       </div>
       <div class="card role-card">
         <div class="role-icon">PM</div>
         <div><span class="en">Project Manager</span><span class="bn">প্রজেক্ট ম্যানেজার</span><span class="ex">Steers the team day-to-day and keeps scope/time/cost in balance.</span></div>
       </div>
       <div class="card role-card">
+        <div class="role-icon">🏦</div>
+        <div><span class="en">Financial Institute</span><span class="bn">আর্থিক প্রতিষ্ঠান</span><span class="ex">Provides loans or financing that backs the project's budget.</span></div>
+      </div>
+      <div class="card role-card">
         <div class="role-icon">&lt;/&gt;</div>
-        <div><span class="en">Developers / Team</span><span class="bn">টিম মেম্বার</span><span class="ex">Do the actual building — code, design, and technical milestones.</span></div>
+        <div><span class="en">Project Team</span><span class="bn">প্রজেক্ট টিম</span><span class="ex">Does the actual building — code, design, and technical milestones.</span></div>
+      </div>
+      <div class="card role-card">
+        <div class="role-icon">🛠️</div>
+        <div><span class="en">Support Staff</span><span class="bn">সাপোর্ট স্টাফ</span><span class="ex">Admin, HR, and IT support keeping things running behind the scenes.</span></div>
       </div>
       <div class="card role-card">
         <div class="role-icon">📦</div>
         <div><span class="en">Suppliers</span><span class="bn">সরবরাহকারী</span><span class="ex">Provide outside tools, software licenses, or services the project needs.</span></div>
+      </div>
+      <div class="card role-card">
+        <div class="role-icon">🏛️</div>
+        <div><span class="en">Local Government</span><span class="bn">স্থানীয় সরকার</span><span class="ex">Issues permits and enforces compliance — legal approval the project needs.</span></div>
+      </div>
+      <div class="card role-card">
+        <div class="role-icon">⚠️</div>
+        <div><span class="en">Opponents</span><span class="bn">বিরোধী পক্ষ</span><span class="ex">Stakeholders who lose out or disagree, and may resist or try to block the project.</span></div>
       </div>
     </div>
   </section>
@@ -480,6 +540,17 @@ footer{text-align:center; padding:30px 20px 50px; color:var(--ink-faint); font-f
       <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
     </div>
     <p class="lead">An RTM is just a table that follows one requirement all the way from "idea" to "tested code," so nothing falls through the cracks.</p>
+
+    <h3 class="block-title">4 steps to get a requirement RTM-ready</h3>
+    <div class="timeline">
+      <div class="tl-step"><div class="tl-dot">1</div><span class="ttl">Elicitation</span><span class="bn">প্রয়োজন বের করা</span></div>
+      <div class="tl-step"><div class="tl-dot">2</div><span class="ttl">Analysis</span><span class="bn">বিশ্লেষণ করা</span></div>
+      <div class="tl-step"><div class="tl-dot">3</div><span class="ttl">Specification</span><span class="bn">লিখিতভাবে নির্দিষ্ট করা</span></div>
+      <div class="tl-step"><div class="tl-dot">4</div><span class="ttl">Validation</span><span class="bn">সঠিকভাবে যাচাই করা</span></div>
+    </div>
+    <div class="note"><b>FIELD NOTE</b>Elicitation = asking and digging for what people actually need · Analysis = making sense of it and resolving conflicts · Specification = writing it down precisely · Validation = confirming with stakeholders that it's right, before it ever reaches the RTM table.</div>
+
+    <h3 class="block-title">Example 1 — IT upgrade</h3>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Req ID</th><th>Description</th><th>Design Module</th><th>Code Module</th><th>Test Case ID</th><th>Status</th></tr></thead>
@@ -489,7 +560,32 @@ footer{text-align:center; padding:30px 20px 50px; color:var(--ink-faint); font-f
         </tbody>
       </table>
     </div>
+
+    <h3 class="block-title">Example 2 — e‑commerce app</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Req ID</th><th>Requirement</th><th>Module</th><th>Test Case</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>REQ-001</td><td>User Registration</td><td>Registration Module</td><td>TC-001</td><td><span class="status done">Pass</span></td></tr>
+          <tr><td>REQ-002</td><td>User Login</td><td>Authentication Module</td><td>TC-002</td><td><span class="status done">Pass</span></td></tr>
+          <tr><td>REQ-003</td><td>Product Search</td><td>Search Module</td><td>TC-003</td><td><span class="status done">Pass</span></td></tr>
+          <tr><td>REQ-004</td><td>Add to Cart</td><td>Cart Module</td><td>TC-004</td><td><span class="status done">Pass</span></td></tr>
+          <tr><td>REQ-005</td><td>Online Payment</td><td>Payment Module</td><td>TC-005</td><td><span class="status progress">Pending</span></td></tr>
+        </tbody>
+      </table>
+    </div>
     <div class="note"><b>FIELD NOTE</b>If a requirement has no row here, ask: was it ever actually built — and was it ever actually tested?</div>
+
+    <h3 class="block-title">Why a Project Charter matters</h3>
+    <p class="lead">The charter is the document that kicks the whole project off — before scope, before RTM, before a single task is scheduled.</p>
+    <div class="role-grid">
+      <div class="card"><span class="en">Official Authorization</span><span class="ex">Formally gives the PM the authority to spend resources and run the project.</span></div>
+      <div class="card"><span class="en">Defines Scope & Constraints</span><span class="ex">Sets the boundary of what's in and out, plus the limits the project must work within.</span></div>
+      <div class="card"><span class="en">Defines Success Criteria</span><span class="ex">Spells out, up front, what "done and successful" actually looks like.</span></div>
+      <div class="card"><span class="en">Key Schedule Milestones</span><span class="ex">Lays down the major dates the project is expected to hit.</span></div>
+      <div class="card"><span class="en">Roles & Responsibilities</span><span class="ex">Makes clear who the sponsor, PM, and key stakeholders are — and what each owns.</span></div>
+      <div class="card"><span class="en">Assumptions Made Clear</span><span class="ex">Documents what's being taken for granted, so surprises later don't derail the plan.</span></div>
+    </div>
   </section>
 
   <!-- SHEET 06 -->
@@ -543,18 +639,22 @@ footer{text-align:center; padding:30px 20px 50px; color:var(--ink-faint); font-f
       </div>
       <div class="titleblock">DRAWN BY: <b>PM-101</b><br>SCALE: <b>NTS</b><br>REV: <b>A</b></div>
     </div>
-    <p class="lead">A picture of how tasks chain together — used to spot the longest unavoidable path through the project.</p>
+    <p class="lead">A picture of how tasks chain together — used to spot the longest unavoidable path through the project. This full Activity-on-Node (AON) example has 9 tasks; the red path is critical.</p>
 
-    <div class="netflow">
-      <div class="nf-node endpoint"><span class="lbl">Start</span></div>
-      <div class="nf-arrow"></div>
-      <div class="nf-node"><span class="lbl">A · Audit</span><span class="days">2 days</span></div>
-      <div class="nf-arrow"></div>
-      <div class="nf-node"><span class="lbl">B · Deploy</span><span class="days">5 days</span></div>
-      <div class="nf-arrow"></div>
-      <div class="nf-node"><span class="lbl">C · Verify</span><span class="days">2 days</span></div>
-      <div class="nf-arrow"></div>
-      <div class="nf-node endpoint"><span class="lbl">End</span><span class="days">9 days total</span></div>
+    <div class="aon-paper">
+      <div class="aon-tape aon-tape-l"></div><div class="aon-tape aon-tape-r"></div>
+      <div class="aon-legend">
+        <div class="aon-legend-title">Legend</div>
+        <div class="aon-mini">
+          <div class="aon-mini-row"><span>ES</span><span class="g">Duration</span><span>EF</span></div>
+          <div class="aon-mini-mid">Activity</div>
+          <div class="aon-mini-row"><span>LS</span><span class="g">Total&nbsp;Float</span><span>LF</span></div>
+        </div>
+        <div class="aon-legend-line"><span class="aon-swatch crit"></span> Critical path link</div>
+        <div class="aon-legend-line"><span class="aon-swatch"></span> Normal link</div>
+        <div class="aon-legend-note">Start date is Day 0 · Critical path: <b>A → D → G → I</b> · Project length: <b>24 days</b></div>
+      </div>
+      <svg id="aonDiagram" viewBox="0 0 1180 700" width="100%" style="max-width:1180px; display:block; margin:0 auto;"></svg>
     </div>
 
     <h3 class="block-title">Key terms — flip for the plain-English version</h3>
@@ -638,6 +738,33 @@ footer{text-align:center; padding:30px 20px 50px; color:var(--ink-faint); font-f
           <tr class="total"><td colspan="6">TOTAL BUDGET</td><td>$17,050</td></tr>
         </tbody>
       </table>
+    </div>
+
+    <h3 class="block-title">Worked example — WBS-based budget formulation</h3>
+    <div class="aon-paper">
+      <div class="aon-tape aon-tape-l"></div><div class="aon-tape aon-tape-r"></div>
+      <div class="paper-doc">
+        <h4>Software Project Budget Formulation</h4>
+        <p><b>Problem.</b> A startup is building a Food Delivery Mobile App that must launch within 5 months, with a 12-person team. The client has a moderate budget but expects high reliability and thorough testing before release.</p>
+        <p><b>Task.</b> Build a WBS-based budget across requirements gathering, design, development, testing, deployment, training, and a contingency reserve — then justify the split.</p>
+        <div class="paper-table-wrap">
+          <table class="paper-table">
+            <thead><tr><th>Activity</th><th>Cost (BDT)</th><th>Share</th></tr></thead>
+            <tbody>
+              <tr><td>Requirements Gathering</td><td>400,000</td><td>8%</td></tr>
+              <tr><td>Design &amp; Prototyping</td><td>600,000</td><td>12%</td></tr>
+              <tr><td>Development</td><td>2,000,000</td><td>40%</td></tr>
+              <tr><td>Testing &amp; QA</td><td>1,000,000</td><td>20%</td></tr>
+              <tr><td>Deployment</td><td>400,000</td><td>8%</td></tr>
+              <tr><td>Training &amp; Documentation</td><td>200,000</td><td>4%</td></tr>
+              <tr><td>Contingency Reserve</td><td>400,000</td><td>8%</td></tr>
+              <tr class="ptotal"><td>Total</td><td>5,000,000</td><td>100%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="paper-just"><b>Justification.</b> Development gets the biggest slice (40%) since it's the most effort-heavy phase. Testing gets 20% to satisfy the client's high-reliability requirement. The contingency reserve protects against unforeseen risk, while design, deployment, and training round out a smooth, usable release.</p>
+        <div class="paper-credit">Prepared by Fahim Faisal, Lecturer, SWE, DIU</div>
+      </div>
     </div>
   </section>
 
@@ -733,6 +860,113 @@ searchInput.addEventListener('input', (e)=>{
     item.classList.toggle('dimmed', !text.includes(q));
   });
 });
+
+// ===== AON Network Diagram render =====
+(function(){
+  const svg = document.getElementById('aonDiagram');
+  if(!svg) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  const W=140, H=110;
+
+  const nodes = [
+    {id:'A', x:170, y:370, crit:true,  es:0,  dur:5,  ef:5,  ls:0,  fl:0,  lf:5},
+    {id:'B', x:170, y:560, crit:false, es:0,  dur:6,  ef:6,  ls:4,  fl:4,  lf:10},
+    {id:'E', x:400, y:190, crit:false, es:5,  dur:1,  ef:6,  ls:7,  fl:2,  lf:8},
+    {id:'D', x:400, y:370, crit:true,  es:5,  dur:3,  ef:8,  ls:5,  fl:0,  lf:8},
+    {id:'C', x:400, y:560, crit:false, es:5,  dur:4,  ef:9,  ls:6,  fl:1,  lf:10},
+    {id:'F', x:630, y:190, crit:false, es:6,  dur:4,  ef:10, ls:20, fl:14, lf:24},
+    {id:'G', x:630, y:370, crit:true,  es:8,  dur:14, ef:22, ls:8,  fl:0,  lf:22},
+    {id:'H', x:630, y:560, crit:false, es:9,  dur:12, ef:21, ls:10, fl:1,  lf:22},
+    {id:'I', x:860, y:370, crit:true,  es:22, dur:2,  ef:24, ls:22, fl:0,  lf:24},
+  ];
+
+  const edges = [
+    {d:'M125,420 L168,425', crit:true},
+    {d:'M125,445 L168,608', crit:false},
+    {d:'M240,368 L470,302', crit:false},
+    {d:'M312,425 L398,425', crit:true},
+    {d:'M240,482 L470,558', crit:false},
+    {d:'M238,560 Q450,690 658,668', crit:false},
+    {d:'M472,302 L698,368', crit:false},
+    {d:'M542,245 L628,245', crit:false},
+    {d:'M542,425 L628,425', crit:true},
+    {d:'M542,615 L628,615', crit:false},
+    {d:'M772,425 L858,425', crit:true},
+    {d:'M740,558 L900,482', crit:false},
+    {d:'M772,245 L1038,402', crit:false},
+    {d:'M1002,425 L1023,425', crit:true},
+  ];
+
+  function el(tag, attrs){
+    const e = document.createElementNS(NS, tag);
+    for(const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  // defs: arrow markers
+  const defs = el('defs', {});
+  [['arrowBlack','#2a2a2a'],['arrowRed','#d2231f']].forEach(([id,color])=>{
+    const marker = el('marker',{id, viewBox:'0 0 10 10', refX:'8', refY:'5', markerWidth:'7', markerHeight:'7', orient:'auto-start-reverse'});
+    marker.appendChild(el('path',{d:'M0,0 L10,5 L0,10 z', fill:color}));
+    defs.appendChild(marker);
+  });
+  svg.appendChild(defs);
+
+  // start / finish circles
+  function circle(cx,cy,label,flag){
+    const g = el('g',{});
+    g.appendChild(el('circle',{cx,cy,r:55,fill:'#f4f1ea',stroke:'#1d2a36','stroke-width':2.5}));
+    const t1 = el('text',{x:cx,y:cy-2,'text-anchor':'middle','font-family':'Sora, sans-serif','font-weight':700,'font-size':17,fill:'#1d2a36'});
+    t1.textContent = label; g.appendChild(t1);
+    const t2 = el('text',{x:cx,y:cy+22,'text-anchor':'middle','font-size':18});
+    t2.textContent = flag; g.appendChild(t2);
+    svg.appendChild(g);
+  }
+  circle(70,430,'Start','🚩');
+  circle(1080,425,'Finish','🏁');
+
+  // edges (drawn before nodes so arrowheads sit under box edges cleanly)
+  edges.forEach(ed=>{
+    svg.appendChild(el('path',{d:ed.d, fill:'none', stroke: ed.crit?'#d2231f':'#2a2a2a', 'stroke-width': ed.crit?2.5:1.6, 'marker-end': ed.crit?'url(#arrowRed)':'url(#arrowBlack)'}));
+  });
+
+  // nodes
+  nodes.forEach(n=>{
+    const {x,y,crit,es,dur,ef,ls,fl,lf,id}=n;
+    const stroke = crit ? '#d2231f' : '#1d2a36';
+    const g = el('g',{});
+    // middle band background
+    g.appendChild(el('rect',{x, y:y+26, width:W, height:58, fill:'#eaf4fb'}));
+    // white cells
+    [[x,y],[x+93,y],[x,y+84],[x+93,y+84]].forEach(([cx,cy])=>{
+      g.appendChild(el('rect',{x:cx,y:cy,width:47,height:26,fill:'#ffffff'}));
+    });
+    // gray (duration/float) cells
+    g.appendChild(el('rect',{x:x+47,y,width:46,height:26,fill:'#d9d9d9'}));
+    g.appendChild(el('rect',{x:x+47,y:y+84,width:46,height:26,fill:'#d9d9d9'}));
+    // outer border + dividers
+    g.appendChild(el('rect',{x,y,width:W,height:H,fill:'none',stroke,'stroke-width':2}));
+    [y,y+26,y+84,y+110].forEach(ly=>{ g.appendChild(el('line',{x1:x,y1:ly,x2:x+W,y2:ly,stroke,'stroke-width':1})); });
+    [x+47,x+93].forEach(lx=>{
+      g.appendChild(el('line',{x1:lx,y1:y,x2:lx,y2:y+26,stroke,'stroke-width':1}));
+      g.appendChild(el('line',{x1:lx,y1:y+84,x2:lx,y2:y+110,stroke,'stroke-width':1}));
+    });
+    // text helper
+    function txt(cx,cy,str,opts){
+      const t = el('text', Object.assign({x:cx,y:cy,'text-anchor':'middle','font-family':'JetBrains Mono, monospace','font-size':14,fill:'#1d2a36'}, opts||{}));
+      t.textContent = str; g.appendChild(t);
+    }
+    txt(x+23.5, y+18, es);
+    txt(x+70,   y+18, dur, {'font-weight':700});
+    txt(x+116.5,y+18, ef);
+    txt(x+23.5, y+100, ls);
+    txt(x+70,   y+100, fl, {'font-weight':700, fill: fl===0 ? '#d2231f' : '#2255a4'});
+    txt(x+116.5,y+100, lf);
+    const idTxt = el('text',{x:x+70,y:y+62,'text-anchor':'middle','font-family':'Sora, sans-serif','font-weight':700,'font-size':19,fill:'#1d2a36'});
+    idTxt.textContent = id; g.appendChild(idTxt);
+    svg.appendChild(g);
+  });
+})();
 </script>
 </body>
 </html>
