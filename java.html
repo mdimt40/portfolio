@@ -263,9 +263,11 @@
 
   /* output box */
   .out-box{
-    display:inline-flex;
+    display:flex;
+    flex-wrap:wrap;
     align-items:center;
     gap:8px;
+    max-width:100%;
     font-family:'JetBrains Mono',monospace;
     font-size:12.5px;
     background:var(--leaf-soft);
@@ -333,6 +335,7 @@
   .compare .col li{margin-bottom:6px;}
   .compare .col.a{border-top:4px solid var(--amber);}
   .compare .col.b{border-top:4px solid var(--leaf);}
+  .compare.triple{grid-template-columns:repeat(3,1fr);}
 
   /* ===== UML diagram boxes ===== */
   .uml-wrap{
@@ -346,7 +349,9 @@
     background:var(--card-bg);
     border:1.5px solid var(--coffee);
     border-radius:8px;
-    min-width:210px;
+    min-width:0;
+    width:210px;
+    max-width:100%;
     box-shadow:var(--shadow);
     font-family:'JetBrains Mono',monospace;
     font-size:12.5px;
@@ -365,6 +370,12 @@
     border-top:1px solid var(--paper-line);
   }
   .uml-class .attrs div, .uml-class .methods div{padding:2px 0;}
+  .uml-arrow{
+    display:flex;
+    align-items:center;
+    font-weight:bold;
+    color:var(--amber);
+  }
 
   .tree{
     display:flex;
@@ -394,6 +405,15 @@
   }
   @media(max-width:800px){.pillars{grid-template-columns:1fr 1fr;}}
   @media(max-width:480px){.pillars{grid-template-columns:1fr;}}
+  @media(max-width:700px){
+    .compare.triple{grid-template-columns:1fr;}
+    .table-wrap{overflow-x:auto;}
+    table.tbl{display:block; overflow-x:auto; white-space:nowrap;}
+    .uml-wrap{flex-direction:column; align-items:stretch; gap:12px;}
+    .uml-class{width:100%;}
+    .uml-arrow{justify-content:center;}
+    .out-box{width:100%;}
+  }
   .pillar{
     background:var(--card-bg);
     border-radius:var(--radius);
@@ -540,7 +560,7 @@
       <div class="sec-head"><span class="sec-num">03</span><h2>Variables in Java</h2></div>
       <p class="sec-bn bn">ভ্যারিয়েবল কোথায় ঘোষণা (declare) করা হচ্ছে তার উপর ভিত্তি করে তিন প্রকার: Local, Instance, আর Static।</p>
 
-      <div class="compare" style="grid-template-columns:repeat(3,1fr);">
+      <div class="compare triple">
         <div class="col a">
           <h4>Local Variable</h4>
           <p style="font-size:13px;">Declared inside a method/block. Block scope protection wrapper.</p>
@@ -813,13 +833,13 @@
           <div class="attrs"><div>+ languageName : String</div><div>+ creator : String</div></div>
           <div class="methods"><div>+ setData(String, String) : void</div><div>+ display() : void</div></div>
         </div>
-        <div style="display:flex; align-items:center; font-weight:bold; color:var(--amber);">◀ extends ◀</div>
+        <div class="uml-arrow">◀ extends ◀</div>
         <div class="uml-class">
           <div class="name">Java</div>
           <div class="attrs"><div>+ version : double</div></div>
           <div class="methods"><div>+ setJavaData(double) : void</div><div>+ display() : void</div></div>
         </div>
-        <div style="display:flex; align-items:center; font-weight:bold; color:var(--amber);">◀ extends ◀</div>
+        <div class="uml-arrow">◀ extends ◀</div>
         <div class="uml-class">
           <div class="name">Python</div>
           <div class="attrs"><div>+ paradigm : String</div></div>
