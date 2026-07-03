@@ -53,8 +53,7 @@
   }
   @media (max-width:900px){
     .wrap{grid-template-columns:1fr;}
-    nav.toc{position:sticky; top:0; background:var(--paper); z-index:100; max-height:none; border-bottom:1px solid var(--paper-line); padding:10px;}
-    nav.toc{flex-wrap:wrap; display:flex; gap:10px;}
+    nav.toc{position:sticky; top:0; background:var(--paper); z-index:100; max-height:none; border-bottom:1px solid var(--paper-line); padding:10px; display:flex; flex-wrap:wrap; gap:10px;}
   }
 
   /* ===== Hero ===== */
@@ -366,12 +365,6 @@
     border-top:1px solid var(--paper-line);
   }
   .uml-class .attrs div, .uml-class .methods div{padding:2px 0;}
-  .uml-arrow-col{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:2px;
-  }
 
   .tree{
     display:flex;
@@ -442,8 +435,6 @@
     font-size:12px;
   }
 
-  .cup{display:inline-block; transform:translateY(1px);}
-
   @media print{
     nav.toc{display:none;}
     .wrap{grid-template-columns:1fr;}
@@ -466,19 +457,19 @@
     <a href="#s1">01 · Java পরিচিতি</a>
     <a href="#s2">02 · Data Types</a>
     <a href="#s3">03 · Variables</a>
-    <a href="#s4">04 · Access Modifiers</a>
-    <a href="#s5">05 · Class &amp; UML</a>
-    <a href="#s6">06 · Object</a>
-    <a href="#s7">07 · Methods</a>
-    <a href="#s8">08 · Method Overloading</a>
-    <a href="#s9">09 · Constructors</a>
-    <a href="#s10">10 · Method vs Constructor</a>
-    <a href="#s11">11 · The `super` Keyword</a>
-    <a href="#s12">12 · OOP 4 Pillars</a>
-    <a href="#s13">13 · Encapsulation</a>
-    <a href="#s14">14 · Abstraction &amp; Polymorphism</a>
-    <a href="#s15">15 · Inheritance Types</a>
-    <a href="#s16">16 · Practice &amp; Capstone</a>
+    <a href="#s4">04 · Control Statements</a>
+    <a href="#s5">05 · Scanner Input</a>
+    <a href="#s6">06 · Arrays in Java</a>
+    <a href="#s7">07 · Access Modifiers</a>
+    <a href="#s8">08 · Class &amp; UML</a>
+    <a href="#s9">09 · Object Creation</a>
+    <a href="#s10">10 · Methods &amp; Overloading</a>
+    <a href="#s11">11 · Constructors</a>
+    <a href="#s12">12 · Method vs Constructor</a>
+    <a href="#s13">13 · The `super` Keyword</a>
+    <a href="#s14">14 · OOP 4 Pillars</a>
+    <a href="#s15">15 · Encapsulation</a>
+    <a href="#s16">16 · Practice Problems</a>
   </nav>
 
   <main>
@@ -487,7 +478,7 @@
       <div class="sec-head"><span class="sec-num">01</span><h2>What is Java?</h2></div>
       <p class="sec-bn bn">জাভা হলো একটি <b>high-level, object-oriented</b> প্রোগ্রামিং ভাষা। এটি ক্লাস ও অবজেক্টের উপর ভিত্তি করে তৈরি, তাই একে object-oriented programming (OOP) ভাষা বলা হয়।</p>
 
-      <p class="expl">Java is a <b>high-level, object-oriented programming language</b>. It's called "object-oriented" because it's built around <b>classes</b> and <b>objects</b>, and supports the four core OOP principles:</p>
+      <p class="expl">Java is a <b>high-level, object-oriented programming language</b>. It's built around <b>classes</b> and <b>objects</b>, and supports the four core OOP principles:</p>
       <div class="pillars">
         <div class="pillar"><span class="pnum">01</span><h4>Inheritance</h4><p>বৈশিষ্ট্য উত্তরাধিকার সূত্রে পাওয়া</p></div>
         <div class="pillar"><span class="pnum">02</span><h4>Abstraction</h4><p>অপ্রয়োজনীয় তথ্য লুকানো</p></div>
@@ -495,17 +486,7 @@
         <div class="pillar"><span class="pnum">04</span><h4>Polymorphism</h4><p>এক নাম, ভিন্ন রূপ</p></div>
       </div>
 
-      <h3 class="sub">Use Cases</h3>
-      <ul class="pointlist">
-        <li>Android apps</li>
-        <li>Websites (backend system)</li>
-        <li>Desktop applications</li>
-        <li>Banking &amp; financial systems</li>
-        <li>Large enterprise software</li>
-      </ul>
-
       <h3 class="sub">Golden Rules of a Java Program</h3>
-      <p class="bnexpl bn">প্রতিটি Java প্রোগ্রামের কিছু বাঁধাধরা নিয়ম আছে — এগুলো ভুলে গেলে কোড কম্পাইলই হবে না।</p>
       <div class="rule-box">
         <b>1.</b> Every application begins with a class, and the class name must match the file name.<br>
         <b>2.</b> Every line of code that runs must be inside a class. Class names start with an <b>uppercase</b> letter.<br>
@@ -521,12 +502,11 @@
     }
 }</pre>
       </div>
-      <div class="out-box"><b>Output</b> Hello World!</div>
     </section>
 
     <section class="block" id="s2">
       <div class="sec-head"><span class="sec-num">02</span><h2>Data Types &amp; Identifiers</h2></div>
-      <p class="sec-bn bn">Java-তে ডেটা টাইপ দুই ভাগে ভাগ করা যায়: <b>primitive</b> (সরাসরি মান রাখে) আর <b>non-primitive</b> (রেফারেন্স রাখে)। আর identifier হলো ভ্যারিয়েবল/клас/মেথডের নাম।</p>
+      <p class="sec-bn bn">Java-তে ডেটা টাইপ দুই ভাগে ভাগ করা যায়: <b>primitive</b> (সরাসরি মান রাখে) আর <b>non-primitive</b> (রেফারেন্স রাখে)।</p>
 
       <h3 class="sub">"7" vs '7' vs 7</h3>
       <table class="tbl">
@@ -541,31 +521,19 @@
           <h4>Primitive Types</h4>
           <ul>
             <li>byte, short, int, long, float, double, char, boolean</li>
-            <li>Stores value directly</li>
-            <li>Fixed size, faster</li>
-            <li>No methods, cannot be null</li>
+            <li>Stores value directly inside memory stack</li>
+            <li>Fixed size, faster processing</li>
           </ul>
         </div>
         <div class="col b">
           <h4>Non-Primitive Types</h4>
           <ul>
             <li>String, Array, Class, Object, Interface</li>
-            <li>Stores a reference</li>
-            <li>Size depends on object, slightly slower</li>
-            <li>Has methods, can be null</li>
+            <li>Stores a memory reference pointer</li>
+            <li>Size depends on object configuration</li>
           </ul>
         </div>
       </div>
-
-      <h3 class="sub">Identifier Rules — নিয়মগুলো</h3>
-      <p class="bnexpl bn">Identifier হলো ভ্যারিয়েবল, মেথড, ক্লাস, প্যাকেজ ইত্যাদির নাম — ইউজার নিজে ঠিক করে দেয়।</p>
-      <ul class="pointlist">
-        <li><b>Start character:</b> letter (a-z, A-Z), <code>$</code>, or underscore <code>_</code> — e.g. <code>myName</code>, <code>_count</code>, <code>$price</code></li>
-        <li><b>No keywords:</b> can't be a reserved word like <code>class</code>, <code>if</code>, <code>for</code>, <code>public</code></li>
-        <li><b>Case-sensitive:</b> <code>myVariable</code> ≠ <code>MyVariable</code></li>
-        <li><b>No special characters:</b> no <code>@</code>, <code>#</code>, <code>!</code> etc.</li>
-        <li><b>Cannot start with a digit:</b> <code>123value</code> ❌ invalid</li>
-      </ul>
     </section>
 
     <section class="block" id="s3">
@@ -574,55 +542,110 @@
 
       <div class="compare" style="grid-template-columns:repeat(3,1fr);">
         <div class="col a">
-          <h4>Local</h4>
-          <p style="font-size:13px;">Declared inside a method or block. Scope limited to that block.</p>
-          <p class="bn" style="font-size:12.5px;color:var(--ink-soft);">মেথডের ভেতরে ঘোষিত, শুধু সেখানেই ব্যবহারযোগ্য।</p>
+          <h4>Local Variable</h4>
+          <p style="font-size:13px;">Declared inside a method/block. Block scope protection wrapper.</p>
         </div>
         <div class="col a">
-          <h4>Instance</h4>
-          <p style="font-size:13px;">Declared inside a class, outside any method. Belongs to an object.</p>
-          <p class="bn" style="font-size:12.5px;color:var(--ink-soft);">ক্লাসের ভেতরে, মেথডের বাইরে — প্রতিটি অবজেক্টের নিজস্ব কপি থাকে।</p>
+          <h4>Instance Variable</h4>
+          <p style="font-size:13px;">Declared inside class, outside methods. Every object gets its own copy.</p>
         </div>
         <div class="col b">
-          <h4>Static / Class</h4>
-          <p style="font-size:13px;">Declared with the <code>static</code> keyword. Belongs to the class, not one object.</p>
-          <p class="bn" style="font-size:12.5px;color:var(--ink-soft);"><code>static</code> কিওয়ার্ড দিয়ে ঘোষিত — ক্লাসের সব অবজেক্ট একসাথে শেয়ার করে।</p>
+          <h4>Static Variable</h4>
+          <p style="font-size:13px;">Declared with <code>static</code> keyword. Shared universally across all objects.</p>
         </div>
       </div>
+    </section>
 
+    <section class="block" id="s4">
+      <div class="sec-head"><span class="sec-num">04</span><h2>Control Statements (Selection &amp; Iteration)</h2></div>
+      <p class="sec-bn bn">জাভায় শর্ত সাপেক্ষে কোড চালানো (if-else, switch) এবং কোনো কাজ বারবার করার জন্য লুপ (for, while, do-while) ব্যবহার করা হয়।</p>
+
+      <h3 class="sub">Conditional (if-else) Structure</h3>
       <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Main.java — local variable</span></div>
-        <pre class="code"><span class="kw">public class</span> Main {
-    <span class="kw">public void</span> myMethod() {
-        <span class="kw">int</span> x = 5; <span class="com">// local variable</span>
-        System.out.println(x);
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">ControlDemo.java</span></div>
+        <pre class="code"><span class="kw">public class</span> ControlDemo {
+    <span class="kw">public static void</span> main(String[] args) {
+        <span class="kw">int</span> score = 85;
+        
+        <span class="kw">if</span> (score >= 90) {
+          System.out.println(<span class="str">"Excellent!"</span>);
+        } <span class="kw">else if</span> (score >= 80) {
+          System.out.println(<span class="str">"Good Job!"</span>);
+        } <span class="kw">else</span> {
+          System.out.println(<span class="str">"Keep trying!"</span>);
+        }
     }
 }</pre>
       </div>
 
+      <h3 class="sub">Loops (for loop structure)</h3>
       <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Main.java — instance variable</span></div>
-        <pre class="code"><span class="kw">public class</span> Main {
-    <span class="kw">int</span> x = 10; <span class="com">// instance variable</span>
-    <span class="kw">public void</span> myMethod() {
-        System.out.println(x);
-    }
-}</pre>
-      </div>
-
-      <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Main.java — static variable</span></div>
-        <pre class="code"><span class="kw">public class</span> Main {
-    <span class="kw">static int</span> x = 20; <span class="com">// static/class variable</span>
-    <span class="kw">public static void</span> myMethod() {
-        System.out.println(x);
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">LoopDemo.java</span></div>
+        <pre class="code"><span class="kw">public class</span> LoopDemo {
+    <span class="kw">public static void</span> main(String[] args) {
+        <span class="com">// Prints 0 to 4</span>
+        <span class="kw">for</span> (<span class="kw">int</span> i = 0; i &lt; 5; i++) {
+            System.out.println(<span class="str">"Count: "</span> + i);
+        }
     }
 }</pre>
       </div>
     </section>
 
-    <section class="block" id="s4">
-      <div class="sec-head"><span class="sec-num">04</span><h2>Access Modifiers</h2></div>
+    <section class="block" id="s5">
+      <div class="sec-head"><span class="sec-num">05</span><h2>Taking User Input (Scanner Class)</h2></div>
+      <p class="sec-bn bn">কনসোল থেকে ইউজারের ইনপুট ডাটা রিড করার জন্য জাভায় <code>java.util.Scanner</code> প্যাকেজ ইমপোর্ট করে ব্যবহার করা হয়।</p>
+
+      <div class="rule-box">
+        <b>Common Scanner Methods:</b><br>
+        • <code>nextInt()</code> — Integer টাইপ ডাটা ইনপুট নেয়।<br>
+        • <code>nextDouble()</code> — Double টাইপ দশমিক ডাটা ইনপুট নেয়।<br>
+        • <code>next()</code> — স্পেস ছাড়া একটি সিঙ্গেল ডাব্লিউ (Word) ইনপুট নেয়।<br>
+        • <code>nextLine()</code> — স্পেসসহ পুরো এক লাইন টেক্সট ইনপুট নেয়।
+      </div>
+
+      <div class="code-card">
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">InputDemo.java</span></div>
+        <pre class="code"><span class="kw">import</span> java.util.Scanner;
+
+<span class="kw">public class</span> InputDemo {
+    <span class="kw">public static void</span> main(String[] args) {
+        Scanner input = <span class="kw">new</span> Scanner(System.in);
+        
+        System.out.print(<span class="str">"Enter an integer: "</span>);
+        <span class="kw">int</span> number = input.nextInt();
+        
+        System.out.println(<span class="str">"You entered: "</span> + number);
+    }
+}</pre>
+      </div>
+    </section>
+
+    <section class="block" id="s6">
+      <div class="sec-head"><span class="sec-num">06</span><h2>Arrays in Java</h2></div>
+      <p class="sec-bn bn">অ্যারে হলো একই ডেটা টাইপের অনেকগুলো উপাদানের একটি নির্দিষ্ট সাইজের সিকোয়েন্সিয়াল কালেকশন। এর ইনডেক্সিং শুরু হয় <b>0</b> থেকে।</p>
+
+      <div class="code-card">
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">ArrayDemo.java</span></div>
+        <pre class="code"><span class="kw">public class</span> ArrayDemo {
+    <span class="kw">public static void</span> main(String[] args) {
+        <span class="com">// Declaration and initialization</span>
+        <span class="kw">int</span>[] numbers = {10, 20, 30, 40, 50};
+        
+        <span class="com">// Printing index 0</span>
+        System.out.println(<span class="str">"First Element: "</span> + numbers[0]);
+        
+        <span class="com">// Iterating via length property</span>
+        <span class="kw">for</span> (<span class="kw">int</span> i = 0; i &lt; numbers.length; i++) {
+            System.out.print(numbers[i] + <span class="str">" "</span>);
+        }
+    }
+}</pre>
+      </div>
+    </section>
+
+    <section class="block" id="s7">
+      <div class="sec-head"><span class="sec-num">07</span><h2>Access Modifiers</h2></div>
       <p class="sec-bn bn">Access modifier ঠিক করে কে কোথা থেকে একটি ভ্যারিয়েবল/মেথড ব্যবহার করতে পারবে।</p>
       <table class="tbl">
         <tr><th>Modifier</th><th>Class</th><th>Package</th><th>Sub-class</th><th>Global</th></tr>
@@ -633,240 +656,86 @@
       </table>
     </section>
 
-    <section class="block" id="s5">
-      <div class="sec-head"><span class="sec-num">05</span><h2>Class Diagram (UML)</h2></div>
-      <p class="sec-bn bn">UML (Unified Modeling Language) দিয়ে একটি ক্লাসকে ছবির মতো তিন ভাগে দেখানো হয়: <b>ক্লাসের নাম</b>, <b>attributes</b> (বৈশিষ্ট্য), আর <b>methods</b> (কাজ)।</p>
+    <section class="block" id="s8">
+      <div class="sec-head"><span class="sec-num">08</span><h2>Class Diagram (UML)</h2></div>
+      <p class="sec-bn bn">UML (Unified Modeling Language) দিয়ে একটি ক্লাসকে তিন ভাগে দেখানো হয়: <b>ক্লাসের নাম</b>, <b>attributes</b>, আর <b>methods</b>।</p>
 
-      <div class="uml-wrap">
-        <div class="uml-class">
-          <div class="name">Class Name</div>
-          <div class="attrs"><div>Instance variables (State)</div></div>
-          <div class="methods"><div>Methods (Behavior)</div></div>
-        </div>
-      </div>
-
-      <h3 class="sub">Example — Car class</h3>
       <div class="uml-wrap">
         <div class="uml-class">
           <div class="name">Car</div>
           <div class="attrs"><div>+ make : String</div><div>+ model : String</div></div>
           <div class="methods"><div>+ driving() : void</div><div>+ breaking() : void</div></div>
         </div>
-        <div class="uml-class">
-          <div class="name">Window</div>
-          <div class="attrs"><div>+ origin : int</div><div>+ size : int</div></div>
-          <div class="methods"><div>+ open() : void</div><div>+ close() : void</div></div>
-        </div>
       </div>
     </section>
 
-    <section class="block" id="s6">
-      <div class="sec-head"><span class="sec-num">06</span><h2>Object in Java</h2></div>
+    <section class="block" id="s9">
+      <div class="sec-head"><span class="sec-num">09</span><h2>Object in Java</h2></div>
       <p class="sec-bn bn">Object হলো ক্লাসের একটি বাস্তব রূপ (instance)। <code>new</code> কিওয়ার্ড দিয়ে অবজেক্ট তৈরি করা হয়।</p>
 
       <div class="rule-box">
         <b>Syntax:</b> <br>
-        <code>ClassName objectName = new ClassName();</code><br>
-        <code>objectName.variable = value;</code>
-      </div>
-
-      <p class="expl"><b>Problem:</b> Create a Box class with height and width. Create an object and display the info.</p>
-      <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Box.java</span></div>
-        <pre class="code"><span class="kw">class</span> Box {
-    <span class="kw">double</span> height;
-    <span class="kw">double</span> width;
-}
-
-<span class="kw">public class</span> Main {
-    <span class="kw">public static void</span> main(String[] args) {
-        Box myBox = <span class="kw">new</span> Box();
-        myBox.height = 7.3;
-        myBox.width = 9.4;
-        System.out.println(<span class="str">"Height is = "</span> + myBox.height);
-        System.out.println(<span class="str">"Width is = "</span> + myBox.width);
-    }
-}</pre>
+        <code>ClassName objectName = new ClassName();</code>
       </div>
     </section>
 
-    <section class="block" id="s7">
-      <div class="sec-head"><span class="sec-num">07</span><h2>Methods in Java</h2></div>
-      <p class="sec-bn bn">Method হলো কতগুলো statement-এর সমষ্টি যেগুলো একসাথে একটি নির্দিষ্ট কাজ করে। প্রতিটি method অবশ্যই একটি class-এর ভেতরে থাকতে হবে।</p>
-
-      <div class="compare">
-        <div class="col a">
-          <h4>Standard Library Method</h4>
-          <ul><li><code>println()</code></li><li><code>nextInt()</code></li><li><code>sqrt()</code> etc.</li></ul>
-        </div>
-        <div class="col b">
-          <h4>User-Defined Method</h4>
-          <ul><li>Created by the programmer to perform a custom task</li></ul>
-        </div>
-      </div>
-
-      <div class="rule-box">
-        <b>Syntax:</b> <code>modifier returnType methodName(parameterList) { // body }</code>
-      </div>
-
-      <h3 class="sub">Without Return Type (void)</h3>
-      <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Main.java</span></div>
-        <pre class="code"><span class="kw">public class</span> Main {
-    <span class="kw">public static void</span> sum(<span class="kw">int</span> a, <span class="kw">int</span> b) {
-        <span class="kw">int</span> result = a + b;
-        System.out.println(<span class="str">"The sum is: "</span> + result);
-    }
-    <span class="kw">public static void</span> main(String[] args) {
-        sum(5, 10);
-    }
-}</pre>
-      </div>
-
-      <h3 class="sub">With Return Type</h3>
-      <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Main.java</span></div>
-        <pre class="code"><span class="kw">public class</span> Main {
-    <span class="kw">public static int</span> sum(<span class="kw">int</span> a, <span class="kw">int</span> b) {
-        <span class="kw">return</span> a + b;
-    }
-    <span class="kw">public static void</span> main(String[] args) {
-        <span class="kw">int</span> result = sum(5, 10);
-        System.out.println(<span class="str">"The sum is: "</span> + result);
-    }
-}</pre>
-      </div>
-    </section>
-
-    <section class="block" id="s8">
-      <div class="sec-head"><span class="sec-num">08</span><h2>Method Overloading</h2></div>
+    <section class="block" id="s10">
+      <div class="sec-head"><span class="sec-num">10</span><h2>Methods &amp; Method Overloading</h2></div>
       <p class="sec-bn bn">একই ক্লাসে একই নামের একাধিক মেথড থাকলে, কিন্তু প্যারামিটার আলাদা হলে, তাকে method overloading বলে। এতে প্রোগ্রামের readability বাড়ে।</p>
-      <div class="rule-box">
-        Two ways to overload a method:<br>
-        <b>1.</b> By changing the <b>number of arguments</b> (প্যারামিটারের সংখ্যা পরিবর্তন করে)<br>
-        <b>2.</b> By changing the <b>data type</b> of arguments (প্যারামিটারের ডেটা টাইপ পরিবর্তন করে)
-      </div>
 
-      <h3 class="sub">1. Changing Number of Arguments</h3>
       <div class="code-card">
         <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">OverloadDemo.java</span></div>
         <pre class="code"><span class="kw">public class</span> OverloadDemo {
     <span class="kw">public void</span> sum(<span class="kw">int</span> a, <span class="kw">int</span> b) {
         System.out.println(a + b);
     }
-    <span class="kw">public void</span> sum(<span class="kw">int</span> a, <span class="kw">int</span> b, <span class="kw">int</span> c) {
-        System.out.println(a + b + c);
-    }
-    <span class="kw">public static void</span> main(String[] args) {
-        OverloadDemo obj = <span class="kw">new</span> OverloadDemo();
-        obj.sum(5, 10);
-        obj.sum(10, 20, 30);
-    }
-}</pre>
-      </div>
-
-      <h3 class="sub">2. Changing Data Type</h3>
-      <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">OverloadDemo2.java</span></div>
-        <pre class="code"><span class="kw">public class</span> OverloadDemo2 {
-    <span class="kw">public void</span> sum(<span class="kw">int</span> a, <span class="kw">int</span> b) {
-        System.out.println(a + b);
-    }
     <span class="kw">public void</span> sum(<span class="kw">double</span> a, <span class="kw">double</span> b) {
         System.out.println(a + b);
     }
-    <span class="kw">public static void</span> main(String[] args) {
-        OverloadDemo2 obj = <span class="kw">new</span> OverloadDemo2();
-        obj.sum(5, 10);
-        obj.sum(5.5, 6.25);
-    }
 }</pre>
-      </div>
-    </section>
-
-    <section class="block" id="s9">
-      <div class="sec-head"><span class="sec-num">09</span><h2>Constructors</h2></div>
-      <p class="sec-bn bn">Constructor একটি বিশেষ মেথড যা অবজেক্ট তৈরি হওয়ার সময় স্বয়ংক্রিয়ভাবে কল হয়ে অবজেক্টকে initialize করে।</p>
-      <ul class="pointlist">
-        <li>A constructor is a special method used to <b>initialize</b> an object</li>
-        <li>Constructor name <b>must match</b> the class name</li>
-        <li>It <b>cannot have a return type</b> (not even <code>void</code>)</li>
-        <li>All classes have a constructor <b>by default</b> if not written explicitly</li>
-      </ul>
-
-      <div class="compare">
-        <div class="col a">
-          <h4>Default Constructor</h4>
-          <p style="font-size:13px;">No-argument constructor. Automatically sets initial or default values.</p>
-        </div>
-        <div class="col b">
-          <h4>Parameterized Constructor</h4>
-          <p style="font-size:13px;">Takes arguments to set custom initial states directly upon birth.</p>
-        </div>
-      </div>
-
-      <h3 class="sub">Constructor Overloading Example</h3>
-      <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Car.java</span></div>
-        <pre class="code"><span class="kw">public class</span> Car {
-    <span class="kw">int</span> x; <span class="kw">int</span> y;
-
-    <span class="com">// Default Constructor (No arguments)</span>
-    <span class="kw">public</span> Car() {
-        this.x = 5; this.y = 10;
-    }
-
-    <span class="com">// Parameterized Constructor</span>
-    <span class="kw">public</span> Car(<span class="kw">int</span> a, <span class="kw">int</span> b) {
-        this.x = a; this.y = b;
-    }
-
-    <span class="kw">public static void</span> main(String[] args) {
-        Car obj1 = <span class="kw">new</span> Car(); <span class="com">// Calls default</span>
-        Car obj2 = <span class="kw">new</span> Car(20, 30); <span class="com">// Calls parameterized</span>
-        
-        System.out.println(<span class="str">"Car1 = "</span> + obj1.x + <span class="str">", "</span> + obj1.y);
-        System.out.println("Car2 = " + obj2.x + ", " + obj2.y);
-    }
-}</pre>
-      </div>
-    </section>
-
-    <section class="block" id="s10">
-      <div class="sec-head"><span class="sec-num">10</span><h2>Method vs Constructor</h2></div>
-      <p class="sec-bn bn">পরীক্ষায় প্রায়ই এই পার্থক্যটি জিজ্ঞেস করা হয় — নিচের টেবিলটি ভালোভাবে মুখস্থ রাখো।</p>
-      <div class="compare">
-        <div class="col a">
-          <h4>Java Method</h4>
-          <ul>
-            <li>Used to expose the <b>behavior</b> of an object.</li>
-            <li>Must have a <b>return type</b> (like <code>void</code>, <code>int</code>, etc.).</li>
-            <li>Method name may or may not match the class name.</li>
-            <li>Invoked <b>explicitly</b> (যেমন: <code>obj.display()</code>).</li>
-            <li>Conventionally starts with a lowercase letter.</li>
-          </ul>
-        </div>
-        <div class="col b">
-          <h4>Java Constructor</h4>
-          <ul>
-            <li>Used to initialize the <b>state</b> of an object.</li>
-            <li>Must <b>NOT have a return type</b> (not even <code>void</code>).</li>
-            <li>Constructor name <b>must</b> be identical to the class name.</li>
-            <li>Invoked <b>implicitly</b> during object creation via <code>new</code>.</li>
-            <li>Starts with an uppercase letter (matches class name).</li>
-          </ul>
-        </div>
       </div>
     </section>
 
     <section class="block" id="s11">
-      <div class="sec-head"><span class="sec-num">11</span><h2>The `super` Keyword</h2></div>
+      <div class="sec-head"><span class="sec-num">11</span><h2>Constructors</h2></div>
+      <p class="sec-bn bn">Constructor একটি বিশেষ মেথড যা অবজেক্ট তৈরি হওয়ার সময় স্বয়ংক্রিয়ভাবে কল হয়ে অবজেক্টকে initialize করে। এর কোনো রিটার্ন টাইপ থাকে না।</p>
+
+      <div class="code-card">
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Box.java</span></div>
+        <pre class="code"><span class="kw">public class</span> Box {
+    <span class="kw">int</span> height; <span class="kw">int</span> width;
+
+    <span class="com">// Default Constructor</span>
+    <span class="kw">public</span> Box() {
+        this.height = 10; this.width = 15;
+    }
+
+    <span class="com">// Parameterized Constructor</span>
+    <span class="kw">public</span> Box(<span class="kw">int</span> h, <span class="kw">int</span> w) {
+        this.height = h; this.width = w;
+    }
+}</pre>
+      </div>
+    </section>
+
+    <section class="block" id="s12">
+      <div class="sec-head"><span class="sec-num">12</span><h2>Method vs Constructor</h2></div>
+      <table class="tbl">
+        <tr><th>Feature</th><th>Java Method</th><th>Java Constructor</th></tr>
+        <tr><td><b>Purpose</b></td><td>Exposes object behaviors/actions</td><td>Initializes object states/variables</td></tr>
+        <tr><td><b>Return Type</b></td><td>Must have a return type (or void)</td><td>Must NOT have any return type</td></tr>
+        <tr><td><b>Invocation</b></td><td>Invoked explicitly (e.g. obj.run())</td><td>Invoked implicitly during <code>new</code></td></tr>
+      </table>
+    </section>
+
+    <section class="block" id="s13">
+      <div class="sec-head"><span class="sec-num">13</span><h2>The `super` Keyword</h2></div>
       <p class="sec-bn bn"><code>super</code> কিওয়ার্ড দিয়ে চাইল্ড ক্লাস থেকে সরাসরি তার immediate parent (ঠিক উপরের অভিভাবক) ক্লাসের প্রোপার্টি অ্যাক্সেস করা যায়।</p>
       
       <div class="rule-box">
         <b>Three Key Uses of <code>super</code>:</b><br>
         <b>1. <code>super.variableName</code></b> — Parent class-এর instance variable-কে নির্দেশ করতে।<br>
-        <b>2. <code>super.methodName()</code></b> — Parent class-এর মেথডকে ডাকতে (invoke করতে)।<br>
+        <b>2. <code>super.methodName()</code></b> — Parent class-এর মেথডকে ডাকতে।<br>
         <b>3. <code>super()</code></b> — Parent class-এর constructor-কে কল করতে।
       </div>
 
@@ -874,9 +743,8 @@
         <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Vehicle.java — Using super Keyword</span></div>
         <pre class="code"><span class="kw">class</span> Vehicle {
     <span class="kw">int</span> speed = 50;
-    
     <span class="kw">public void</span> display() {
-        System.out.println(<span class="str">"Hello polapains!"</span>);
+        System.out.println(<span class="str">"Hello parent vehicle!"</span>);
     }
 }
 
@@ -886,9 +754,9 @@
     <span class="com">@Override</span>
     <span class="kw">public void</span> display() {
       System.out.println(<span class="str">"Hello Rakin"</span>);
-        System.out.println(<span class="kw">super</span>.speed);   <span class="com">// i. Immediate parent variable (50)</span>
-        System.out.println(speed);         <span class="com">// Child variable (100)</span>
-        <span class="kw">super</span>.display();                   <span class="com">// ii. Invoke parent method</span>
+        System.out.println(<span class="kw">super</span>.speed);   <span class="com">// Access immediate parent variable (50)</span>
+        System.out.println(speed);         <span class="com">// Access child variable (100)</span>
+        <span class="kw">super</span>.display();                   <span class="com">// Invoke parent method</span>
     }
     
     <span class="kw">public static void</span> main(String[] args) {
@@ -897,159 +765,46 @@
     }
 }</pre>
       </div>
-      <div class="out-box"><b>Output</b> Hello Rakin <br> 50 <br> 100 <br> Hello polapains!</div>
+      <div class="out-box"><b>Output</b> Hello Rakin <br> 50 <br> 100 <br> Hello parent vehicle!</div>
     </section>
 
-    <section class="block" id="s12">
-      <div class="sec-head"><span class="sec-num">12</span><h2>The 4 Pillars of OOP</h2></div>
+    <section class="block" id="s14">
+      <div class="sec-head"><span class="sec-num">14</span><h2>The 4 Pillars of OOP</h2></div>
       <p class="sec-bn bn">Object Oriented Programming চারটি মূল স্তম্ভের উপর দাঁড়িয়ে আছে।</p>
       <div class="pillars">
-        <div class="pillar"><span class="pnum">01</span><h4>Encapsulation</h4><p>Data + code bound into one unit, hidden like a capsule.</p></div>
+        <div class="pillar"><span class="pnum">01</span><h4>Encapsulation</h4><p>Data + code bound into one unit, hidden safely.</p></div>
         <div class="pillar"><span class="pnum">02</span><h4>Abstraction</h4><p>Hides unnecessary details, shows only essentials.</p></div>
         <div class="pillar"><span class="pnum">03</span><h4>Inheritance</h4><p>An object acquires properties from another object.</p></div>
         <div class="pillar"><span class="pnum">04</span><h4>Polymorphism</h4><p>Ability of an object to take many forms.</p></div>
       </div>
     </section>
 
-    <section class="block" id="s13">
-      <div class="sec-head"><span class="sec-num">13</span><h2>Encapsulation</h2></div>
-      <p class="sec-bn bn">ভ্যারিয়েবল private রেখে, পাবলিক <b>set</b> ও <b>get</b> মেথড দিয়ে সেই ভ্যারিয়েবলের মান পড়া/লেখার নিয়মকে Encapsulation বলে — অনেকটা ক্যাপসুলের মতো ভেতরের জিনিস মুড়ে রাখা।</p>
-
-      <div class="rule-box">
-        <b>1.</b> Declare class variables/attributes as <b>private</b><br>
-        <b>2.</b> Provide public <b>set</b> and <b>get</b> methods to access &amp; update the private variable<br>
-        <b>3.</b> The <b>set</b> method sets the value (writes)<br>
-        <b>4.</b> The <b>get</b> method returns the value (reads)
-      </div>
+    <section class="block" id="s15">
+      <div class="sec-head"><span class="sec-num">15</span><h2>Encapsulation</h2></div>
+      <p class="sec-bn bn">ভ্যারিয়েবল private রেখে, পাবলিক <b>set</b> ও <b>get</b> মেথড দিয়ে সেই ভ্যারিয়েবলের মান পড়া/লেখার নিয়মকে Encapsulation বলে。</p>
 
       <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Person.java — encapsulation</span></div>
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Person.java</span></div>
         <pre class="code"><span class="kw">public class</span> Person {
-    <span class="kw">private</span> String name;
+    <span class="kw">private</span> String name; <span class="com">// Private variable</span>
 
-    <span class="com">// set method (writes data)</span>
+    <span class="com">// setter</span>
     <span class="kw">public void</span> setName(String name) {
         this.name = name;
     }
-    <span class="com">// get method (reads data)</span>
+    <span class="com">// getter</span>
     <span class="kw">public</span> String getName() {
         <span class="kw">return</span> name;
     }
-}
-
-<span class="kw">public class</span> Main {
-    <span class="kw">public static void</span> main(String[] args) {
-        Person obj = <span class="kw">new</span> Person();
-        obj.setName(<span class="str">"Rakin"</span>);
-        System.out.println(obj.getName());
-    }
 }</pre>
       </div>
-      <div class="out-box"><b>Output</b> Rakin</div>
-    </section>
-
-    <section class="block" id="s14">
-      <div class="sec-head"><span class="sec-num">14</span><h2>Abstraction &amp; Polymorphism</h2></div>
-
-      <h3 class="sub">Abstraction</h3>
-      <p class="bnexpl bn">ব্যবহারকারীর কাছ থেকে অপ্রয়োজনীয় তথ্য লুকিয়ে রাখা, যাতে অ্যাপ্লিকেশনটি ব্যবহার করা সহজ হয়। শুধু প্রয়োজনীয় বৈশিষ্ট্যগুলোই দেখানো হয়।</p>
-      <p class="expl">Hiding unnecessary data from the user and making the application user-friendly. Hides implementation details, shows only essential features.</p>
-
-      <h3 class="sub">Polymorphism</h3>
-      <p class="bnexpl bn">এক নাম, ভিন্ন ভিন্ন পরিস্থিতিতে ভিন্ন আচরণ — এটিই Polymorphism ("বহুরূপতা")।</p>
-      
-      <div class="compare">
-        <div class="col a">
-          <h4>1. Method Overloading</h4>
-          <p class="bn" style="font-size:12.5px;color:var(--ink-soft);">একই ক্লাসে (Same class), একই নামে (Same name) কয়েকটা মেথড। মেথডগুলোর নাম এক হলেও <b>প্যারামিটারের সংখ্যা ভিন্ন</b> অথবা <b>ডেটা টাইপ ভিন্ন</b> হতে হবে।</p>
-        </div>
-        <div class="col b">
-          <h4>2. Method Overriding</h4>
-          <p class="bn" style="font-size:12.5px;color:var(--ink-soft);">এজন্য একাধিক ক্লাস (More than 1 class) লাগবে যেখানে <b>IS-A relationship</b> বিদ্যমান। প্যারেন্ট ও চাইল্ড ক্লাসের মেথডের নাম এবং প্যারামিটার <b>একদম হুবহু সেম</b> হতে হবে।</p>
-        </div>
-      </div>
-
-      <h3 class="sub">Method Overriding — Example</h3>
-      <p class="bnexpl bn">চাইল্ড ক্লাস (<code>Rakin</code>) প্যারেন্ট ক্লাস (<code>Student</code>)-এর ইনহেরিট করা <code>run()</code> মেথডের আচরণ সম্পূর্ণ নিজের মতো করে বদলে নিয়েছে। <code>@Override</code> কিওয়ার্ড দিয়ে এটি নির্দেশ করা হয়।</p>
-      <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Main.java — Overriding</span></div>
-        <pre class="code"><span class="kw">class</span> Student {
-    <span class="kw">public void</span> run() {
-        System.out.println(<span class="str">"Hello person"</span>);
-    }
-}
-
-<span class="kw">class</span> Rakin <span class="kw">extends</span> Student {
-    <span class="com">@Override</span>
-    <span class="kw">public void</span> run() {
-        System.out.println(<span class="str">"Hello Rakin"</span>);
-    }
-}
-
-<span class="kw">public class</span> Main {
-    <span class="kw">public static void</span> main(String[] args) {
-        Rakin obj = <span class="kw">new</span> Rakin();
-        obj.run(); <span class="com">// Runs overridden version</span>
-    }
-}</pre>
-      </div>
-      <div class="out-box"><b>Output</b> Hello Rakin</div>
-    </section>
-
-    <section class="block" id="s15">
-      <div class="sec-head"><span class="sec-num">15</span><h2>Types of Inheritance</h2></div>
-      <p class="sec-bn bn">একটি object যখন আরেকটি object-এর সব বৈশিষ্ট্য ও আচরণ অর্জন করে, তাকে Inheritance বলে। জাভাতে <code>extends</code> কিওয়ার্ড দিয়ে এটি করা হয়।</p>
-
-      <div class="uml-wrap" style="gap:40px; justify-content: space-around;">
-        <div>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:12.5px;margin:0 0 8px;color:var(--coffee); font-weight:700;">1. Single Inheritance</p>
-          <div class="tree">
-            <div class="node">Class A (Parent)</div>
-            <span class="arrow">▲</span>
-            <div class="node">Class B (Child)</div>
-          </div>
-        </div>
-        <div>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:12.5px;margin:0 0 8px;color:var(--coffee); font-weight:700;">2. Multilevel Inheritance</p>
-          <div class="tree">
-            <div class="node">Class A</div>
-            <span class="arrow">▲</span>
-            <div class="node">Class B</div>
-            <span class="arrow">▲</span>
-            <div class="node">Class C</div>
-          </div>
-        </div>
-        <div>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:12.5px;margin:0 0 8px;color:var(--coffee); font-weight:700;">3. Hierarchical Inheritance</p>
-          <div class="tree">
-            <div class="node">Parent Class</div>
-            <span class="arrow">▲</span>
-            <div class="row">
-              <div class="node">Child 1</div>
-              <div class="node">Child 2</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:12.5px;margin:0 0 8px;color:var(--red-flag); font-weight:700;">4. Multiple Inheritance ❌</p>
-          <div class="tree">
-            <div class="row">
-              <div class="node">Class A</div>
-              <div class="node">Class B</div>
-            </div>
-            <span class="arrow">▲</span>
-            <div class="node">Class C</div>
-          </div>
-        </div>
-      </div>
-      <div class="rule-box"><b>CRITICAL EXAM NOTE:</b> Multiple inheritance (একই সাথে দুটি ক্লাসকে extend করা) জাভার সাধারণ ক্লাসের ক্ষেত্রে <b>সম্ভব নয়</b>। (i.e. <code>class C extends A, B</code> ❌ Error!)।</div>
     </section>
 
     <section class="block" id="s16">
       <div class="sec-head"><span class="sec-num">16</span><h2>Practice Problems &amp; Capstone Project</h2></div>
       
       <h3 class="sub">UML Diagram Assignment (Programming Tree)</h3>
-      <p class="bnexpl bn">নিচের ক্লাসের ছবির ডায়াগ্রামটি (UML) ভালোভাবে লক্ষ্য করো। এটি একটি ৩-স্তরের <b>Multilevel Inheritance</b> রিলেশনশিপ ম্যাপ করে।</p>
+      <p class="bnexpl bn">নিচের ৩-স্তরের <b>Multilevel Inheritance</b> রিলেশনশিপ ডায়াগ্রামটির জাভা রূপান্তর ভালোভাবে লক্ষ্য করো।</p>
 
       
       <div class="uml-wrap">
@@ -1072,10 +827,8 @@
         </div>
       </div>
 
-      <p class="expl"><b>Question:</b> Convert the above class diagram into appropriate Java code. Create one object of the <code>Python</code> class inside the <code>Main</code> method, implement all data sets, and verify the expected output.</p>
-
       <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Programming.java — Level 1 Superclass</span></div>
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Programming.java</span></div>
         <pre class="code"><span class="kw">class</span> Programming {
     <span class="kw">public</span> String languageName;
     <span class="kw">public</span> String creator;
@@ -1084,7 +837,6 @@
         <span class="kw">this</span>.languageName = languageName;
         <span class="kw">this</span>.creator = creator;
     }
-
     <span class="kw">public void</span> display() {
         System.out.println(<span class="str">"Basic programming"</span>);
     }
@@ -1092,67 +844,55 @@
       </div>
 
       <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Java.java — Level 2 Intermediate Subclass</span></div>
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Java.java</span></div>
         <pre class="code"><span class="kw">class</span> Java <span class="kw">extends</span> Programming {
     <span class="kw">public double</span> version;
 
     <span class="kw">public void</span> setJavaData(<span class="kw">double</span> version) {
         <span class="kw">this</span>.version = version;
     }
-
     <span class="com">@Override</span>
     <span class="kw">public void</span> display() {
-        <span class="kw">super</span>.display(); <span class="com">// Calls parent Programming.display()</span>
+        <span class="kw">super</span>.display();
         System.out.println(<span class="str">"Java programming"</span>);
     }
 }</pre>
       </div>
 
       <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Python.java — Level 3 Child Subclass</span></div>
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Python.java</span></div>
         <pre class="code"><span class="kw">class</span> Python <span class="kw">extends</span> Java {
     <span class="kw">public String</span> paradigm;
 
     <span class="kw">public void</span> setPythonData(String paradigm) {
         <span class="kw">this</span>.paradigm = paradigm;
     }
-
     <span class="com">@Override</span>
     <span class="kw">public void</span> display() {
-        <span class="kw">super</span>.display(); <span class="com">// Calls parent Java.display()</span>
+        <span class="kw">super</span>.display();
         System.out.println(<span class="str">"python programming"</span>);
     }
 }</pre>
       </div>
 
       <div class="code-card">
-        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Main.java — Execution Driver Block</span></div>
+        <div class="code-tab"><div class="dots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="fname">Main.java</span></div>
         <pre class="code"><span class="kw">public class</span> Main {
     <span class="kw">public static void</span> main(String[] args) {
-        <span class="com">// Instantiate a single bottom-level child object</span>
         Python obj = <span class="kw">new</span> Python();
-        
-        <span class="com">// Accessing inherited methods across different tree levels</span>
         obj.setData(<span class="str">"python"</span>, <span class="str">"Guido van Rossum"</span>);
         obj.setJavaData(17.0);
         obj.setPythonData(<span class="str">"oop"</span>);
-        
-        <span class="com">// Triggers the overridden chain execution</span>
         obj.display();
     }
 }</pre>
       </div>
       
       <div class="out-box">
-        <b>Expected System Output:</b><br>
+        <b>System Output:</b><br>
         Basic programming<br>
         Java programming<br>
         python programming
-      </div>
-
-      <div class="rule-box bn">
-        <b>💡 কেন এই ক্রমানুসারে আউটপুট এলো?</b><br>
-        যখন আমরা <code>obj.display()</code> কল করি, তখন চেইনের সবার নিচে থাকা <code>Python</code> ক্লাসের মেথডটি চালু হয়। তার ভেতরে <code>super.display()</code> থাকার কারণে সে তার প্যারেন্ট <code>Java</code>-র মেথডকে রান করায়। <code>Java</code>-র মেথডটি আবার তার নিজস্ব <code>super.display()</code> দিয়ে একদম টপ-লেভেলের <code>Programming</code> ক্লাসের মেথডকে সচল করে। ফলে আউটপুট চেইনটি উপর থেকে নিচে নিখুঁতভাবে প্রিন্ট হয়।
       </div>
     </section>
 
